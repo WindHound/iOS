@@ -22,8 +22,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="tintColor" red="0.01176470588" green="0.65098039220000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Interfaceicon" translatesAutoresizingMaskIntoConstraints="NO" id="yia-k5-ium">
-                                <rect key="frame" x="127" y="273.5" width="120" height="120"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Event_list_icon" translatesAutoresizingMaskIntoConstraints="NO" id="yia-k5-ium">
+                                <rect key="frame" x="177" y="323.5" width="20" height="20"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -44,7 +44,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Interfaceicon" width="120" height="120"/>
+        <image name="Event_list_icon" width="20" height="20"/>
         <image name="log_in_background" width="414" height="736"/>
     </resources>
 </document>
