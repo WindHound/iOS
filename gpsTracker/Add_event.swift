@@ -1,42 +1,58 @@
 //
-//  Add_event.swift
+//  add_event.swift
 //  gpsTracker
 //
-//  Created by 신종훈 on 28/01/2018.
+//  Created by 신종훈 on 29/01/2018.
 //  Copyright © 2018 신종훈. All rights reserved.
 //
 
 import UIKit
 
-class Add_event: UIViewController {
+class add_event: UIViewController {
 
-    @IBOutlet weak var toolbar: UIToolbar!
-    
-    @IBOutlet weak var dateField: UITextField!
-    
     @IBOutlet weak var textTitle: UITextField!
     
-    
     @IBOutlet weak var textLocation: UITextField!
+    
+    @IBOutlet weak var textStartdate: UITextField!
+    
+    @IBOutlet weak var textEnddate: UITextField!
+    
+    @IBOutlet weak var topToolBar: UIToolbar!
+    
+    
     
     let picker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        toolbar.clipsToBounds = true
+        topToolBar.clipsToBounds = true
         
         textTitle.delegate = self
         textLocation.delegate = self
         
+        // To repond when user presses date text fields
         createDatePicker()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        // Initial start date when view is loaded
+        let date = Date()
+        
+        let startformatter = DateFormatter()
+        startformatter.dateStyle = .medium
+        startformatter.timeStyle = .short
+        
+        textStartdate.text = "\(startformatter.string(from:date))"
+        
+        // Initial end date when view is loaded
+        let calendar = Calendar.current
+        
+        let hour = (calendar.component(.hour, from: date) + 1)
+        let minute = calendar.component(.minute, from: date)
+        
+        textEnddate.text = "\(hour):\(minute)"
+        
+        
     }
     
     func createDatePicker() {
@@ -48,8 +64,11 @@ class Add_event: UIViewController {
         let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
         datetoolbar.setItems([done], animated: false)
         
-        dateField.inputAccessoryView = datetoolbar
-        dateField.inputView = picker
+        textStartdate.inputAccessoryView = datetoolbar
+        textStartdate.inputView = picker
+        
+        textEnddate.inputAccessoryView = datetoolbar
+        textEnddate.inputView = picker
         
         
     }
@@ -57,12 +76,21 @@ class Add_event: UIViewController {
     @objc func donePressed() {
         // format date
         
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        let dateString = formatter.string(from: picker.date)
+        let startformatter = DateFormatter()
+        startformatter.dateStyle = .medium
+        startformatter.timeStyle = .short
+        let startdateString = startformatter.string(from: picker.date)
         
-        dateField.text = "\(dateString)"
+        let initialformatter = DateFormatter()
+        initialformatter.dateStyle = .medium
+        initialformatter.timeStyle = .none
+        let initialdateString = initialformatter.string(from: picker.date)
+        
+        
+        textStartdate.text = "\(startdateString)"
+        
+        
+        
         self.view.endEditing(true)
         
     }
@@ -71,9 +99,11 @@ class Add_event: UIViewController {
         textTitle.resignFirstResponder()
         textLocation.resignFirstResponder()
     }
-    
-    
-    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
 
     /*
@@ -88,8 +118,8 @@ class Add_event: UIViewController {
 
 }
 
-extension Add_event : UITextFieldDelegate {
-    
+
+extension add_event : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
