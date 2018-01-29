@@ -62,6 +62,7 @@
 		557F41612007E8DF0087239B /* gpsTracker */ = {
 			isa = PBXGroup;
 			children = (
+				55B94DDF201F4BCC0048DBB6 /* Interface_screen_shot */,
 				550AEE2B201653C700C0A986 /* Login_screen.storyboard */,
 				557F41622007E8DF0087239B /* AppDelegate.swift */,
 				557F41642007E8DF0087239B /* ViewController.swift */,
@@ -74,6 +75,13 @@
 				554B37DF201E46D1000F4136 /* Add_event.swift */,
 			);
 			path = gpsTracker;
+			sourceTree = "<group>";
+		};
+		55B94DDF201F4BCC0048DBB6 /* Interface_screen_shot */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interface_screen_shot;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

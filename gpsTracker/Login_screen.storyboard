@@ -256,7 +256,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p5a-OE-YqB">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p5a-OE-YqB">
                                                 <rect key="frame" x="8" y="173" width="359" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -277,6 +277,7 @@
                                             <constraint firstItem="rNA-xz-i2s" firstAttribute="top" secondItem="BZ1-5i-t79" secondAttribute="bottom" constant="8" id="R5C-0E-JK3"/>
                                             <constraint firstItem="p5a-OE-YqB" firstAttribute="leading" secondItem="uUY-R5-5ox" secondAttribute="leading" constant="8" id="Zg3-sd-MeI"/>
                                             <constraint firstAttribute="trailing" secondItem="rNA-xz-i2s" secondAttribute="trailing" constant="8" id="hY3-7w-OUR"/>
+                                            <constraint firstItem="p5a-OE-YqB" firstAttribute="top" secondItem="Xra-zL-Ofs" secondAttribute="bottom" constant="8" id="jNu-Oy-ZJh"/>
                                             <constraint firstAttribute="height" constant="1000" id="lsU-ng-1OV"/>
                                             <constraint firstItem="rNA-xz-i2s" firstAttribute="centerX" secondItem="uUY-R5-5ox" secondAttribute="centerX" id="wBr-tS-Mfz"/>
                                             <constraint firstItem="rNA-xz-i2s" firstAttribute="leading" secondItem="uUY-R5-5ox" secondAttribute="leading" constant="8" id="ydw-5Y-o5m"/>
