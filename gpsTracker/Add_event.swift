@@ -63,7 +63,7 @@ class Add_event: UIViewController {
         
     }
     
-    
+    // Below functions are for assigning current active text field
     @IBAction func textStart_touched(_ sender: Any) {
         activeTextField = textStartdate
     }
@@ -73,6 +73,24 @@ class Add_event: UIViewController {
         activeTextField = textEnddate
     }
     
+    @IBAction func textLocation_touched(_ sender: Any) {
+        activeTextField = textLocation
+    }
+    
+    // Function to display differnet view controller when the location text field is pressed
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        if activeTextField == textLocation {
+            performSegue(withIdentifier: "location_clicked", sender: self)
+            return false
+        } else {
+            return true
+        }
+        
+    }
+    
+    
+    // Function to create date picker
     func createDatePicker(forField field : UITextField) {
         // toolbar
         let datetoolbar = UIToolbar()
@@ -138,6 +156,10 @@ class Add_event: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    @IBAction func unwindToAddEvent(segue:UIStoryboardSegue) { }
+
     
     
 

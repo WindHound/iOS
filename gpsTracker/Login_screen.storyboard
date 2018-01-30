@@ -168,11 +168,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HDT-yC-Nvy">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDT-yC-Nvy">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="9hC-SC-gb1"/>
-                                    <barButtonItem title="Item" image="Add_icon" id="h8v-FJ-KTm">
+                                    <barButtonItem systemItem="add" id="h8v-FJ-KTm">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="32m-N5-8nb" kind="show" identifier="New_event_clicked" id="Rhz-Gb-AeS"/>
@@ -224,13 +224,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n31-WI-jeH">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="n31-WI-jeH">
                                 <rect key="frame" x="8" y="130" width="359" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textLocation_touched:" destination="32m-N5-8nb" eventType="touchDown" id="u9X-aD-trh"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nm1-wY-YuK">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Nm1-wY-YuK">
                                 <rect key="frame" x="8" y="92" width="359" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -260,10 +263,10 @@
                                     <action selector="textEnd_touched:" destination="32m-N5-8nb" eventType="touchDown" id="NsN-wE-1ju"/>
                                 </connections>
                             </textField>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HHu-Jg-2yB">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHu-Jg-2yB">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Cancel" id="3lI-Lv-tqo">
+                                    <barButtonItem systemItem="cancel" id="3lI-Lv-tqo">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="cGr-Zf-NEc" kind="unwind" unwindAction="unwindToEventListWithSegue:" id="tnZ-Wl-o8g"/>
@@ -328,12 +331,96 @@
                         <outlet property="textStartdate" destination="dtl-ni-Qds" id="Vda-Oc-Ol6"/>
                         <outlet property="textTitle" destination="Nm1-wY-YuK" id="k9k-MB-44B"/>
                         <outlet property="topToolBar" destination="HHu-Jg-2yB" id="bne-lV-cfb"/>
+                        <segue destination="9g9-xT-xxC" kind="show" identifier="location_clicked" id="KYs-zd-y2C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81Q-IJ-I0e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cGr-Zf-NEc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2615.1999999999998" y="-694.45277361319347"/>
+        </scene>
+        <!--Set location-->
+        <scene sceneID="bCD-MN-GsU">
+            <objects>
+                <viewController id="9g9-xT-xxC" customClass="set_location" customModule="gpsTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UVI-qo-7yY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOX-wd-kXC">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="cancel" id="brf-fK-yuN">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="haM-rg-jmN" kind="unwind" unwindAction="unwindToAddEventWithSegue:" id="RS6-XY-FCu"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Eeu-fX-Q8o"/>
+                                    <barButtonItem systemItem="search" id="aEW-Zg-wqD">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="searchbutton:" destination="9g9-xT-xxC" id="1DX-cn-4SM"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" red="0.090196078430000007" green="0.65098039220000004" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="log_in_background" translatesAutoresizingMaskIntoConstraints="NO" id="Ppg-jq-zna">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqD-9K-4QG">
+                                <rect key="frame" x="154.5" y="32" width="66" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kGw-AZ-NU6">
+                                <rect key="frame" x="0.0" y="61" width="375" height="606"/>
+                                <connections>
+                                    <outlet property="delegate" destination="9g9-xT-xxC" id="uI9-cD-YWA"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ppg-jq-zna" firstAttribute="leading" secondItem="UVI-qo-7yY" secondAttribute="leading" id="17q-Jt-HpD"/>
+                            <constraint firstItem="kGw-AZ-NU6" firstAttribute="trailing" secondItem="aQI-S9-9TY" secondAttribute="trailing" id="56W-aC-inS"/>
+                            <constraint firstItem="kGw-AZ-NU6" firstAttribute="top" secondItem="sqD-9K-4QG" secondAttribute="bottom" constant="8" id="5cT-Sl-Rfk"/>
+                            <constraint firstItem="Ppg-jq-zna" firstAttribute="top" secondItem="UVI-qo-7yY" secondAttribute="top" id="HjE-qz-o3H"/>
+                            <constraint firstItem="sqD-9K-4QG" firstAttribute="top" secondItem="Ppg-jq-zna" secondAttribute="bottom" constant="12" id="PdN-wQ-gvS"/>
+                            <constraint firstItem="eOX-wd-kXC" firstAttribute="top" secondItem="aQI-S9-9TY" secondAttribute="top" id="RtF-gY-Hk3"/>
+                            <constraint firstAttribute="trailing" secondItem="Ppg-jq-zna" secondAttribute="trailing" id="a91-aw-nEi"/>
+                            <constraint firstItem="sqD-9K-4QG" firstAttribute="centerX" secondItem="UVI-qo-7yY" secondAttribute="centerX" id="aPm-V5-JZP"/>
+                            <constraint firstAttribute="bottom" secondItem="kGw-AZ-NU6" secondAttribute="bottom" id="d5j-aQ-XRz"/>
+                            <constraint firstItem="kGw-AZ-NU6" firstAttribute="leading" secondItem="aQI-S9-9TY" secondAttribute="leading" id="dcl-gc-5wf"/>
+                            <constraint firstItem="eOX-wd-kXC" firstAttribute="top" secondItem="Ppg-jq-zna" secondAttribute="bottom" id="fmU-ha-oQG"/>
+                            <constraint firstItem="eOX-wd-kXC" firstAttribute="trailing" secondItem="aQI-S9-9TY" secondAttribute="trailing" id="jrl-Wl-THF"/>
+                            <constraint firstItem="Ppg-jq-zna" firstAttribute="top" secondItem="UVI-qo-7yY" secondAttribute="top" id="oQJ-jc-ZoN"/>
+                            <constraint firstItem="Ppg-jq-zna" firstAttribute="leading" secondItem="UVI-qo-7yY" secondAttribute="leading" id="q7f-8V-F7A"/>
+                            <constraint firstItem="eOX-wd-kXC" firstAttribute="leading" secondItem="aQI-S9-9TY" secondAttribute="leading" id="sai-p6-KL4"/>
+                            <constraint firstItem="eOX-wd-kXC" firstAttribute="top" secondItem="Ppg-jq-zna" secondAttribute="bottom" id="uAr-zJ-dSp"/>
+                            <constraint firstAttribute="trailing" secondItem="Ppg-jq-zna" secondAttribute="trailing" id="xdl-EC-bDa"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aQI-S9-9TY"/>
+                    </view>
+                    <connections>
+                        <outlet property="myMap" destination="kGw-AZ-NU6" id="zZD-cR-kcT"/>
+                        <outlet property="searchDisplayController" destination="7aP-dV-Y2h" id="QP9-Dc-UGQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a73-ca-1NB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="haM-rg-jmN" userLabel="Exit" sceneMemberID="exit"/>
+                <searchDisplayController id="7aP-dV-Y2h">
+                    <connections>
+                        <outlet property="delegate" destination="9g9-xT-xxC" id="see-Gy-laH"/>
+                        <outlet property="searchContentsController" destination="9g9-xT-xxC" id="h4U-Ea-67Y"/>
+                        <outlet property="searchResultsDataSource" destination="9g9-xT-xxC" id="xZw-To-yS8"/>
+                        <outlet property="searchResultsDelegate" destination="9g9-xT-xxC" id="W3o-kr-ZjS"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="3424.8000000000002" y="-696.05911330049264"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="kP8-XN-EXx">
@@ -355,7 +442,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Add_icon" width="20" height="20"/>
         <image name="Event_list_icon" width="20" height="20"/>
         <image name="Interfaceicon" width="120" height="120"/>
         <image name="Profile_icon" width="20" height="20"/>
