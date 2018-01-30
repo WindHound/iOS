@@ -8,7 +8,7 @@
 
 import UIKit
 
-class add_event: UIViewController {
+class Add_event: UIViewController {
 
     @IBOutlet weak var textTitle: UITextField!
     
@@ -20,6 +20,9 @@ class add_event: UIViewController {
     
     @IBOutlet weak var topToolBar: UIToolbar!
     
+    var activeTextField : UITextField!
+    
+    var initialdate : String!
     
     
     let picker = UIDatePicker()
@@ -33,7 +36,8 @@ class add_event: UIViewController {
         textLocation.delegate = self
         
         // To repond when user presses date text fields
-        createDatePicker()
+        createDatePicker(forField: textStartdate)
+        createDatePicker(forField: textEnddate)
         
         // Initial start date when view is loaded
         let date = Date()
@@ -43,6 +47,10 @@ class add_event: UIViewController {
         startformatter.timeStyle = .short
         
         textStartdate.text = "\(startformatter.string(from:date))"
+        
+        startformatter.timeStyle = .none
+        
+        initialdate = startformatter.string(from:date)
         
         // Initial end date when view is loaded
         let calendar = Calendar.current
@@ -55,7 +63,17 @@ class add_event: UIViewController {
         
     }
     
-    func createDatePicker() {
+    
+    @IBAction func textStart_touched(_ sender: Any) {
+        activeTextField = textStartdate
+    }
+    
+    
+    @IBAction func textEnd_touched(_ sender: Any) {
+        activeTextField = textEnddate
+    }
+    
+    func createDatePicker(forField field : UITextField) {
         // toolbar
         let datetoolbar = UIToolbar()
         datetoolbar.sizeToFit()
@@ -64,11 +82,8 @@ class add_event: UIViewController {
         let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
         datetoolbar.setItems([done], animated: false)
         
-        textStartdate.inputAccessoryView = datetoolbar
-        textStartdate.inputView = picker
-        
-        textEnddate.inputAccessoryView = datetoolbar
-        textEnddate.inputView = picker
+        field.inputAccessoryView = datetoolbar
+        field.inputView =  picker
         
         
     }
@@ -76,20 +91,37 @@ class add_event: UIViewController {
     @objc func donePressed() {
         // format date
         
-        let startformatter = DateFormatter()
-        startformatter.dateStyle = .medium
-        startformatter.timeStyle = .short
-        let startdateString = startformatter.string(from: picker.date)
+        // Start date
+        if activeTextField == textStartdate {
+            let startdateformatter = DateFormatter()
+            startdateformatter.dateStyle = .medium
+            startdateformatter.timeStyle = .short
+            let startdateString = startdateformatter.string(from: picker.date)
+            
+            textStartdate.text = "\(startdateString)"
+            
+            startdateformatter.timeStyle = .none
+            
+            initialdate = startdateformatter.string(from: picker.date)
+            
+        }
         
-        let initialformatter = DateFormatter()
-        initialformatter.dateStyle = .medium
-        initialformatter.timeStyle = .none
-        let initialdateString = initialformatter.string(from: picker.date)
         
-        
-        textStartdate.text = "\(startdateString)"
-        
-        
+        //End date
+        if activeTextField == textEnddate {
+            let enddateformatter = DateFormatter()
+            enddateformatter.dateStyle = .medium
+            enddateformatter.timeStyle = .none
+            let comparedateString = enddateformatter.string(from: picker.date)
+            
+            if comparedateString == initialdate {
+                enddateformatter.dateStyle = .none
+            }
+            enddateformatter.timeStyle = .short
+            let enddateString = enddateformatter.string(from: picker.date)
+            
+            textEnddate.text = "\(enddateString)"
+        }
         
         self.view.endEditing(true)
         
@@ -105,6 +137,7 @@ class add_event: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
 
     /*
     // MARK: - Navigation
@@ -119,7 +152,7 @@ class add_event: UIViewController {
 }
 
 
-extension add_event : UITextFieldDelegate {
+extension Add_event : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
