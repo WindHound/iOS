@@ -130,6 +130,8 @@ class Add_event: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         textTitle.resignFirstResponder()
         textLocation.resignFirstResponder()
+        textStartdate.resignFirstResponder()
+        textEnddate.resignFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
