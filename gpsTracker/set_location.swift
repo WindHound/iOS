@@ -44,6 +44,7 @@ class set_location: UIViewController{
         let searchBar = resultSearchController!.searchBar
         searchBar.sizeToFit()
         searchBar.placeholder = "Search for places"
+        searchBar.tintColor = UIColor.white
         navigationItem.titleView = resultSearchController?.searchBar
         
         // Navigation bar is still visible when search results are displayed
@@ -55,9 +56,8 @@ class set_location: UIViewController{
         // Limits the overlap area to just the View Controller's frame instead of the whole Navigation Controller
         definesPresentationContext = true
         
-        
-
-        // Do any additional setup after loading the view.
+        // This passes along a handle of the myMap from the set)location view controller onto the locationSearchTable
+        locationSearchTable.mapView = myMap
     }
     
     override func didReceiveMemoryWarning() {
