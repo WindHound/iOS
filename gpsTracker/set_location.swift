@@ -9,90 +9,62 @@
 import UIKit
 import MapKit
 
-class set_location: UIViewController, UISearchBarDelegate {
+class set_location: UIViewController{
 
     @IBOutlet weak var myMap: MKMapView!
     
+    let locationManager = CLLocationManager()
+
+    var resultSearchController : UISearchController? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Setting up location manager
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        
+        let coordinate = locationManager.location?.coordinate
+        
+        // zoom into current position when map is first loaded
+        
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let region = MKCoordinateRegionMake(coordinate!, span)
+        myMap.setRegion(region, animated: false)
+        
+        
+        // Setting up table to store the results of location search and display it on screen
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
+        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+        resultSearchController?.searchResultsUpdater = locationSearchTable
+        
+        // Setting up search bar and embedding it within the navigation bar
+        let searchBar = resultSearchController!.searchBar
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Search for places"
+        navigationItem.titleView = resultSearchController?.searchBar
+        
+        // Navigation bar is still visible when search results are displayed
+        resultSearchController?.hidesNavigationBarDuringPresentation = false
+        
+        // Overlay a semi-transparent background when the search bar is selected
+        resultSearchController?.dimsBackgroundDuringPresentation = true
+        
+        // Limits the overlap area to just the View Controller's frame instead of the whole Navigation Controller
+        definesPresentationContext = true
+        
+        
 
         // Do any additional setup after loading the view.
     }
     
-    // Creating search bar when search button is touched
-    @IBAction func searchbutton(_ sender: Any) {
-        let searchController = UISearchController(searchResultsController: nil)
-        
-        searchController.searchBar.delegate = self
-        present(searchController, animated: true, completion: nil)
-        
-    }
-    
-    // When search button is touched
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        // Ignoring user
-        UIApplication.shared.beginIgnoringInteractionEvents()
-        
-        // Activity Indicator
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.startAnimating()
-        
-        self.view.addSubview(activityIndicator)
-        
-        // Hide search bar
-        searchBar.resignFirstResponder()
-        dismiss(animated: true, completion: nil)
-        
-        // Create the search request
-        let searchRequest = MKLocalSearchRequest()
-        searchRequest.naturalLanguageQuery = searchBar.text
-        
-        let activeSearch = MKLocalSearch(request: searchRequest)
-        
-        activeSearch.start{(response, error) in
-          
-            activityIndicator.stopAnimating()
-            UIApplication.shared.endIgnoringInteractionEvents()
-            
-            if response == nil {
-                print("Error")
-            } else {
-                // Remove annotations
-                
-                let annotations = self.myMap.annotations
-                self.myMap.removeAnnotations(annotations)
-                
-                // Getting data
-                let latitude = response?.boundingRegion.center.latitude
-                let longitude = response?.boundingRegion.center.longitude
-                
-                // Create annotation
-                let annotation = MKPointAnnotation()
-                annotation.title = searchBar.text
-                annotation.coordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
-                self.myMap.addAnnotation(annotation)
-                
-                //Zooming in on annotation
-                let coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude!, longitude!)
-                
-                let span = MKCoordinateSpanMake(0.1, 0.1)
-                
-                let region = MKCoordinateRegionMake(coordinate, span)
-                
-                self.myMap.setRegion(region, animated: false)
-                
-            }
-            
-        }
-        
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 
     /*
@@ -105,4 +77,45 @@ class set_location: UIViewController, UISearchBarDelegate {
     }
     */
 
+}
+
+extension set_location : CLLocationManagerDelegate {
+    // If authorization changed
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        // If accessing GPS location is denied
+        if (status == CLAuthorizationStatus.denied) {
+            // Show alert message and acquire gps permission
+            showLocationDisabledPopup()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            let span = MKCoordinateSpanMake(0.05, 0.05)
+            let region = MKCoordinateRegionMake(location.coordinate, span)
+            myMap.setRegion(region, animated: false)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error:: \(error)")
+    }
+    
+    
+    func showLocationDisabledPopup() {
+        let alertController = UIAlertController(title: "Background Location Access Disabled", message: "GPS access is required to get current location", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let openAction = UIAlertAction(title: "Open Settings", style: .default) {(action) in
+            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        
+        alertController.addAction(openAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
 }

@@ -10,6 +10,7 @@
 		550AEE2C201653C700C0A986 /* Login_screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550AEE2B201653C700C0A986 /* Login_screen.storyboard */; };
 		550B1D4A2020845900213E81 /* set_location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B1D492020845900213E81 /* set_location.swift */; };
 		550B2E9020174AAE0027127F /* log_in.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B2E8F20174AAE0027127F /* log_in.swift */; };
+		552865402022282E007D4707 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5528653F2022282E007D4707 /* LocationSearchTable.swift */; };
 		552CF840201FD5F700620C29 /* Add_event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552CF83F201FD5F700620C29 /* Add_event.swift */; };
 		55548A142019444B00FC7E23 /* event_list_admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55548A132019444B00FC7E23 /* event_list_admin.swift */; };
 		5559739520161FFF00CAEBDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5559739420161FFF00CAEBDC /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 		550AEE2B201653C700C0A986 /* Login_screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login_screen.storyboard; sourceTree = "<group>"; };
 		550B1D492020845900213E81 /* set_location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = set_location.swift; sourceTree = "<group>"; };
 		550B2E8F20174AAE0027127F /* log_in.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = log_in.swift; sourceTree = "<group>"; };
+		5528653F2022282E007D4707 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		552CF83F201FD5F700620C29 /* Add_event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_event.swift; sourceTree = "<group>"; };
 		55548A132019444B00FC7E23 /* event_list_admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event_list_admin.swift; sourceTree = "<group>"; };
 		5559739420161FFF00CAEBDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../xamarin/sailGPS/sailGPS/Assets.xcassets; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			children = (
 				55B94DDF201F4BCC0048DBB6 /* Interface_screen_shot */,
 				550AEE2B201653C700C0A986 /* Login_screen.storyboard */,
+				5528653F2022282E007D4707 /* LocationSearchTable.swift */,
 				557F41622007E8DF0087239B /* AppDelegate.swift */,
 				557F41642007E8DF0087239B /* ViewController.swift */,
 				557F41662007E8DF0087239B /* Main.storyboard */,
@@ -160,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				552865402022282E007D4707 /* LocationSearchTable.swift in Sources */,
 				55548A142019444B00FC7E23 /* event_list_admin.swift in Sources */,
 				550B1D4A2020845900213E81 /* set_location.swift in Sources */,
 				550B2E9020174AAE0027127F /* log_in.swift in Sources */,
