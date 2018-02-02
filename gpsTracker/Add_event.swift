@@ -18,8 +18,6 @@ class Add_event: UIViewController {
     
     @IBOutlet weak var textEnddate: UITextField!
     
-    @IBOutlet weak var topToolBar: UIToolbar!
-    
     var activeTextField : UITextField!
     
     var initialdate : String!
@@ -29,8 +27,6 @@ class Add_event: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        topToolBar.clipsToBounds = true
         
         textTitle.delegate = self
         textLocation.delegate = self

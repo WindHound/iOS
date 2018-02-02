@@ -9,6 +9,11 @@
 import UIKit
 import MapKit
 
+// It acts like an interface
+protocol HandleMapSearch {
+    func dropPinZommIn(placemark:MKPlacemark)
+}
+
 class set_location: UIViewController{
 
     @IBOutlet weak var myMap: MKMapView!
@@ -16,6 +21,8 @@ class set_location: UIViewController{
     let locationManager = CLLocationManager()
 
     var resultSearchController : UISearchController? = nil
+    
+    var selectedPin : MKPlacemark? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,19 +33,13 @@ class set_location: UIViewController{
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
-        let coordinate = locationManager.location?.coordinate
-        
-        // zoom into current position when map is first loaded
-        
-        let span = MKCoordinateSpanMake(0.05, 0.05)
-        let region = MKCoordinateRegionMake(coordinate!, span)
-        myMap.setRegion(region, animated: false)
-        
-        
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         // Setting up table to store the results of location search and display it on screen
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController?.searchResultsUpdater = locationSearchTable
+        
+        locationSearchTable.handleMapSearchDelegate = self
         
         // Setting up search bar and embedding it within the navigation bar
         let searchBar = resultSearchController!.searchBar
@@ -58,6 +59,7 @@ class set_location: UIViewController{
         
         // This passes along a handle of the myMap from the set)location view controller onto the locationSearchTable
         locationSearchTable.mapView = myMap
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -117,5 +119,30 @@ extension set_location : CLLocationManagerDelegate {
         alertController.addAction(openAction)
         
         self.present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension set_location: HandleMapSearch {
+    func dropPinZommIn(placemark: MKPlacemark) {
+        // cache the pin
+        selectedPin = placemark
+        
+        // clear existing pins
+        myMap.removeAnnotations(myMap.annotations)
+        
+        // Create new pin
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        if let city = placemark.locality,
+            let state = placemark.administrativeArea {
+            annotation.subtitle = "\(city) \(state)"
+        }
+        
+        myMap.addAnnotation(annotation)
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let region = MKCoordinateRegionMake(placemark.coordinate, span)
+        myMap.setRegion(region, animated: true)
+        
     }
 }
