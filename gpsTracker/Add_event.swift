@@ -28,6 +28,7 @@ class Add_event: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         textTitle.delegate = self
         textLocation.delegate = self
         

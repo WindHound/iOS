@@ -14,15 +14,20 @@ protocol HandleMapSearch {
     func dropPinZommIn(placemark:MKPlacemark)
 }
 
-class set_location: UIViewController{
+class set_location: UIViewController, UISearchBarDelegate{
 
-    @IBOutlet weak var myMap: MKMapView!
     
     let locationManager = CLLocationManager()
 
     var resultSearchController : UISearchController? = nil
     
     var selectedPin : MKPlacemark? = nil
+    
+    @IBOutlet weak var myMap: MKMapView!
+    
+    @IBOutlet weak var add_button: UIBarButtonItem!
+    
+    @IBOutlet weak var search_button: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +38,22 @@ class set_location: UIViewController{
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
+        // zoom into current position when map is first loaded
+        let coordinate = locationManager.location?.coordinate
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let region = MKCoordinateRegionMake(coordinate!, span)
+        myMap.setRegion(region, animated: false)
+        myMap.showsUserLocation = true
+        
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        
+        add_button.isEnabled = false
+        
+
+    }
+    
+    
+    @IBAction func searchButton(_ sender: Any) {
         // Setting up table to store the results of location search and display it on screen
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
@@ -43,23 +63,27 @@ class set_location: UIViewController{
         
         // Setting up search bar and embedding it within the navigation bar
         let searchBar = resultSearchController!.searchBar
-        searchBar.sizeToFit()
+        searchBar.delegate = self
         searchBar.placeholder = "Search for places"
-        searchBar.tintColor = UIColor.white
-        navigationItem.titleView = resultSearchController?.searchBar
+        
         
         // Navigation bar is still visible when search results are displayed
         resultSearchController?.hidesNavigationBarDuringPresentation = false
+        
+        
+        present(resultSearchController!, animated: true, completion: nil)
+
         
         // Overlay a semi-transparent background when the search bar is selected
         resultSearchController?.dimsBackgroundDuringPresentation = true
         
         // Limits the overlap area to just the View Controller's frame instead of the whole Navigation Controller
-        definesPresentationContext = true
+        definesPresentationContext = false
         
         // This passes along a handle of the myMap from the set)location view controller onto the locationSearchTable
         locationSearchTable.mapView = myMap
-
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,11 +116,7 @@ extension set_location : CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            let span = MKCoordinateSpanMake(0.05, 0.05)
-            let region = MKCoordinateRegionMake(location.coordinate, span)
-            myMap.setRegion(region, animated: false)
-        }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -143,6 +163,9 @@ extension set_location: HandleMapSearch {
         let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         myMap.setRegion(region, animated: true)
+        
+        // Enable add button
+        add_button.isEnabled = true
         
     }
 }
