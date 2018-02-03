@@ -18,10 +18,18 @@ class Add_event: UIViewController {
     
     @IBOutlet weak var textEnddate: UITextField!
     
+    @IBOutlet weak var textInvitees: UITextField!
+    
+    var latitude : Double!
+    var longitude : Double!
+    
     var activeTextField : UITextField!
     
     var initialdate : String!
     
+    var invitees : [String] = []
+    
+    @IBOutlet weak var add_button: UIBarButtonItem!
     
     let picker = UIDatePicker()
     
@@ -31,6 +39,7 @@ class Add_event: UIViewController {
         
         textTitle.delegate = self
         textLocation.delegate = self
+        add_button.isEnabled = false
         
         // To repond when user presses date text fields
         createDatePicker(forField: textStartdate)
@@ -57,6 +66,9 @@ class Add_event: UIViewController {
         
         textEnddate.text = "\(hour):\(minute)"
         
+        // Initial invitees text field text
+        textInvitees.text = "None"
+        
         
     }
     
@@ -74,6 +86,11 @@ class Add_event: UIViewController {
         activeTextField = textLocation
     }
     
+    
+    @IBAction func textInvitees_touched(_ sender: Any) {
+        activeTextField = textInvitees
+    }
+    
     // Function to display differnet view controller when the location text field is pressed
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
@@ -81,6 +98,9 @@ class Add_event: UIViewController {
             performSegue(withIdentifier: "location_clicked", sender: self)
             return false
         } else {
+            if activeTextField == textInvitees {
+                performSegue(withIdentifier: "invitees_clicked", sender: <#T##Any?#>)
+            }
             return true
         }
         

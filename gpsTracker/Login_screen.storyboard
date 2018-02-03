@@ -237,7 +237,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dtl-ni-Qds">
-                                <rect key="frame" x="67" y="135" width="300" height="30"/>
+                                <rect key="frame" x="79" y="135" width="288" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -246,7 +246,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QKd-4K-ajB">
-                                <rect key="frame" x="67" y="173" width="300" height="30"/>
+                                <rect key="frame" x="79" y="173" width="288" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -269,6 +269,21 @@
                                     <action selector="textLocation_touched:" destination="32m-N5-8nb" eventType="touchDown" id="u9X-aD-trh"/>
                                 </connections>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invitees:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dcn-Tt-ID4">
+                                <rect key="frame" x="8" y="243" width="63.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9RF-vf-Ael">
+                                <rect key="frame" x="79" y="239" width="288" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textInvitees_touched:" destination="32m-N5-8nb" eventType="editingDidEnd" id="XO1-jF-oU5"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -276,16 +291,21 @@
                             <constraint firstItem="JO7-mc-PXb" firstAttribute="top" secondItem="n31-WI-jeH" secondAttribute="bottom" constant="47" id="0t0-5P-baj"/>
                             <constraint firstItem="pH0-mG-cdq" firstAttribute="trailing" secondItem="QKd-4K-ajB" secondAttribute="trailing" constant="8" id="1j2-8i-VKr"/>
                             <constraint firstItem="ciP-zk-TVY" firstAttribute="top" secondItem="JO7-mc-PXb" secondAttribute="bottom" constant="17" id="7yP-B1-Q0v"/>
+                            <constraint firstItem="Dcn-Tt-ID4" firstAttribute="top" secondItem="ciP-zk-TVY" secondAttribute="bottom" constant="44" id="FBh-y4-c8M"/>
+                            <constraint firstItem="9RF-vf-Ael" firstAttribute="top" secondItem="QKd-4K-ajB" secondAttribute="bottom" constant="36" id="Gby-7w-Ejs"/>
                             <constraint firstItem="ciP-zk-TVY" firstAttribute="leading" secondItem="pH0-mG-cdq" secondAttribute="leading" constant="8" id="HC1-OW-eic"/>
                             <constraint firstItem="Nm1-wY-YuK" firstAttribute="top" secondItem="pH0-mG-cdq" secondAttribute="top" constant="25" id="HHu-kK-leg"/>
                             <constraint firstItem="QKd-4K-ajB" firstAttribute="top" secondItem="dtl-ni-Qds" secondAttribute="bottom" constant="8" id="KYy-65-vbf"/>
-                            <constraint firstItem="QKd-4K-ajB" firstAttribute="leading" secondItem="ciP-zk-TVY" secondAttribute="trailing" constant="16.5" id="QzZ-61-WJb"/>
+                            <constraint firstItem="QKd-4K-ajB" firstAttribute="leading" secondItem="ciP-zk-TVY" secondAttribute="trailing" constant="28.5" id="QzZ-61-WJb"/>
                             <constraint firstItem="n31-WI-jeH" firstAttribute="top" secondItem="Nm1-wY-YuK" secondAttribute="bottom" constant="8" id="WJN-7t-Cra"/>
+                            <constraint firstItem="Dcn-Tt-ID4" firstAttribute="leading" secondItem="pH0-mG-cdq" secondAttribute="leading" constant="8" id="Zc1-Wm-u6F"/>
                             <constraint firstItem="dtl-ni-Qds" firstAttribute="top" secondItem="n31-WI-jeH" secondAttribute="bottom" constant="42" id="clT-8m-4mO"/>
+                            <constraint firstItem="9RF-vf-Ael" firstAttribute="leading" secondItem="Dcn-Tt-ID4" secondAttribute="trailing" constant="7.5" id="hsG-db-0FA"/>
                             <constraint firstItem="pH0-mG-cdq" firstAttribute="trailing" secondItem="Nm1-wY-YuK" secondAttribute="trailing" constant="8" id="iyT-Bn-dNA"/>
                             <constraint firstItem="Nm1-wY-YuK" firstAttribute="leading" secondItem="pH0-mG-cdq" secondAttribute="leading" constant="8" id="lmH-Rl-CXp"/>
-                            <constraint firstItem="dtl-ni-Qds" firstAttribute="leading" secondItem="JO7-mc-PXb" secondAttribute="trailing" constant="8" id="m13-r3-5B7"/>
+                            <constraint firstItem="dtl-ni-Qds" firstAttribute="leading" secondItem="JO7-mc-PXb" secondAttribute="trailing" constant="20" id="m13-r3-5B7"/>
                             <constraint firstItem="pH0-mG-cdq" firstAttribute="trailing" secondItem="dtl-ni-Qds" secondAttribute="trailing" constant="8" id="mro-Uk-9rE"/>
+                            <constraint firstItem="pH0-mG-cdq" firstAttribute="trailing" secondItem="9RF-vf-Ael" secondAttribute="trailing" constant="8" id="saI-BD-066"/>
                             <constraint firstItem="JO7-mc-PXb" firstAttribute="leading" secondItem="pH0-mG-cdq" secondAttribute="leading" constant="8" id="vfx-Z6-vJb"/>
                             <constraint firstItem="pH0-mG-cdq" firstAttribute="trailing" secondItem="n31-WI-jeH" secondAttribute="trailing" constant="8" id="w1h-J2-NMq"/>
                         </constraints>
@@ -304,17 +324,35 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="add_button" destination="II0-lB-lOU" id="pTd-aX-OGK"/>
                         <outlet property="textEnddate" destination="QKd-4K-ajB" id="PHv-aA-BRz"/>
+                        <outlet property="textInvitees" destination="9RF-vf-Ael" id="EXP-KC-ewC"/>
                         <outlet property="textLocation" destination="n31-WI-jeH" id="Sdt-Zu-aP1"/>
                         <outlet property="textStartdate" destination="dtl-ni-Qds" id="Vda-Oc-Ol6"/>
                         <outlet property="textTitle" destination="Nm1-wY-YuK" id="k9k-MB-44B"/>
                         <segue destination="9g9-xT-xxC" kind="show" identifier="location_clicked" id="JSd-Av-lRV"/>
+                        <segue destination="omy-uL-yWB" kind="show" identifier="invitees_clicked" id="YLN-f6-ifP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81Q-IJ-I0e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cGr-Zf-NEc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3332" y="-692"/>
+            <point key="canvasLocation" x="3332" y="-692.20389805097454"/>
+        </scene>
+        <!--Added invitees-->
+        <scene sceneID="hql-AY-OVe">
+            <objects>
+                <viewController id="omy-uL-yWB" customClass="added_invitees" customModule="gpsTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cea-6s-fkg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="Dwe-VK-GbY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8nI-5B-NhY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4230" y="-376"/>
         </scene>
         <!--Location-->
         <scene sceneID="bCD-MN-GsU">
@@ -342,8 +380,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="rIP-Of-YkU">
                         <rightBarButtonItems>
-                            <barButtonItem title="Add" style="plain" id="M6B-n2-xVk">
+                            <barButtonItem title="Add" id="gpg-0S-4GB">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="add_button_clicked:" destination="9g9-xT-xxC" id="WGU-nY-6nd"/>
+                                    <segue destination="8VE-ce-C5K" kind="unwind" unwindAction="unwindToAddEventWithSegue:" id="kj4-ha-REd"/>
+                                </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="search" id="ycX-gA-s25">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -354,13 +396,14 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="add_button" destination="M6B-n2-xVk" id="Iey-fl-5OP"/>
+                        <outlet property="add_button" destination="gpg-0S-4GB" id="xAk-20-uxV"/>
                         <outlet property="myMap" destination="wcS-ER-DGB" id="atm-lB-C4e"/>
                         <outlet property="searchDisplayController" destination="qoi-7P-ffH" id="WAV-mi-tjO"/>
                         <outlet property="search_button" destination="ycX-gA-s25" id="zgP-rj-C7p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a73-ca-1NB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8VE-ce-C5K" userLabel="Exit" sceneMemberID="exit"/>
                 <searchDisplayController id="qoi-7P-ffH">
                     <connections>
                         <outlet property="delegate" destination="9g9-xT-xxC" id="LKk-FS-e8t"/>
@@ -370,7 +413,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="4024.8000000000002" y="-692.20389805097454"/>
+            <point key="canvasLocation" x="4226" y="-1081"/>
         </scene>
         <!--Location Search Table-->
         <scene sceneID="37i-Oe-e2Q">
@@ -414,7 +457,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLh-IF-SCq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5247.1999999999998" y="-716.49175412293857"/>
+            <point key="canvasLocation" x="4946" y="-1082"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="kP8-XN-EXx">

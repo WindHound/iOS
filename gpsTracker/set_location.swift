@@ -29,6 +29,10 @@ class set_location: UIViewController, UISearchBarDelegate{
     
     @IBOutlet weak var search_button: UIBarButtonItem!
     
+    var location = String()
+    var latitude : Double!
+    var longitude : Double!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +49,7 @@ class set_location: UIViewController, UISearchBarDelegate{
         myMap.setRegion(region, animated: false)
         myMap.showsUserLocation = true
         
+        // Make back button color to white
         self.navigationController?.navigationBar.tintColor = UIColor.white
         
         add_button.isEnabled = false
@@ -86,13 +91,19 @@ class set_location: UIViewController, UISearchBarDelegate{
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let add_event = segue.destination as! Add_event
+        add_event.textLocation.text = location
+        add_event.latitude = latitude
+        add_event.longitude = longitude
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     
-
     /*
     // MARK: - Navigation
 
@@ -163,6 +174,11 @@ extension set_location: HandleMapSearch {
         let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         myMap.setRegion(region, animated: true)
+        
+        // Assinging latitude and longitude value to pass to add_event view controller
+        location = placemark.name!
+        latitude = placemark.coordinate.latitude
+        longitude = placemark.coordinate.longitude
         
         // Enable add button
         add_button.isEnabled = true
