@@ -8,13 +8,23 @@
 
 import UIKit
 import CoreLocation
+import CoreMotion
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
 
-    
-    @IBOutlet weak var longitude: UILabel!
     @IBOutlet weak var latitude: UILabel!
+    @IBOutlet weak var longitude: UILabel!
+    @IBOutlet weak var accXvalue: UILabel!
+    @IBOutlet weak var accYvalue: UILabel!
+    @IBOutlet weak var accZvalue: UILabel!
+    @IBOutlet weak var gyrXvalue: UILabel!
+    @IBOutlet weak var gyrYvalue: UILabel!
+    @IBOutlet weak var gyrZvalue: UILabel!
+    @IBOutlet weak var compass: UILabel!
+    
     let locationManager = CLLocationManager()
+    
+    var motionManager = CMMotionManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +40,48 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
+            locationManager.startUpdatingHeading()
             
         }
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        motionManager.accelerometerUpdateInterval = 0.5
+        
+        motionManager.gyroUpdateInterval = 0.1
+        
+        motionManager.startAccelerometerUpdates(to: OperationQueue.current!, withHandler: {(data, error) in
+            if let myData = data
+            {
+            
+                self.accXvalue.text = "X: " + String(format: "%.2f", ((myData.acceleration.x) * 10 * -1))
+                self.accYvalue.text = "Y: " + String(format: "%.2f", ((myData.acceleration.y) * 10 * -1))
+                self.accZvalue.text = "Z: " + String(format: "%.2f", ((myData.acceleration.z) * 10 * -1))
+//            print(String(format: "%.3f", totalWorkTimeInHours)) Reference purpose
+            }
+        })
+        
+        motionManager.startGyroUpdates(to: OperationQueue.current!, withHandler: {(data, error) in
+            if let myData = data
+            {
+                print(myData.rotationRate)
+                self.gyrXvalue.text = "X: " + String(format: "%.2f", ((myData.rotationRate.x)))
+                self.gyrYvalue.text = "Y: " + String(format: "%.2f", ((myData.rotationRate.y)))
+                self.gyrZvalue.text = "Z: " + String(format: "%.2f", ((myData.rotationRate.z)))
+            }
+        })
+    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             print(location.coordinate)
             latitude.text = "Latitude:   " + String(location.coordinate.latitude)
             longitude.text = "Longitude: " + String(location.coordinate.longitude)
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        compass.text = String(format: "%.0f", newHeading.trueHeading)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

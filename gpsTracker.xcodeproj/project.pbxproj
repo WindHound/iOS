@@ -16,8 +16,7 @@
 		55548A142019444B00FC7E23 /* event_list_admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55548A132019444B00FC7E23 /* event_list_admin.swift */; };
 		5559739520161FFF00CAEBDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5559739420161FFF00CAEBDC /* Assets.xcassets */; };
 		557F41632007E8DF0087239B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41622007E8DF0087239B /* AppDelegate.swift */; };
-		557F41652007E8DF0087239B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41642007E8DF0087239B /* ViewController.swift */; };
-		557F41682007E8DF0087239B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 557F41662007E8DF0087239B /* Main.storyboard */; };
+		557F41652007E8DF0087239B /* GpsAndSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41642007E8DF0087239B /* GpsAndSensor.swift */; };
 		557F416D2007E8DF0087239B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 557F416B2007E8DF0087239B /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -32,8 +31,7 @@
 		5559739420161FFF00CAEBDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../xamarin/sailGPS/sailGPS/Assets.xcassets; sourceTree = "<group>"; };
 		557F415F2007E8DF0087239B /* gpsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gpsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		557F41622007E8DF0087239B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		557F41642007E8DF0087239B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		557F41672007E8DF0087239B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		557F41642007E8DF0087239B /* GpsAndSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpsAndSensor.swift; sourceTree = "<group>"; };
 		557F416C2007E8DF0087239B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		557F416E2007E8DF0087239B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,29 +66,20 @@
 		557F41612007E8DF0087239B /* gpsTracker */ = {
 			isa = PBXGroup;
 			children = (
-				55B94DDF201F4BCC0048DBB6 /* Interface_screen_shot */,
-				550AEE2B201653C700C0A986 /* Login_screen.storyboard */,
-				550BBF9120266ABA0075AC79 /* added_invitees.swift */,
-				5528653F2022282E007D4707 /* LocationSearchTable.swift */,
-				557F41622007E8DF0087239B /* AppDelegate.swift */,
-				557F41642007E8DF0087239B /* ViewController.swift */,
-				557F41662007E8DF0087239B /* Main.storyboard */,
-				5559739420161FFF00CAEBDC /* Assets.xcassets */,
 				557F416B2007E8DF0087239B /* LaunchScreen.storyboard */,
-				557F416E2007E8DF0087239B /* Info.plist */,
+				550AEE2B201653C700C0A986 /* Login_screen.storyboard */,
 				550B2E8F20174AAE0027127F /* log_in.swift */,
+				557F41642007E8DF0087239B /* GpsAndSensor.swift */,
 				55548A132019444B00FC7E23 /* event_list_admin.swift */,
+				550BBF9120266ABA0075AC79 /* added_invitees.swift */,
 				552CF83F201FD5F700620C29 /* Add_event.swift */,
 				550B1D492020845900213E81 /* set_location.swift */,
+				5528653F2022282E007D4707 /* LocationSearchTable.swift */,
+				557F41622007E8DF0087239B /* AppDelegate.swift */,
+				5559739420161FFF00CAEBDC /* Assets.xcassets */,
+				557F416E2007E8DF0087239B /* Info.plist */,
 			);
 			path = gpsTracker;
-			sourceTree = "<group>";
-		};
-		55B94DDF201F4BCC0048DBB6 /* Interface_screen_shot */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Interface_screen_shot;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,7 +144,6 @@
 				557F416D2007E8DF0087239B /* LaunchScreen.storyboard in Resources */,
 				5559739520161FFF00CAEBDC /* Assets.xcassets in Resources */,
 				550AEE2C201653C700C0A986 /* Login_screen.storyboard in Resources */,
-				557F41682007E8DF0087239B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +158,7 @@
 				55548A142019444B00FC7E23 /* event_list_admin.swift in Sources */,
 				550B1D4A2020845900213E81 /* set_location.swift in Sources */,
 				550B2E9020174AAE0027127F /* log_in.swift in Sources */,
-				557F41652007E8DF0087239B /* ViewController.swift in Sources */,
+				557F41652007E8DF0087239B /* GpsAndSensor.swift in Sources */,
 				552CF840201FD5F700620C29 /* Add_event.swift in Sources */,
 				557F41632007E8DF0087239B /* AppDelegate.swift in Sources */,
 				550BBF9220266ABA0075AC79 /* added_invitees.swift in Sources */,
@@ -180,14 +168,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		557F41662007E8DF0087239B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				557F41672007E8DF0087239B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		557F416B2007E8DF0087239B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

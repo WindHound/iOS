@@ -39,6 +39,7 @@ class Add_event: UIViewController {
         
         textTitle.delegate = self
         textLocation.delegate = self
+        textInvitees.delegate = self
         add_button.isEnabled = false
         
         // To repond when user presses date text fields
@@ -97,13 +98,12 @@ class Add_event: UIViewController {
         if activeTextField == textLocation {
             performSegue(withIdentifier: "location_clicked", sender: self)
             return false
+        } else if activeTextField == textInvitees{
+           performSegue(withIdentifier: "invitees_clicked", sender: self)
+            return false
         } else {
-            if activeTextField == textInvitees {
-                performSegue(withIdentifier: "invitees_clicked", sender: <#T##Any?#>)
-            }
             return true
         }
-        
     }
     
     
