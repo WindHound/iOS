@@ -204,7 +204,6 @@
         <!--History-->
         <scene sceneID="YOO-Il-wTN">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cdR-8m-euN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="9DD-9q-oax" customClass="History_event" customModule="gpsTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h20-Kr-rmw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -279,6 +278,7 @@
                         <segue destination="7N5-1w-mx0" kind="show" identifier="History_detail" id="wRV-wV-yJb"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cdR-8m-euN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2313" y="-168"/>
         </scene>
@@ -301,7 +301,6 @@
         <!--Upcoming-->
         <scene sceneID="7Gx-vJ-uS2">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="of8-cS-5L9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Zk4-Of-lwg" customClass="event_list_admin" customModule="gpsTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c8B-p1-04V">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -374,6 +373,7 @@
                         <segue destination="7N5-1w-mx0" kind="show" identifier="Upcoming_detail" id="QrV-xx-c3o"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="of8-cS-5L9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2312.8000000000002" y="-905.3973013493254"/>
         </scene>
@@ -819,7 +819,7 @@
         <image name="SOS" width="512" height="512"/>
         <image name="Stop" width="512" height="512"/>
         <image name="Upcoming_event" width="20" height="20"/>
-        <image name="log_in_background" width="414" height="736"/>
+        <image name="log_in_background" width="621" height="1104"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QrV-xx-c3o"/>
