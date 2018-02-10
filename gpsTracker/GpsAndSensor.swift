@@ -36,19 +36,21 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
     var gyrYvalues : [String] = []
     var gyrZvalues : [String] = []
     var comp : [String] = []
+    var compass = String()
     
     var producedfile : [String] = []
     var filetosend : [String] = []
     var sentfile : [String] = []
     
-    var compass = String()
+    @IBOutlet weak var networkimage: UIImageView!
+    @IBOutlet weak var gpsImage: UIImageView!
+    
     
     var timer = Timer()
     
     var time = 0
     
     let locationManager = CLLocationManager()
-    
     var motionManager = CMMotionManager()
     
     override func viewDidLoad() {
@@ -132,6 +134,7 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
         if let location = locations.first {
             if !checkSensors() {
                 updateSensors()
+                gpsImage.image = #imageLiteral(resourceName: "GPS_connected")
                 timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GpsAndSensor.action), userInfo: nil, repeats: true)
             }
             
