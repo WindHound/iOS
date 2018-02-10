@@ -10,17 +10,42 @@ import UIKit
 import CoreLocation
 import CoreMotion
 
-class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
+struct sailboat {
+    let id: String
+    let longitude : String
+    let latitude : String
+    let speed : String
+    let accXvalue : String
+    let accYvalue : String
+    let accZvalue : String
+    let gyrXvalue : String
+    let gyrYvalue : String
+    let gyrZvalue : String
+    let comp : String
+}
 
-    @IBOutlet weak var latitude: UILabel!
-    @IBOutlet weak var longitude: UILabel!
-    @IBOutlet weak var accXvalue: UILabel!
-    @IBOutlet weak var accYvalue: UILabel!
-    @IBOutlet weak var accZvalue: UILabel!
-    @IBOutlet weak var gyrXvalue: UILabel!
-    @IBOutlet weak var gyrYvalue: UILabel!
-    @IBOutlet weak var gyrZvalue: UILabel!
-    @IBOutlet weak var compass: UILabel!
+class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
+    
+    var lat : Double = 0.0
+    var long : Double = 0.0
+    var speed = String()
+    var accXvalues : [String] = []
+    var accYvalues : [String] = []
+    var accZvalues : [String] = []
+    var gyrXvalues : [String] = []
+    var gyrYvalues : [String] = []
+    var gyrZvalues : [String] = []
+    var comp : [String] = []
+    
+    var producedfile : [String] = []
+    var filetosend : [String] = []
+    var sentfile : [String] = []
+    
+    var compass = String()
+    
+    var timer = Timer()
+    
+    var time = 0
     
     let locationManager = CLLocationManager()
     
@@ -44,44 +69,84 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
             
         }
         
+        motionManager.accelerometerUpdateInterval = 1/60
+        
+        motionManager.gyroUpdateInterval = 1/60
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        motionManager.accelerometerUpdateInterval = 0.5
+    func updateSensors() {
         
-        motionManager.gyroUpdateInterval = 0.1
-        
+        motionManager.startAccelerometerUpdates()
+        motionManager.startGyroUpdates()
         motionManager.startAccelerometerUpdates(to: OperationQueue.current!, withHandler: {(data, error) in
             if let myData = data
             {
-            
-                self.accXvalue.text = "X: " + String(format: "%.2f", ((myData.acceleration.x) * 10 * -1))
-                self.accYvalue.text = "Y: " + String(format: "%.2f", ((myData.acceleration.y) * 10 * -1))
-                self.accZvalue.text = "Z: " + String(format: "%.2f", ((myData.acceleration.z) * 10 * -1))
-//            print(String(format: "%.3f", totalWorkTimeInHours)) Reference purpose
+                if self.accXvalues.count < 60 {
+                    self.accXvalues.append(String(format: "%.2f", ((myData.acceleration.x) * -10)))
+                    self.accYvalues.append(String(format: "%.2f", ((myData.acceleration.y) * -10)))
+                    self.accZvalues.append(String(format: "%.2f", ((myData.acceleration.z) * -10)))
+                    self.comp.append(self.compass)
+
+                }
+                
             }
         })
-        
+
         motionManager.startGyroUpdates(to: OperationQueue.current!, withHandler: {(data, error) in
             if let myData = data
             {
-                print(myData.rotationRate)
-                self.gyrXvalue.text = "X: " + String(format: "%.2f", ((myData.rotationRate.x)))
-                self.gyrYvalue.text = "Y: " + String(format: "%.2f", ((myData.rotationRate.y)))
-                self.gyrZvalue.text = "Z: " + String(format: "%.2f", ((myData.rotationRate.z)))
+                if self.gyrXvalues.count < 60 {
+                    self.gyrXvalues.append(String(format:"%.2f", myData.rotationRate.x))
+                    self.gyrYvalues.append(String(format:"%.2f", myData.rotationRate.y))
+                    self.gyrZvalues.append(String(format:"%.2f", myData.rotationRate.z))
+                }
             }
         })
+        
+        
+        
     }
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            print(location.coordinate)
-            latitude.text = "Latitude:   " + String(location.coordinate.latitude)
-            longitude.text = "Longitude: " + String(location.coordinate.longitude)
+    
+    func checkSensors() -> Bool {
+        if motionManager.isGyroActive || motionManager.isAccelerometerActive {
+            return true
+        } else {
+            return false
         }
     }
     
+    func clearArrays() {
+        accXvalues.removeAll()
+        accYvalues.removeAll()
+        accZvalues.removeAll()
+        gyrXvalues.removeAll()
+        gyrYvalues.removeAll()
+        gyrZvalues.removeAll()
+        comp.removeAll()
+    }
+    
+    // Location manager functions
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if let location = locations.first {
+            if !checkSensors() {
+                updateSensors()
+                timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GpsAndSensor.action), userInfo: nil, repeats: true)
+            }
+            
+            print(location.coordinate)
+            lat = location.coordinate.latitude
+            long = location.coordinate.longitude
+            speed = String(location.speed)
+        }
+    }
+    
+   
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        compass.text = String(format: "%.0f", newHeading.trueHeading)
+
+        compass = String(format: "%.0f", newHeading.trueHeading)
+
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -90,6 +155,56 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
         }
     }
   
+    // Do this action every second
+    @objc func action() {
+        
+        time += 1
+        
+        let date = Date()
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        
+        var filename = String(describing: date)
+        let endIndex = filename.index(filename.endIndex, offsetBy: -6)
+        filename = filename.substring(to: endIndex)
+        
+        saveUploadedFilesSet(fileName: filename)
+
+        clearArrays()
+    }
+    
+    // Function to save the data from the sensors and locations to json file
+    func saveUploadedFilesSet(fileName:String) {
+        let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension("txt")
+        print("File Path: \(fileURL.path)")
+        
+        let writeString = "id, \(fileName), \(lat), \(long)"
+        do {
+            try writeString.write(to: fileURL, atomically: true, encoding: String.Encoding.utf32)
+        } catch let error as Error {
+            print("Failed to write to URL")
+            print(error)
+        }
+        
+        producedfile.append("\(fileName).txt")
+        filetosend.append("\(fileName).txt")
+        
+        var readString = ""
+        do {
+            readString = try String(contentsOf: fileURL)
+        } catch let error as Error {
+            print("Failed to read file")
+            print(error)
+        }
+        
+        print("Contents of the file \(readString)")
+    
+        
+        
+    }
     
     func showLocationDisabledPopup() {
         let alertController = UIAlertController(title: "Background Location Access Disabled", message: "To get the latitude and longitude, gps access is required", preferredStyle: .alert)

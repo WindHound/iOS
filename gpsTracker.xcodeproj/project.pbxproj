@@ -12,6 +12,7 @@
 		550B1D4A2020845900213E81 /* set_location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B1D492020845900213E81 /* set_location.swift */; };
 		550B2E9020174AAE0027127F /* log_in.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B2E8F20174AAE0027127F /* log_in.swift */; };
 		550BBF9220266ABA0075AC79 /* added_invitees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BBF9120266ABA0075AC79 /* added_invitees.swift */; };
+		55166B282029D879001A45A9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55166B292029D879001A45A9 /* SwiftyJSON.framework */; };
 		552865402022282E007D4707 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5528653F2022282E007D4707 /* LocationSearchTable.swift */; };
 		552CF840201FD5F700620C29 /* Add_event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552CF83F201FD5F700620C29 /* Add_event.swift */; };
 		554F424B2029CCBD0088534B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 554F424A2029CCBD0088534B /* Podfile */; };
@@ -28,9 +29,11 @@
 		550B1D492020845900213E81 /* set_location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = set_location.swift; sourceTree = "<group>"; };
 		550B2E8F20174AAE0027127F /* log_in.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = log_in.swift; sourceTree = "<group>"; };
 		550BBF9120266ABA0075AC79 /* added_invitees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = added_invitees.swift; sourceTree = "<group>"; };
+		5512BD4A202A5F2500C19DBB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		55166B292029D879001A45A9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5528653F2022282E007D4707 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		552CF83F201FD5F700620C29 /* Add_event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_event.swift; sourceTree = "<group>"; };
-		554F424A2029CCBD0088534B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		554F424A2029CCBD0088534B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		55548A132019444B00FC7E23 /* event_list_admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event_list_admin.swift; sourceTree = "<group>"; };
 		5559739420161FFF00CAEBDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../xamarin/sailGPS/sailGPS/Assets.xcassets; sourceTree = "<group>"; };
 		557F415F2007E8DF0087239B /* gpsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gpsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55166B282029D879001A45A9 /* SwiftyJSON.framework in Frameworks */,
 				5011C7D4ABB4948DA5ED2A1E /* Pods_gpsTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +108,8 @@
 		9F61C4DE1CB61021BC1A1573 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5512BD4A202A5F2500C19DBB /* CoreLocation.framework */,
+				55166B292029D879001A45A9 /* SwiftyJSON.framework */,
 				52D50E1CB167872A24CD9BA8 /* Pods_gpsTracker.framework */,
 			);
 			name = Frameworks;

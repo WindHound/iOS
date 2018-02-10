@@ -10,12 +10,14 @@ import UIKit
 
 class event_list_admin: UIViewController {
 
-    @IBOutlet weak var toolbar: UIToolbar!
+
+    var eventlisttitle : [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         toolbar.clipsToBounds = true
+        
     
         // Do any additional setup after loading the view.
     }
