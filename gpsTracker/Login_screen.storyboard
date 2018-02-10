@@ -300,7 +300,7 @@
                                     <barButtonItem systemItem="add" id="h8v-FJ-KTm">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="ZBI-El-uav" kind="show" id="DgI-n0-jvd"/>
+                                            <segue destination="ZBI-El-uav" kind="show" identifier="toAddEvent" id="DgI-n0-jvd"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>

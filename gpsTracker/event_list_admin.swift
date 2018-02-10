@@ -44,9 +44,13 @@ class event_list_admin: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let secondViewController = segue.destination as! event_information
+        let nextscreen = segue.identifier
         
-        secondViewController.fromwhere = "Upcoming"
+        if (nextscreen == "Upcoming_detail") {
+            let secondViewController = segue.destination as! event_information
+            secondViewController.fromwhere = "Upcoming"
+        }
+       
     }
     
 
