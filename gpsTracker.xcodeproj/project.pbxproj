@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5011C7D4ABB4948DA5ED2A1E /* Pods_gpsTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D50E1CB167872A24CD9BA8 /* Pods_gpsTracker.framework */; };
 		550AEE19202F37C200FC1978 /* History_event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550AEE18202F37C200FC1978 /* History_event.swift */; };
+		550AEE1B202F3B9100FC1978 /* event_information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550AEE1A202F3B9100FC1978 /* event_information.swift */; };
 		550AEE2C201653C700C0A986 /* Login_screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550AEE2B201653C700C0A986 /* Login_screen.storyboard */; };
 		550B1D4A2020845900213E81 /* set_location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B1D492020845900213E81 /* set_location.swift */; };
 		550B2E9020174AAE0027127F /* log_in.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B2E8F20174AAE0027127F /* log_in.swift */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		52D50E1CB167872A24CD9BA8 /* Pods_gpsTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gpsTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		550AEE18202F37C200FC1978 /* History_event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History_event.swift; sourceTree = "<group>"; };
+		550AEE1A202F3B9100FC1978 /* event_information.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event_information.swift; sourceTree = "<group>"; };
 		550AEE2B201653C700C0A986 /* Login_screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login_screen.storyboard; sourceTree = "<group>"; };
 		550B1D492020845900213E81 /* set_location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = set_location.swift; sourceTree = "<group>"; };
 		550B2E8F20174AAE0027127F /* log_in.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = log_in.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				557F41622007E8DF0087239B /* AppDelegate.swift */,
 				5559739420161FFF00CAEBDC /* Assets.xcassets */,
 				557F416E2007E8DF0087239B /* Info.plist */,
+				550AEE1A202F3B9100FC1978 /* event_information.swift */,
 			);
 			path = gpsTracker;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				550B1D4A2020845900213E81 /* set_location.swift in Sources */,
 				550B2E9020174AAE0027127F /* log_in.swift in Sources */,
 				557F41652007E8DF0087239B /* GpsAndSensor.swift in Sources */,
+				550AEE1B202F3B9100FC1978 /* event_information.swift in Sources */,
 				550AEE19202F37C200FC1978 /* History_event.swift in Sources */,
 				552CF840201FD5F700620C29 /* Add_event.swift in Sources */,
 				557F41632007E8DF0087239B /* AppDelegate.swift in Sources */,
