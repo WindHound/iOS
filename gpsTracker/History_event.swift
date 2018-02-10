@@ -1,25 +1,23 @@
 //
-//  event_list.swift
+//  History_event.swift
 //  gpsTracker
 //
-//  Created by 신종훈 on 24/01/2018.
+//  Created by 신종훈 on 10/02/2018.
 //  Copyright © 2018 신종훈. All rights reserved.
 //
 
 import UIKit
 
-class event_list_admin: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class History_event: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var toolbar: UIToolbar!
-    
-    var eventlisttitle : [String] = []
-    
+    var event_history : [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         toolbar.clipsToBounds = true
         
-        eventlisttitle.append("Bristol")
+        event_history.append("London")
         // Do any additional setup after loading the view.
     }
 
@@ -29,12 +27,12 @@ class event_list_admin: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return(eventlisttitle.count)
+        return(event_history.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = eventlisttitle[indexPath.row]
+        cell.textLabel?.text = event_history[indexPath.row]
         
         return(cell)
     }
@@ -49,10 +47,5 @@ class event_list_admin: UIViewController, UITableViewDelegate, UITableViewDataSo
         // Pass the selected object to the new view controller.
     }
     */
-    
-    @IBAction func unwindToEventList(segue:UIStoryboardSegue) { }
-    
-    
-    
 
 }

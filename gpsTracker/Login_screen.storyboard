@@ -206,13 +206,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BwA-ar-rf0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2353" y="179"/>
+            <point key="canvasLocation" x="2313" y="650"/>
         </scene>
         <!--History-->
         <scene sceneID="YOO-Il-wTN">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cdR-8m-euN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="9DD-9q-oax" sceneMemberID="viewController">
+                <viewController id="9DD-9q-oax" customClass="History_event" customModule="gpsTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h20-Kr-rmw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -222,17 +222,26 @@
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Afb-LY-iQW">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="i6r-oz-gYF"/>
-                                    <barButtonItem systemItem="add" id="H0q-SL-sfc">
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </barButtonItem>
-                                </items>
+                                <items/>
                                 <color key="barTintColor" red="0.090196078430000007" green="0.65098039220000004" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pYB-WD-aBB">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="FhN-nW-F7L">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FhN-nW-F7L" id="Ssz-uJ-uNf">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="9DD-9q-oax" id="Oqc-8U-4HX"/>
+                                    <outlet property="delegate" destination="9DD-9q-oax" id="xVb-g0-9OW"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -263,9 +272,12 @@
                         <viewLayoutGuide key="safeArea" id="qkF-MP-osv"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="History" image="History_event" id="1sL-sK-ynK"/>
+                    <connections>
+                        <outlet property="toolbar" destination="Afb-LY-iQW" id="My0-Tv-TMP"/>
+                    </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2340" y="1019.640179910045"/>
+            <point key="canvasLocation" x="2313" y="-168"/>
         </scene>
         <!--Upcoming-->
         <scene sceneID="7Gx-vJ-uS2">
@@ -292,51 +304,64 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="log_in_background" translatesAutoresizingMaskIntoConstraints="NO" id="VNt-5s-YtU">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hqm-3r-oeW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5uU-Kp-NUf">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="event_cell" id="cG4-yU-Qdh">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="wPf-E1-cJ1">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cG4-yU-Qdh" id="XNS-ol-mIm">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wPf-E1-cJ1" id="GTL-Kx-CqA">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="Zk4-Of-lwg" id="SPx-sV-soq"/>
-                                    <outlet property="delegate" destination="Zk4-Of-lwg" id="hBZ-Fl-z9F"/>
+                                    <outlet property="dataSource" destination="Zk4-Of-lwg" id="hdG-sU-Gng"/>
+                                    <outlet property="delegate" destination="Zk4-Of-lwg" id="E4K-uf-ssB"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.090196078431372548" green="0.65098039215686276" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="5uU-Kp-NUf" firstAttribute="top" secondItem="HDT-yC-Nvy" secondAttribute="bottom" id="7CE-0w-kvx"/>
                             <constraint firstItem="VNt-5s-YtU" firstAttribute="leading" secondItem="c8B-p1-04V" secondAttribute="leading" id="CA1-bw-O5o"/>
+                            <constraint firstItem="5uU-Kp-NUf" firstAttribute="leading" secondItem="f4v-uo-m2s" secondAttribute="leading" id="E7Y-Vq-EJ4"/>
                             <constraint firstItem="HDT-yC-Nvy" firstAttribute="trailing" secondItem="f4v-uo-m2s" secondAttribute="trailing" id="Ey1-sg-aE0"/>
                             <constraint firstItem="HDT-yC-Nvy" firstAttribute="top" secondItem="f4v-uo-m2s" secondAttribute="top" id="FOl-AT-teA"/>
+                            <constraint firstItem="5uU-Kp-NUf" firstAttribute="trailing" secondItem="f4v-uo-m2s" secondAttribute="trailing" id="PX8-wo-ZlJ"/>
                             <constraint firstItem="HDT-yC-Nvy" firstAttribute="leading" secondItem="f4v-uo-m2s" secondAttribute="leading" id="VhF-U1-90e"/>
-                            <constraint firstItem="Hqm-3r-oeW" firstAttribute="bottom" secondItem="f4v-uo-m2s" secondAttribute="bottom" id="Ytq-KX-bXI"/>
-                            <constraint firstItem="Hqm-3r-oeW" firstAttribute="top" secondItem="HDT-yC-Nvy" secondAttribute="bottom" id="alT-cT-Jx7"/>
-                            <constraint firstItem="Hqm-3r-oeW" firstAttribute="leading" secondItem="f4v-uo-m2s" secondAttribute="leading" id="cJa-9h-gnQ"/>
+                            <constraint firstItem="5uU-Kp-NUf" firstAttribute="bottom" secondItem="f4v-uo-m2s" secondAttribute="bottom" id="ct9-nJ-Hid"/>
                             <constraint firstItem="HDT-yC-Nvy" firstAttribute="top" secondItem="VNt-5s-YtU" secondAttribute="bottom" id="dnz-KE-CFV"/>
                             <constraint firstItem="VNt-5s-YtU" firstAttribute="top" secondItem="c8B-p1-04V" secondAttribute="top" id="elU-VI-pA6"/>
-                            <constraint firstItem="Hqm-3r-oeW" firstAttribute="top" secondItem="HDT-yC-Nvy" secondAttribute="bottom" id="hlb-OZ-RXW"/>
                             <constraint firstAttribute="trailing" secondItem="VNt-5s-YtU" secondAttribute="trailing" id="nbq-r5-xCS"/>
-                            <constraint firstItem="Hqm-3r-oeW" firstAttribute="trailing" secondItem="f4v-uo-m2s" secondAttribute="trailing" id="p0V-Mn-R7s"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="f4v-uo-m2s"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Upcoming" image="Upcoming_event" id="Gvh-ub-64j"/>
                     <connections>
-                        <outlet property="toolbar" destination="HDT-yC-Nvy" id="hoU-io-AaA"/>
-                        <outlet property="upcoming_event_list" destination="Hqm-3r-oeW" id="CI5-Pl-4a4"/>
+                        <outlet property="toolbar" destination="HDT-yC-Nvy" id="gZA-CX-psL"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2314" y="-905"/>
+            <point key="canvasLocation" x="2312.8000000000002" y="-905.3973013493254"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tBj-iQ-i5e">
+            <objects>
+                <viewController id="7N5-1w-mx0" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Idb-0H-450">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="d8M-yX-hcM"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ezN-n5-I1T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3257" y="-494"/>
         </scene>
         <!--Add_Event-->
         <scene sceneID="iKJ-94-Wf4">
