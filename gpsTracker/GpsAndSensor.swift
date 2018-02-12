@@ -180,30 +180,78 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
     
     // Function to save the data from the sensors and locations to json file
     func saveUploadedFilesSet(fileName:String) {
-        let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        let fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension("txt")
-        print("File Path: \(fileURL.path)")
         
-        let writeString = "id, \(fileName), \(lat), \(long)"
+        var data : [String : String] = [:]
+        
+        print("Id : 1, Time = \(fileName), Latitude: \(lat), Longitude: \(long)")
+        data["Id"] = "1"
+        data["Time"] = "\(fileName)"
+        data["Latitude"] = "\(lat)"
+        data["Longitude"] = "\(long)"
+        
+        
         do {
-            try writeString.write(to: fileURL, atomically: true, encoding: String.Encoding.utf32)
-        } catch let error as Error {
-            print("Failed to write to URL")
+            let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+        
+            let DocumentDirURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            
+            let jsonURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension("json")
+            print(jsonURL)
+            
+            do {
+                try jsonData.write(to: jsonURL)
+            } catch let error as Error {
+                print(error)
+            }
+            
+            
+        } catch let error as Error{
             print(error)
         }
         
-        producedfile.append("\(fileName).txt")
-        filetosend.append("\(fileName).txt")
-        
-        var readString = ""
         do {
-            readString = try String(contentsOf: fileURL)
+            let DocumentDirURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let jsonURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension("json")
+            
+            let jsonReadData = NSData(contentsOf: jsonURL)
+            
+            if let jsonReadData = jsonReadData {
+                let sailInfo = try JSONSerialization.jsonObject(with: jsonReadData as Data, options: .mutableContainers)
+                let readData = sailInfo as! [String : String]
+                let id = readData["I§d"], time = readData["Time"], latitude = readData["Latitude"], longitude = readData["Longitude"]
+                
+                print(id, time, latitude, longitude)
+            }
+            
         } catch let error as Error {
-            print("Failed to read file")
             print(error)
         }
         
-        print("Contents of the file \(readString)")
+        
+        
+//        let fileURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension("txt")
+//        print("File Path: \(fileURL.path)")
+//
+//        let writeString = "id, \(fileName), \(lat), \(long)"
+//        do {
+//            try writeString.write(to: fileURL, atomically: true, encoding: String.Encoding.utf32)
+//        } catch let error as Error {
+//            print("Failed to write to URL")
+//            print(error)
+//        }
+//
+//        producedfile.append("\(fileName).txt")
+//        filetosend.append("\(fileName).txt")
+//
+//        var readString = ""
+//        do {
+//            readString = try String(contentsOf: fileURL)
+//        } catch let error as Error {
+//            print("Failed to read file")
+//            print(error)
+//        }
+//
+//        print("Contents of the file \(readString)")
     
         
         

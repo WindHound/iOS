@@ -49,6 +49,6 @@
     </scenes>
     <resources>
         <image name="Interfaceicon" width="284" height="284"/>
-        <image name="log_in_background" width="414" height="736"/>
+        <image name="log_in_background" width="621" height="1104"/>
     </resources>
 </document>
