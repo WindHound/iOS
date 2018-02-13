@@ -1,27 +1,21 @@
 //
-//  History_event.swift
+//  event_list.swift
 //  gpsTracker
 //
-//  Created by 신종훈 on 13/02/2018.
+//  Created by 신종훈 on 24/01/2018.
 //  Copyright © 2018 신종훈. All rights reserved.
 //
 
 import UIKit
 
-class History_event: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class upcoming_champ: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var history_event_list : [String] = []
+    var upcoming_champ_list : [String] = []
     
-    var fromwhere : String = ""
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: nil)
-        
-        history_event_list.append("Big Ben")
+        upcoming_champ_list.append("Bristol")
         // Do any additional setup after loading the view.
     }
 
@@ -31,28 +25,31 @@ class History_event: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return(history_event_list.count)
+        return(upcoming_champ_list.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = history_event_list[indexPath.row]
+        cell.textLabel?.text = upcoming_champ_list[indexPath.row]
+        
         return(cell)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "History_race", sender: self)
+        performSegue(withIdentifier: "Upcoming_event_detail", sender: self)
         tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextscreen = segue.identifier
         
-        if (nextscreen == "History_race") {
-            let secondViewController = segue.destination as! History_race
-            secondViewController.fromwhere = "History_race"
+        if (nextscreen == "Upcoming_event_detail") {
+            let secondViewController = segue.destination as! Upcoming_events
+            secondViewController.fromwhere = "Upcoming_Champ"
         }
+       
     }
+    
 
     /*
     // MARK: - Navigation
@@ -63,5 +60,10 @@ class History_event: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @IBAction func unwindToUpChampList(segue:UIStoryboardSegue) { }
+    
+    
+    
 
 }

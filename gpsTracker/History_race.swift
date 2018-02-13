@@ -1,5 +1,5 @@
 //
-//  History_event.swift
+//  History_race.swift
 //  gpsTracker
 //
 //  Created by 신종훈 on 13/02/2018.
@@ -8,20 +8,19 @@
 
 import UIKit
 
-class History_event: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class History_race: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var history_event_list : [String] = []
-    
+    var history_race_list : [String] = []
+
     var fromwhere : String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: nil)
         
-        history_event_list.append("Big Ben")
+        history_race_list.append("Race1")
+
         // Do any additional setup after loading the view.
     }
 
@@ -31,27 +30,14 @@ class History_event: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return(history_event_list.count)
+        return(history_race_list.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = history_event_list[indexPath.row]
-        return(cell)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "History_race", sender: self)
-        tableView.reloadData()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nextscreen = segue.identifier
+        cell.textLabel?.text = history_race_list[indexPath.row]
         
-        if (nextscreen == "History_race") {
-            let secondViewController = segue.destination as! History_race
-            secondViewController.fromwhere = "History_race"
-        }
+        return(cell)
     }
 
     /*

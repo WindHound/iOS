@@ -29,12 +29,7 @@ class event_information: UIViewController {
     }
     
     @IBAction func back_button_pressed(_ sender: Any) {
-        if fromwhere == "Upcoming" {
-            self.performSegue(withIdentifier: "unwindToEventList", sender: self)
-        }
-        if fromwhere == "History" {
-            self.performSegue(withIdentifier: "unwindToHistory", sender: self)
-        }
+        
     }
     
     

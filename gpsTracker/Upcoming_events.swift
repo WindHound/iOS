@@ -1,5 +1,5 @@
 //
-//  History_event.swift
+//  Upcoming_events.swift
 //  gpsTracker
 //
 //  Created by 신종훈 on 13/02/2018.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class History_event: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class Upcoming_events: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var history_event_list : [String] = []
+    var upcoming_event_list : [String] = []
     
     var fromwhere : String = ""
 
@@ -19,9 +19,13 @@ class History_event: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: nil)
+        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        let search = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: nil)
         
-        history_event_list.append("Big Ben")
+        self.navigationItem.rightBarButtonItems = [add, search]
+        
+        upcoming_event_list.append("MVB")
+
         // Do any additional setup after loading the view.
     }
 
@@ -31,28 +35,30 @@ class History_event: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return(history_event_list.count)
+        return(upcoming_event_list.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = history_event_list[indexPath.row]
+        cell.textLabel?.text = upcoming_event_list[indexPath.row]
+        
         return(cell)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "History_race", sender: self)
+        performSegue(withIdentifier: "Upcoming_race", sender: self)
         tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextscreen = segue.identifier
         
-        if (nextscreen == "History_race") {
-            let secondViewController = segue.destination as! History_race
-            secondViewController.fromwhere = "History_race"
+        if (nextscreen == "Upcoming_race") {
+            let secondViewController = segue.destination as! Upcoming_race
+            secondViewController.fromwhere = "Upcoming_event"            
         }
     }
+    
 
     /*
     // MARK: - Navigation

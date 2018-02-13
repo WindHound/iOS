@@ -1,25 +1,31 @@
 //
-//  event_list.swift
+//  Upcoming_race.swift
 //  gpsTracker
 //
-//  Created by 신종훈 on 24/01/2018.
+//  Created by 신종훈 on 13/02/2018.
 //  Copyright © 2018 신종훈. All rights reserved.
 //
 
 import UIKit
 
-class event_list_admin: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class Upcoming_race: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var upcoming_race_list : [String] = []
+    
+    var fromwhere : String = ""
 
-    @IBOutlet weak var toolbar: UIToolbar!
-    
-    var eventlisttitle : [String] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        toolbar.clipsToBounds = true
         
-        eventlisttitle.append("Bristol")
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        upcoming_race_list.append("Race1")
+        
+        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        let search = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: nil)
+        
+        self.navigationItem.rightBarButtonItems = [add, search]
+        
+
         // Do any additional setup after loading the view.
     }
 
@@ -29,29 +35,15 @@ class event_list_admin: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return(eventlisttitle.count)
+        return(upcoming_race_list.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = eventlisttitle[indexPath.row]
+        
+        cell.textLabel?.text = upcoming_race_list[indexPath.row]
         
         return(cell)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "Upcoming_detail", sender: self)
-        tableView.reloadData()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nextscreen = segue.identifier
-        
-        if (nextscreen == "Upcoming_detail") {
-            let secondViewController = segue.destination as! event_information
-            secondViewController.fromwhere = "Upcoming"
-        }
-       
     }
     
 
@@ -64,10 +56,5 @@ class event_list_admin: UIViewController, UITableViewDelegate, UITableViewDataSo
         // Pass the selected object to the new view controller.
     }
     */
-    
-    @IBAction func unwindToEventList(segue:UIStoryboardSegue) { }
-    
-    
-    
 
 }

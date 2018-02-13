@@ -47,7 +47,7 @@
 		550A67F0202F924100AE1019 /* GPS_Connected.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 550A67EF202F924100AE1019 /* GPS_Connected.pdf */; };
 		550A67F4202F925500AE1019 /* Net_Not_connected.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 550A67F2202F925500AE1019 /* Net_Not_connected.pdf */; };
 		550A67F5202F925500AE1019 /* Net_Connected.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 550A67F3202F925500AE1019 /* Net_Connected.pdf */; };
-		550AEE19202F37C200FC1978 /* History_event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550AEE18202F37C200FC1978 /* History_event.swift */; };
+		550AEE19202F37C200FC1978 /* History_champ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550AEE18202F37C200FC1978 /* History_champ.swift */; };
 		550AEE1B202F3B9100FC1978 /* event_information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550AEE1A202F3B9100FC1978 /* event_information.swift */; };
 		550AEE2C201653C700C0A986 /* Login_screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550AEE2B201653C700C0A986 /* Login_screen.storyboard */; };
 		550B1D4A2020845900213E81 /* set_location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B1D492020845900213E81 /* set_location.swift */; };
@@ -57,11 +57,15 @@
 		552865402022282E007D4707 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5528653F2022282E007D4707 /* LocationSearchTable.swift */; };
 		552CF840201FD5F700620C29 /* Add_event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552CF83F201FD5F700620C29 /* Add_event.swift */; };
 		554F424B2029CCBD0088534B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 554F424A2029CCBD0088534B /* Podfile */; };
-		55548A142019444B00FC7E23 /* event_list_admin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55548A132019444B00FC7E23 /* event_list_admin.swift */; };
+		55548A142019444B00FC7E23 /* upcoming_champ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55548A132019444B00FC7E23 /* upcoming_champ.swift */; };
 		5559739520161FFF00CAEBDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5559739420161FFF00CAEBDC /* Assets.xcassets */; };
 		557F41632007E8DF0087239B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41622007E8DF0087239B /* AppDelegate.swift */; };
 		557F41652007E8DF0087239B /* GpsAndSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41642007E8DF0087239B /* GpsAndSensor.swift */; };
 		557F416D2007E8DF0087239B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 557F416B2007E8DF0087239B /* LaunchScreen.storyboard */; };
+		55BC1DDD2033282B00DEA668 /* Upcoming_events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC1DDC2033282B00DEA668 /* Upcoming_events.swift */; };
+		55BC1DE52033324000DEA668 /* Upcoming_race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BC1DE42033324000DEA668 /* Upcoming_race.swift */; };
+		55D9991B20333D6300C8C8DD /* History_event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D9991A20333D6300C8C8DD /* History_event.swift */; };
+		55D9991D20333D7600C8C8DD /* History_race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D9991C20333D7600C8C8DD /* History_race.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,7 +109,7 @@
 		550A67EF202F924100AE1019 /* GPS_Connected.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = GPS_Connected.pdf; sourceTree = "<group>"; };
 		550A67F2202F925500AE1019 /* Net_Not_connected.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Net_Not_connected.pdf; sourceTree = "<group>"; };
 		550A67F3202F925500AE1019 /* Net_Connected.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Net_Connected.pdf; sourceTree = "<group>"; };
-		550AEE18202F37C200FC1978 /* History_event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History_event.swift; sourceTree = "<group>"; };
+		550AEE18202F37C200FC1978 /* History_champ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History_champ.swift; sourceTree = "<group>"; };
 		550AEE1A202F3B9100FC1978 /* event_information.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event_information.swift; sourceTree = "<group>"; };
 		550AEE2B201653C700C0A986 /* Login_screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login_screen.storyboard; sourceTree = "<group>"; };
 		550B1D492020845900213E81 /* set_location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = set_location.swift; sourceTree = "<group>"; };
@@ -116,13 +120,17 @@
 		5528653F2022282E007D4707 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		552CF83F201FD5F700620C29 /* Add_event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_event.swift; sourceTree = "<group>"; };
 		554F424A2029CCBD0088534B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		55548A132019444B00FC7E23 /* event_list_admin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event_list_admin.swift; sourceTree = "<group>"; };
+		55548A132019444B00FC7E23 /* upcoming_champ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = upcoming_champ.swift; sourceTree = "<group>"; };
 		5559739420161FFF00CAEBDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../xamarin/sailGPS/sailGPS/Assets.xcassets; sourceTree = "<group>"; };
 		557F415F2007E8DF0087239B /* gpsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gpsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		557F41622007E8DF0087239B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		557F41642007E8DF0087239B /* GpsAndSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpsAndSensor.swift; sourceTree = "<group>"; };
 		557F416C2007E8DF0087239B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		557F416E2007E8DF0087239B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55BC1DDC2033282B00DEA668 /* Upcoming_events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming_events.swift; sourceTree = "<group>"; };
+		55BC1DE42033324000DEA668 /* Upcoming_race.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming_race.swift; sourceTree = "<group>"; };
+		55D9991A20333D6300C8C8DD /* History_event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History_event.swift; sourceTree = "<group>"; };
+		55D9991C20333D7600C8C8DD /* History_race.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History_race.swift; sourceTree = "<group>"; };
 		EF9CF05843E5FBF14F617A45 /* Pods-gpsTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gpsTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gpsTracker/Pods-gpsTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		F4D1C942EE929B99CBC34F87 /* Pods-gpsTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gpsTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-gpsTracker/Pods-gpsTracker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -284,10 +292,14 @@
 				550A679D202F884B00AE1019 /* Icons */,
 				557F416B2007E8DF0087239B /* LaunchScreen.storyboard */,
 				550AEE2B201653C700C0A986 /* Login_screen.storyboard */,
-				550AEE18202F37C200FC1978 /* History_event.swift */,
 				550B2E8F20174AAE0027127F /* log_in.swift */,
+				55548A132019444B00FC7E23 /* upcoming_champ.swift */,
+				55BC1DDC2033282B00DEA668 /* Upcoming_events.swift */,
+				55BC1DE42033324000DEA668 /* Upcoming_race.swift */,
+				550AEE18202F37C200FC1978 /* History_champ.swift */,
+				55D9991A20333D6300C8C8DD /* History_event.swift */,
+				55D9991C20333D7600C8C8DD /* History_race.swift */,
 				557F41642007E8DF0087239B /* GpsAndSensor.swift */,
-				55548A132019444B00FC7E23 /* event_list_admin.swift */,
 				550BBF9120266ABA0075AC79 /* added_invitees.swift */,
 				552CF83F201FD5F700620C29 /* Add_event.swift */,
 				550B1D492020845900213E81 /* set_location.swift */,
@@ -479,13 +491,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55D9991B20333D6300C8C8DD /* History_event.swift in Sources */,
 				552865402022282E007D4707 /* LocationSearchTable.swift in Sources */,
-				55548A142019444B00FC7E23 /* event_list_admin.swift in Sources */,
+				55548A142019444B00FC7E23 /* upcoming_champ.swift in Sources */,
+				55D9991D20333D7600C8C8DD /* History_race.swift in Sources */,
+				55BC1DDD2033282B00DEA668 /* Upcoming_events.swift in Sources */,
 				550B1D4A2020845900213E81 /* set_location.swift in Sources */,
 				550B2E9020174AAE0027127F /* log_in.swift in Sources */,
 				557F41652007E8DF0087239B /* GpsAndSensor.swift in Sources */,
+				55BC1DE52033324000DEA668 /* Upcoming_race.swift in Sources */,
 				550AEE1B202F3B9100FC1978 /* event_information.swift in Sources */,
-				550AEE19202F37C200FC1978 /* History_event.swift in Sources */,
+				550AEE19202F37C200FC1978 /* History_champ.swift in Sources */,
 				552CF840201FD5F700620C29 /* Add_event.swift in Sources */,
 				557F41632007E8DF0087239B /* AppDelegate.swift in Sources */,
 				550BBF9220266ABA0075AC79 /* added_invitees.swift in Sources */,
