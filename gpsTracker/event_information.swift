@@ -29,7 +29,13 @@ class event_information: UIViewController {
     }
     
     @IBAction func back_button_pressed(_ sender: Any) {
+        if fromwhere == "Upcoming_race" {
+            self.performSegue(withIdentifier: "unwindToUpRaceList", sender: self)
+        }
         
+        if fromwhere == "History_race" {
+            self.performSegue(withIdentifier: "unWindToHistRaceList", sender: self)
+        }
     }
     
     

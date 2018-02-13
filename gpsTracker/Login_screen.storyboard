@@ -566,8 +566,8 @@
                     <connections>
                         <outlet property="raceTitle" destination="KXJ-Wx-ONV" id="QFL-za-Xwi"/>
                         <outlet property="toolbar" destination="HLN-W3-tmb" id="k7d-MG-v2G"/>
-                        <segue destination="tht-hK-9Ar" kind="unwind" identifier="unwindToEventList" unwindAction="unwindToEventListWithSegue:" id="lbp-2D-2rt"/>
-                        <segue destination="tht-hK-9Ar" kind="unwind" identifier="unwindToHistory" unwindAction="unwindToHistoryEventListWithSegue:" id="Cgm-if-guq"/>
+                        <segue destination="tht-hK-9Ar" kind="unwind" identifier="unWindToHistRaceList" unwindAction="unwindToHistRaceListWithSegue:" id="nrI-de-doC"/>
+                        <segue destination="tht-hK-9Ar" kind="unwind" identifier="unwindToUpRaceList" unwindAction="unwindToUpRaceListWithSegue:" id="WkI-6c-5cy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ezN-n5-I1T" userLabel="First Responder" sceneMemberID="firstResponder"/>

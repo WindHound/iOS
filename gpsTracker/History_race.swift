@@ -39,6 +39,22 @@ class History_race: UIViewController, UITableViewDataSource, UITableViewDelegate
         
         return(cell)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "History_race_info", sender: self)
+        tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextscreen = segue.identifier
+        
+        if (nextscreen == "History_race_info") {
+            let secondViewController = segue.destination as! event_information
+            secondViewController.fromwhere = "History_race"
+        }
+    }
+    
+    @IBAction func unwindToHistRaceList(segue:UIStoryboardSegue) { }
 
     /*
     // MARK: - Navigation

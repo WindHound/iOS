@@ -46,6 +46,24 @@ class Upcoming_race: UIViewController, UITableViewDelegate, UITableViewDataSourc
         return(cell)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "Upcoming_race_info", sender: self)
+        tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextscreen = segue.identifier
+        
+        if (nextscreen == "Upcoming_race_info") {
+            let secondViewController = segue.destination as! event_information
+            secondViewController.fromwhere = "Upcoming_race"
+        }
+    }
+    
+    @IBAction func unwindToUpRaceList(segue:UIStoryboardSegue) { }
+    
+    
+    
 
     /*
     // MARK: - Navigation

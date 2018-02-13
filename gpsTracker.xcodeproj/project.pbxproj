@@ -299,15 +299,15 @@
 				550AEE18202F37C200FC1978 /* History_champ.swift */,
 				55D9991A20333D6300C8C8DD /* History_event.swift */,
 				55D9991C20333D7600C8C8DD /* History_race.swift */,
+				550AEE1A202F3B9100FC1978 /* event_information.swift */,
 				557F41642007E8DF0087239B /* GpsAndSensor.swift */,
-				550BBF9120266ABA0075AC79 /* added_invitees.swift */,
 				552CF83F201FD5F700620C29 /* Add_event.swift */,
 				550B1D492020845900213E81 /* set_location.swift */,
 				5528653F2022282E007D4707 /* LocationSearchTable.swift */,
+				550BBF9120266ABA0075AC79 /* added_invitees.swift */,
 				557F41622007E8DF0087239B /* AppDelegate.swift */,
 				5559739420161FFF00CAEBDC /* Assets.xcassets */,
 				557F416E2007E8DF0087239B /* Info.plist */,
-				550AEE1A202F3B9100FC1978 /* event_information.swift */,
 			);
 			path = gpsTracker;
 			sourceTree = "<group>";

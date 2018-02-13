@@ -59,6 +59,7 @@ class Upcoming_events: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
+    @IBAction func unwindToUpEventList(segue:UIStoryboardSegue) { }
 
     /*
     // MARK: - Navigation

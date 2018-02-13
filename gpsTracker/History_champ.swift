@@ -50,7 +50,7 @@ class History_champ: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     
-    @IBAction func unwindToHistoryEventList(segue:UIStoryboardSegue) { }
+    @IBAction func unwindToHistChampList(segue:UIStoryboardSegue) { }
 
     /*
     // MARK: - Navigation

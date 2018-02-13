@@ -53,6 +53,8 @@ class History_event: UIViewController, UITableViewDelegate, UITableViewDataSourc
             secondViewController.fromwhere = "History_race"
         }
     }
+    
+    @IBAction func unwindToHistEventList(segue:UIStoryboardSegue) { }
 
     /*
     // MARK: - Navigation
