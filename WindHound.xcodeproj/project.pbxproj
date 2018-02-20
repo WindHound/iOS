@@ -142,7 +142,7 @@
 		554F424A2029CCBD0088534B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		55548A132019444B00FC7E23 /* Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Championship.swift; sourceTree = "<group>"; };
 		5559739420161FFF00CAEBDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../xamarin/sailGPS/sailGPS/Assets.xcassets; sourceTree = "<group>"; };
-		557F415F2007E8DF0087239B /* gpsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gpsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		557F415F2007E8DF0087239B /* WindHound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WindHound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		557F41622007E8DF0087239B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		557F41642007E8DF0087239B /* GpsAndSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpsAndSensor.swift; sourceTree = "<group>"; };
 		557F416C2007E8DF0087239B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 		557F41602007E8DF0087239B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				557F415F2007E8DF0087239B /* gpsTracker.app */,
+				557F415F2007E8DF0087239B /* WindHound.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -373,9 +373,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		557F415E2007E8DF0087239B /* gpsTracker */ = {
+		557F415E2007E8DF0087239B /* WindHound */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 557F41712007E8DF0087239B /* Build configuration list for PBXNativeTarget "gpsTracker" */;
+			buildConfigurationList = 557F41712007E8DF0087239B /* Build configuration list for PBXNativeTarget "WindHound" */;
 			buildPhases = (
 				7EA4FD844C937AA60305394B /* [CP] Check Pods Manifest.lock */,
 				557F415B2007E8DF0087239B /* Sources */,
@@ -388,9 +388,9 @@
 			);
 			dependencies = (
 			);
-			name = gpsTracker;
+			name = WindHound;
 			productName = gpsTracker;
-			productReference = 557F415F2007E8DF0087239B /* gpsTracker.app */;
+			productReference = 557F415F2007E8DF0087239B /* WindHound.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -409,7 +409,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 557F415A2007E8DF0087239B /* Build configuration list for PBXProject "gpsTracker" */;
+			buildConfigurationList = 557F415A2007E8DF0087239B /* Build configuration list for PBXProject "WindHound" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -422,7 +422,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				557F415E2007E8DF0087239B /* gpsTracker */,
+				557F415E2007E8DF0087239B /* WindHound */,
 			);
 		};
 /* End PBXProject section */
@@ -694,7 +694,7 @@
 				DEVELOPMENT_TEAM = SY6JF4JZZ4;
 				INFOPLIST_FILE = gpsTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sailingclub.gpsTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = sailingclub.WindHound;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -710,7 +710,7 @@
 				DEVELOPMENT_TEAM = SY6JF4JZZ4;
 				INFOPLIST_FILE = gpsTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sailingclub.gpsTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = sailingclub.WindHound;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -720,7 +720,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		557F415A2007E8DF0087239B /* Build configuration list for PBXProject "gpsTracker" */ = {
+		557F415A2007E8DF0087239B /* Build configuration list for PBXProject "WindHound" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				557F416F2007E8DF0087239B /* Debug */,
@@ -729,7 +729,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		557F41712007E8DF0087239B /* Build configuration list for PBXNativeTarget "gpsTracker" */ = {
+		557F41712007E8DF0087239B /* Build configuration list for PBXNativeTarget "WindHound" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				557F41722007E8DF0087239B /* Debug */,
