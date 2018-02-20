@@ -2,8 +2,8 @@
 //  add_event.swift
 //  gpsTracker
 //
-//  Created by 신종훈 on 29/01/2018.
-//  Copyright © 2018 신종훈. All rights reserved.
+//  Created by David Shin on 29/01/2018.
+//  Copyright © 2018 David Shin. All rights reserved.
 //
 
 import UIKit

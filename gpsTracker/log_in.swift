@@ -2,8 +2,8 @@
 //  log_in.swift
 //  gpsTracker
 //
-//  Created by 신종훈 on 23/01/2018.
-//  Copyright © 2018 신종훈. All rights reserved.
+//  Created by David Shin on 23/01/2018.
+//  Copyright © 2018 David Shin. All rights reserved.
 //
 
 import UIKit
@@ -76,15 +76,15 @@ class log_in: UIViewController {
     
     @IBAction func log_in_clicked(_ sender: Any) {
         
-        let password = textPassword.text
-        
-        if (textUsername.text == "") {
-            createAlert(title: "Invalid Username", message: "Please try it again", name: "Username")
-        } else if (!isPasswordValid(password!)) {
-            createAlert(title: "Invalid password", message: "Your password length needs to be at least 8, and at least contain one digit", name: "Password")
-            textPassword.text = ""
-        }
-       
+//        let password = textPassword.text
+//        
+//        if (textUsername.text == "") {
+//            createAlert(title: "Invalid Username", message: "Please try it again", name: "Username")
+//        } else if (!isPasswordValid(password!)) {
+//            createAlert(title: "Invalid password", message: "Your password length needs to be at least 8, and at least contain one digit", name: "Password")
+//            textPassword.text = ""
+//        }
+//       
         
     }
     

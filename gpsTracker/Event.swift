@@ -1,31 +1,22 @@
 //
-//  Upcoming_race.swift
+//  History_event.swift
 //  gpsTracker
 //
-//  Created by 신종훈 on 13/02/2018.
-//  Copyright © 2018 신종훈. All rights reserved.
+//  Created by David Shin on 10/02/2018.
+//  Copyright © 2018 David Shin. All rights reserved.
 //
 
 import UIKit
 
-class Upcoming_race: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    var upcoming_race_list : [String] = []
-    
-    var fromwhere : String = ""
+class Event: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var toolbar: UIToolbar!
+    var event_list : [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        event_list.append("London")
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        upcoming_race_list.append("Race1")
-        
-        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
-        let search = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: nil)
-        
-        self.navigationItem.rightBarButtonItems = [add, search]
-        
-
         // Do any additional setup after loading the view.
     }
 
@@ -35,35 +26,32 @@ class Upcoming_race: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return(upcoming_race_list.count)
+        return(event_list.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-        
-        cell.textLabel?.text = upcoming_race_list[indexPath.row]
+        cell.textLabel?.text = event_list[indexPath.row]
         
         return(cell)
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "Upcoming_race_info", sender: self)
-        tableView.reloadData()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nextscreen = segue.identifier
+        let destination = segue.identifier
         
-        if (nextscreen == "Upcoming_race_info") {
-            let secondViewController = segue.destination as! event_information
-            secondViewController.fromwhere = "Upcoming_race"
+        if destination == "To_Profile" {
+            let secondViewController = segue.destination as! Profile_page
+            secondViewController.fromwhere = "Event"
         }
     }
     
-    @IBAction func unwindToUpRaceList(segue:UIStoryboardSegue) { }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        performSegue(withIdentifier: "History_event", sender: self)
+//        tableView.reloadData()
+//    }
     
     
-    
+    @IBAction func unwindToEventList(segue:UIStoryboardSegue) { }
 
     /*
     // MARK: - Navigation
