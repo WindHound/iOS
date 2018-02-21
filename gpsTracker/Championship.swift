@@ -10,7 +10,9 @@ import UIKit
 import Foundation
 
 var upcoming_champ : [String] = []
+var tenupcoming_champ : [String] = []
 var history_champ : [String] = []
+var tenhistory_champ : [String] = []
 
 class Championship: UITableViewController{
     
@@ -32,10 +34,12 @@ class Championship: UITableViewController{
         
         for i in 1...10 {
             upcoming_champ.append("Championship\(i)")
+            history_champ.append("Championship\(i)")
         }
         
-        for i in 1...12 {
-            history_champ.append("Championship\(i)")
+        for i in 11...20 {
+            tenupcoming_champ.append("Championship\(i)")
+            tenhistory_champ.append("Championship\(i)")
         }
         
         upcoming_table.delegate = Up
@@ -143,7 +147,7 @@ class Championship: UITableViewController{
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
+        // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
     */
@@ -172,6 +176,15 @@ class Upcoming : NSObject, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == upcoming_champ.count {
+            for i in 0...9 {
+                upcoming_champ.append(tenupcoming_champ[i])
+            }
+            tableView.reloadData()
+        }
+    }
+    
 }
 
 class History : NSObject, UITableViewDataSource, UITableViewDelegate {
@@ -189,6 +202,15 @@ class History : NSObject, UITableViewDataSource, UITableViewDelegate {
         
         cell.textLabel?.text = history_champ[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == history_champ.count {
+            for i in 0...9 {
+                history_champ.append(tenhistory_champ[i])
+            }
+            tableView.reloadData()
+        }
     }
     
 }
