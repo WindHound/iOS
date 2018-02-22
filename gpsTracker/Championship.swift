@@ -9,10 +9,10 @@
 import UIKit
 import Foundation
 
-var upcoming_champ : [String] = []
-var tenupcoming_champ : [String] = []
-var history_champ : [String] = []
-var tenhistory_champ : [String] = []
+private var upcoming_champ : [String] = []
+private var tenupcoming_champ : [String] = []
+private var history_champ : [String] = []
+private var tenhistory_champ : [String] = []
 
 class Championship: UITableViewController{
     
@@ -25,9 +25,9 @@ class Championship: UITableViewController{
     
     private var HistoryCellExpanded : Bool = false
 
-    var Up = Upcoming()
+    private var Up = Upcoming()
 
-    var His = History()
+    private var His = History()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,16 +57,7 @@ class Championship: UITableViewController{
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tableView == outside_table {
-            return(2)
-        }
-        if tableView == upcoming_table {
-            return upcoming_champ.count
-        }
-        if tableView == history_table {
-            return history_champ.count
-        }
-        return 0
+        return 2
     }
     
 //    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -159,7 +150,7 @@ class Championship: UITableViewController{
 
 }
 
-class Upcoming : NSObject, UITableViewDelegate, UITableViewDataSource {
+private class Upcoming : NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -187,7 +178,7 @@ class Upcoming : NSObject, UITableViewDelegate, UITableViewDataSource {
     
 }
 
-class History : NSObject, UITableViewDataSource, UITableViewDelegate {
+private class History : NSObject, UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

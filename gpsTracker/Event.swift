@@ -8,15 +8,48 @@
 
 import UIKit
 
+private var upcoming_event : [String] = []
+private var tenupcoming_event : [String] = []
+private var history_event : [String] = []
+private var tenhistory_event : [String] = []
+
 class Event: UITableViewController{
 
     @IBOutlet weak var toolbar: UIToolbar!
-    var event_list : [String] = []
+    
+    @IBOutlet var outside_table: UITableView!
+    @IBOutlet weak var upcoming_table: UITableView!
+    @IBOutlet weak var history_table: UITableView!
+    
+    private var UpcomingCellExpanded : Bool = true
+    
+    private var HistoryCellExpanded : Bool = false
+    
+    private var Up = EventUpcoming()
+    
+    private var His = EventHistory()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        event_list.append("London")
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        
+        for i in 1...10 {
+            upcoming_event.append("Event\(i)")
+            history_event.append("Event\(i)")
+        }
+        
+        for i in 11...20 {
+            tenupcoming_event.append("Event\(i)")
+            tenhistory_event.append("Event\(i)")
+        }
+        
+        upcoming_table.delegate = Up
+        upcoming_table.dataSource = Up
+        history_table.delegate = His
+        history_table.dataSource = His
+        
         // Do any additional setup after loading the view.
     }
 
@@ -26,14 +59,49 @@ class Event: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return(event_list.count)
+        
+        return 2
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = event_list[indexPath.row]
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            if !UpcomingCellExpanded {
+                UpcomingCellExpanded = true
+                HistoryCellExpanded = false
+            }
+        }
         
-        return(cell)
+        if indexPath.row == 1 {
+            if !HistoryCellExpanded {
+                UpcomingCellExpanded = false
+                HistoryCellExpanded = true
+            }
+        }
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            if UpcomingCellExpanded {
+                return (self.outside_table.bounds.height - self.navigationController!.navigationBar.frame.size.height - (self.tabBarController?.tabBar.frame.size.height)!)
+            } else {
+                return 50
+            }
+        }
+        
+        if indexPath.row == 1 {
+            if HistoryCellExpanded {
+                return (self.outside_table.bounds.height - self.navigationController!.navigationBar.frame.size.height - (self.tabBarController?.tabBar.frame.size.height)!)
+            } else {
+                return 50
+            }
+        }
+        
+        return 50
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -63,4 +131,58 @@ class Event: UITableViewController{
     }
     */
 
+}
+
+private class EventUpcoming : NSObject, UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return upcoming_event.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Upcoming_event", for: indexPath)
+        
+        cell.textLabel?.text = upcoming_event[indexPath.row]
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == upcoming_event.count {
+            for i in 0...9 {
+                upcoming_event.append(tenupcoming_event[i])
+            }
+            tableView.reloadData()
+        }
+    }
+}
+
+private class EventHistory : NSObject, UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return history_event.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "History_event", for: indexPath)
+        
+        cell.textLabel?.text = history_event[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == history_event.count {
+            for i in 0...9 {
+                history_event.append(tenhistory_event[i])
+            }
+            
+            tableView.reloadData()
+        }
+    }
 }
