@@ -13,12 +13,19 @@ class event_information: UIViewController {
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var raceTitle: UILabel!
     
+    @IBOutlet weak var Edit_button: UIBarButtonItem!
+    @IBOutlet weak var Mutipurpose_button: UIBarButtonItem!
+    
+    var UpOrHis = ""
     var fromwhere = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         toolbar.clipsToBounds = true
+        
+        print(fromwhere)
+        print(UpOrHis)
 
         // Do any additional setup after loading the view.
     }
@@ -29,12 +36,12 @@ class event_information: UIViewController {
     }
     
     @IBAction func back_button_pressed(_ sender: Any) {
-        if fromwhere == "Upcoming_race" {
-            self.performSegue(withIdentifier: "unwindToUpRaceList", sender: self)
+        if fromwhere == "Race_List" {
+            self.performSegue(withIdentifier: "Back_To_Race_List", sender: self)
         }
         
-        if fromwhere == "History_race" {
-            self.performSegue(withIdentifier: "unWindToHistRaceList", sender: self)
+        if fromwhere == "Race" {
+            self.performSegue(withIdentifier: "Back To Race", sender: self)
         }
     }
     

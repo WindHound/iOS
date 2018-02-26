@@ -14,7 +14,19 @@ private var tenupcoming_champ : [String] = []
 private var history_champ : [String] = []
 private var tenhistory_champ : [String] = []
 
-class Championship: UITableViewController{
+protocol UpcomingDelegate: class {
+    func UpTo(datasource: Any)
+}
+
+protocol HistoryDelegate: class {
+    func HistTo(datesource: Any)
+}
+
+private var Up = Upcoming()
+
+private var His = History()
+
+class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
     
     
     @IBOutlet weak var outside_table: UITableView!
@@ -24,10 +36,6 @@ class Championship: UITableViewController{
     private var UpcomingCellExpanded : Bool = true
     
     private var HistoryCellExpanded : Bool = false
-
-    private var Up = Upcoming()
-
-    private var His = History()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +49,11 @@ class Championship: UITableViewController{
             tenupcoming_champ.append("Championship\(i)")
             tenhistory_champ.append("Championship\(i)")
         }
+        
+        
+        
+        Up.delegate = self
+        His.delegate = self
         
         upcoming_table.delegate = Up
         upcoming_table.dataSource = Up
@@ -60,21 +73,7 @@ class Championship: UITableViewController{
         return 2
     }
     
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        UITableViewCell cell = nil
-//
-//        if tableView == Upcoming_table {
-//            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Upcoming_champ")
-//            cell.textLabel?.text = upcoming_champ[indexPath.row]
-//        }
-//        if tableView == History_table {
-//            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "History_champ")
-//            cell.textLabel?.text = history_champ[indexPath.row]
-//        }
-//
-//        return cell
-//    }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.identifier
         
@@ -82,6 +81,17 @@ class Championship: UITableViewController{
             let secondViewController = segue.destination as! Profile_page
             secondViewController.fromwhere = "Championship"
         }
+        
+        if destination == "Up_To_Event" || destination == "Hist_To_Event" {
+            let secondViewController = segue.destination as! Event_list
+            
+            if destination == "Up_To_Event" {
+                secondViewController.UpOrHis = "Upcoming"
+            } else {
+                secondViewController.UpOrHis = "History"
+            }
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -105,9 +115,15 @@ class Championship: UITableViewController{
 
             outside_table.deselectRow(at: indexPath, animated: true)
         }
-        
-        
     
+    }
+    
+    internal func UpTo(datasource: Any) {
+        performSegue(withIdentifier: "Up_To_Event", sender: self)
+    }
+    
+    internal func HistTo(datesource: Any) {
+        performSegue(withIdentifier: "Hist_To_Event", sender: self)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -150,7 +166,9 @@ class Championship: UITableViewController{
 
 }
 
-private class Upcoming : NSObject, UITableViewDelegate, UITableViewDataSource {
+class Upcoming : UIView, UITableViewDelegate, UITableViewDataSource {
+    
+    var delegate : UpcomingDelegate?
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -176,9 +194,16 @@ private class Upcoming : NSObject, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.UpTo(datasource: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
 }
 
-private class History : NSObject, UITableViewDataSource, UITableViewDelegate {
+class History : UIView, UITableViewDataSource, UITableViewDelegate {
+    
+    var delegate : HistoryDelegate?
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -202,6 +227,11 @@ private class History : NSObject, UITableViewDataSource, UITableViewDelegate {
             }
             tableView.reloadData()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.HistTo(datesource: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

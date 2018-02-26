@@ -13,19 +13,20 @@ private var tenupcoming_race : [String] = []
 private var history_race : [String] = []
 private var tenhistory_race : [String] = []
 
-class Race: UITableViewController {
+private var Up = RaceUpcoming()
+
+private var His = RaceHistory()
+
+class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
     
     @IBOutlet var outside_table: UITableView!
     @IBOutlet weak var upcoming_table: UITableView!
     @IBOutlet weak var history_table: UITableView!
     
     private var UpcomingCellExpanded : Bool = true
-    
     private var HistoryCellExpanded : Bool = false
     
-    private var Up = RaceUpcoming()
     
-    private var His = RaceHistory()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,9 @@ class Race: UITableViewController {
             tenupcoming_race.append("Race\(i)")
             tenhistory_race.append("Race\(i)")
         }
+        
+        Up.delegate = self
+        His.delegate = self
         
         upcoming_table.delegate = Up
         upcoming_table.dataSource = Up
@@ -100,12 +104,30 @@ class Race: UITableViewController {
         return 50
     }
     
+    internal func UpTo(datasource: Any) {
+        performSegue(withIdentifier: "Up To Info", sender: self)
+    }
+    
+    internal func HistTo(datesource: Any) {
+        performSegue(withIdentifier: "Hist To Info", sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.identifier
         
         if destination == "To_Profile" {
             let secondViewController = segue.destination as! Profile_page
             secondViewController.fromwhere = "Race"
+        }
+        
+        if destination == "Up To Info" || destination == "Hist To Info" {
+            let secondViewController = segue.destination as! event_information
+            secondViewController.fromwhere = "Race"
+            if destination == "Up To Info" {
+                secondViewController.UpOrHis = "Upcoming"
+            } else {
+                secondViewController.UpOrHis = "History"
+            }
         }
     }
     
@@ -125,6 +147,9 @@ class Race: UITableViewController {
 }
 
 private class RaceUpcoming : NSObject, UITableViewDelegate, UITableViewDataSource {
+    
+    var delegate : UpcomingDelegate?
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -148,9 +173,17 @@ private class RaceUpcoming : NSObject, UITableViewDelegate, UITableViewDataSourc
             tableView.reloadData()
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.UpTo(datasource: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 private class RaceHistory : NSObject, UITableViewDataSource, UITableViewDelegate {
+    
+    var delegate : HistoryDelegate?
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -175,5 +208,10 @@ private class RaceHistory : NSObject, UITableViewDataSource, UITableViewDelegate
             
             tableView.reloadData()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.HistTo(datesource: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

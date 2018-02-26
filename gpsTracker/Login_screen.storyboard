@@ -185,7 +185,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aSd-di-1Pk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hsZ-b7-oPS" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="7311" y="-364"/>
+            <point key="canvasLocation" x="3542" y="1061"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="q1a-1B-qlR">
@@ -297,12 +297,14 @@
                         <segue destination="VH9-OW-x59" kind="unwind" identifier="Back_To_Champ" unwindAction="unwindToChampListWithSegue:" id="MpF-n9-fvC"/>
                         <segue destination="VH9-OW-x59" kind="unwind" identifier="Back_To_Event" unwindAction="unwindToEventListWithSegue:" id="m3C-db-p04"/>
                         <segue destination="VH9-OW-x59" kind="unwind" identifier="Back_To_Race" unwindAction="unwindToRaceListWithSegue:" id="PRe-j2-dNl"/>
+                        <segue destination="VH9-OW-x59" kind="unwind" identifier="Back_To_Detailed_Event" unwindAction="unwindToDetailedEventWithSegue:" id="8iq-xx-AmD"/>
+                        <segue destination="VH9-OW-x59" kind="unwind" identifier="Back_To_Detailed_Race" unwindAction="unwindToDetailedRaceWithSegue:" id="ZHh-1Y-azX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sxY-MI-Aay" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="VH9-OW-x59" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2769" y="-2060"/>
+            <point key="canvasLocation" x="1977" y="-1913"/>
         </scene>
         <!--Event information-->
         <scene sceneID="tBj-iQ-i5e">
@@ -441,16 +443,18 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="b1J-hX-TKp"/>
                     <connections>
+                        <outlet property="Edit_button" destination="FiY-oh-6w8" id="aq5-Zy-MOF"/>
+                        <outlet property="Mutipurpose_button" destination="4Ar-eM-QuW" id="Rih-gw-7hq"/>
                         <outlet property="raceTitle" destination="KXJ-Wx-ONV" id="QFL-za-Xwi"/>
                         <outlet property="toolbar" destination="HLN-W3-tmb" id="k7d-MG-v2G"/>
-                        <segue destination="tht-hK-9Ar" kind="unwind" identifier="unWindToHistRaceList" unwindAction="unwindToHistRaceListWithSegue:" id="nrI-de-doC"/>
-                        <segue destination="tht-hK-9Ar" kind="unwind" identifier="unwindToUpRaceList" unwindAction="unwindToUpRaceListWithSegue:" id="WkI-6c-5cy"/>
+                        <segue destination="tht-hK-9Ar" kind="unwind" identifier="Back_To_Race_List" unwindAction="unwindToDetailedRaceWithSegue:" id="xle-I0-l5X"/>
+                        <segue destination="tht-hK-9Ar" kind="unwind" identifier="Back To Race" unwindAction="unwindToRaceListWithSegue:" id="49i-gx-03O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ezN-n5-I1T" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="tht-hK-9Ar" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="6567" y="-364"/>
+            <point key="canvasLocation" x="3542" y="331"/>
         </scene>
         <!--Add_Event-->
         <scene sceneID="iKJ-94-Wf4">
@@ -676,11 +680,11 @@
             </objects>
             <point key="canvasLocation" x="1014" y="-246"/>
         </scene>
-        <!--Item-->
+        <!--Event-->
         <scene sceneID="cV8-eQ-ch2">
             <objects>
                 <navigationController id="uMq-EU-5lk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="Event" id="vCT-Eg-rf9"/>
+                    <tabBarItem key="tabBarItem" title="Event" image="Event" id="vCT-Eg-rf9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="8wW-mP-k6P">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -701,7 +705,7 @@
         <scene sceneID="VLm-G5-5MT">
             <objects>
                 <tableViewController id="UHd-NQ-hLL" customClass="Event" customModule="WindHound" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hAf-UA-fJd">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hAf-UA-fJd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -814,6 +818,8 @@
                         <outlet property="history_table" destination="hCZ-Z4-EnE" id="uLD-bT-zOa"/>
                         <outlet property="outside_table" destination="hAf-UA-fJd" id="JVZ-7K-46h"/>
                         <outlet property="upcoming_table" destination="1Pz-Vj-syL" id="bsf-ms-AVz"/>
+                        <segue destination="pY0-7z-LEB" kind="show" identifier="Up_To_Race" id="Usf-FV-74p"/>
+                        <segue destination="pY0-7z-LEB" kind="show" identifier="Hist_To_Race" id="Fte-uU-173"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oFM-BO-678" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -842,11 +848,11 @@
             </objects>
             <point key="canvasLocation" x="-2450" y="-2854"/>
         </scene>
-        <!--Item-->
+        <!--Championship-->
         <scene sceneID="1UJ-m3-nXz">
             <objects>
                 <navigationController id="59h-4c-Sj0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="Championship" id="szj-Iw-qAC"/>
+                    <tabBarItem key="tabBarItem" title="Championship" image="Championship" id="szj-Iw-qAC"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="ulb-mq-Y54">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -980,17 +986,87 @@
                         <outlet property="history_table" destination="qLL-nq-1qP" id="p61-et-IsQ"/>
                         <outlet property="outside_table" destination="KC8-gs-mPw" id="IFW-1K-LaB"/>
                         <outlet property="upcoming_table" destination="iPa-Gs-gAo" id="sG0-11-Wg3"/>
+                        <segue destination="1tw-Ak-GIU" kind="show" identifier="Up_To_Event" id="aBv-4I-gSL"/>
+                        <segue destination="1tw-Ak-GIU" kind="show" identifier="Hist_To_Event" id="Hwa-x3-jEx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vNh-Ux-dqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2768.8000000000002" y="-1245.4272863568217"/>
+            <point key="canvasLocation" x="2769" y="-1245"/>
         </scene>
-        <!--Item-->
+        <!--Event list-->
+        <scene sceneID="56s-Ok-y1H">
+            <objects>
+                <tableViewController id="1tw-Ak-GIU" customClass="Event_list" customModule="WindHound" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nsb-L3-WVP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Detailed_Event" id="B11-yd-0ZR">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="B11-yd-0ZR" id="SYR-3J-g67">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="pY0-7z-LEB" kind="show" identifier="To_Race" id="XI3-to-Z0N"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1tw-Ak-GIU" id="TmH-hi-vC0"/>
+                            <outlet property="delegate" destination="1tw-Ak-GIU" id="uFQ-kj-ndg"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="fgw-gB-dAu" kind="showDetail" identifier="To_Profile" id="Gbk-Sd-3aG"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qHZ-2r-OO6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3543" y="-1245"/>
+        </scene>
+        <!--Race list-->
+        <scene sceneID="du4-Vr-V42">
+            <objects>
+                <tableViewController id="pY0-7z-LEB" customClass="Race_list" customModule="WindHound" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="KGK-6O-GMr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Detailed_Race" id="wWd-4K-Wwo">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wWd-4K-Wwo" id="S82-IV-TT3">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="7N5-1w-mx0" kind="showDetail" identifier="Race_info" id="7f0-Te-Jgh"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pY0-7z-LEB" id="7op-92-eGm"/>
+                            <outlet property="delegate" destination="pY0-7z-LEB" id="CeO-rw-RMN"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="fgw-gB-dAu" kind="showDetail" identifier="To_Profile" id="d8d-wV-tJg"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bkS-Wp-wme" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3542" y="-510"/>
+        </scene>
+        <!--Race-->
         <scene sceneID="Obc-vw-4Wz">
             <objects>
                 <navigationController id="Gaw-vn-87P" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="Race" id="lbb-lr-TpK"/>
+                    <tabBarItem key="tabBarItem" title="Race" image="Race" id="lbb-lr-TpK"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="wsF-3v-QKc">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1011,7 +1087,7 @@
         <scene sceneID="tc4-HL-D1V">
             <objects>
                 <tableViewController id="ZYi-fK-sGp" customClass="Race" customModule="WindHound" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HmU-aQ-3Qa">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HmU-aQ-3Qa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1124,6 +1200,8 @@
                         <outlet property="history_table" destination="kKq-eg-ePe" id="k9j-q5-2sP"/>
                         <outlet property="outside_table" destination="HmU-aQ-3Qa" id="dBd-Ks-4a2"/>
                         <outlet property="upcoming_table" destination="Oe3-SI-nez" id="amR-MN-XNi"/>
+                        <segue destination="7N5-1w-mx0" kind="showDetail" identifier="Up To Info" id="5uT-0O-MbX"/>
+                        <segue destination="7N5-1w-mx0" kind="showDetail" identifier="Hist To Info" id="yIK-qN-H3e"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F9j-oC-Jfv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1144,6 +1222,9 @@
         <image name="log_in_background" width="621" height="1104"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Usf-FV-74p"/>
+        <segue reference="aBv-4I-gSL"/>
+        <segue reference="5uT-0O-MbX"/>
         <segue reference="MJu-6F-DJK"/>
     </inferredMetricsTieBreakers>
 </document>

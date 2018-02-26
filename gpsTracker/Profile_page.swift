@@ -40,6 +40,14 @@ class Profile_page: UIViewController {
         if fromwhere == "Race" {
             performSegue(withIdentifier: "Back_To_Race", sender: self)
         }
+        
+        if fromwhere == "Detailed_Event" {
+            performSegue(withIdentifier: "Back_To_Detailed_Event", sender: self)
+        }
+        
+        if fromwhere == "Detailed_Race" {
+            performSegue(withIdentifier: "Back_To_Detailed_Race", sender: self)
+        }
     }
     
     /*
