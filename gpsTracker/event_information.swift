@@ -26,10 +26,27 @@ class event_information: UIViewController {
         
         print(fromwhere)
         print(UpOrHis)
+        
+        if UpOrHis == "History" {
+            Edit_button.isEnabled = false
+            Edit_button.tintColor = UIColor.clear
+            Mutipurpose_button.title = "Replay"
+        }
 
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func Mutipurpose_button_pressed(_ sender: Any) {
+        
+        if Mutipurpose_button.title == "Record" {
+            performSegue(withIdentifier: "To Record", sender: self)
+        }
+        
+        if Mutipurpose_button.title == "Replay" {
+            performSegue(withIdentifier: "To Replay", sender: self)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

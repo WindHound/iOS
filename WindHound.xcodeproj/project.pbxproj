@@ -69,6 +69,8 @@
 		552865402022282E007D4707 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5528653F2022282E007D4707 /* LocationSearchTable.swift */; };
 		552CF840201FD5F700620C29 /* Add_event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552CF83F201FD5F700620C29 /* Add_event.swift */; };
 		554F424B2029CCBD0088534B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 554F424A2029CCBD0088534B /* Podfile */; };
+		554FCA0C2045C942009B0EE2 /* Add_Championship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554FCA0B2045C942009B0EE2 /* Add_Championship.swift */; };
+		554FCA0E2045D745009B0EE2 /* Existing_Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554FCA0D2045D745009B0EE2 /* Existing_Events.swift */; };
 		5552C9512041AE0000598669 /* Event_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5552C9502041AE0000598669 /* Event_list.swift */; };
 		5552C9532041AE1800598669 /* Race_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5552C9522041AE1800598669 /* Race_list.swift */; };
 		55548A142019444B00FC7E23 /* Championship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55548A132019444B00FC7E23 /* Championship.swift */; };
@@ -142,6 +144,8 @@
 		5528653F2022282E007D4707 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		552CF83F201FD5F700620C29 /* Add_event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_event.swift; sourceTree = "<group>"; };
 		554F424A2029CCBD0088534B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		554FCA0B2045C942009B0EE2 /* Add_Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_Championship.swift; sourceTree = "<group>"; };
+		554FCA0D2045D745009B0EE2 /* Existing_Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_Events.swift; sourceTree = "<group>"; };
 		5552C9502041AE0000598669 /* Event_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event_list.swift; sourceTree = "<group>"; };
 		5552C9522041AE1800598669 /* Race_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Race_list.swift; sourceTree = "<group>"; };
 		55548A132019444B00FC7E23 /* Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Championship.swift; sourceTree = "<group>"; };
@@ -349,6 +353,8 @@
 				550833172035B8430007EC08 /* Select_page.swift */,
 				550B2E8F20174AAE0027127F /* log_in.swift */,
 				55548A132019444B00FC7E23 /* Championship.swift */,
+				554FCA0B2045C942009B0EE2 /* Add_Championship.swift */,
+				554FCA0D2045D745009B0EE2 /* Existing_Events.swift */,
 				5552C9502041AE0000598669 /* Event_list.swift */,
 				550AEE18202F37C200FC1978 /* Event.swift */,
 				5552C9522041AE1800598669 /* Race_list.swift */,
@@ -562,10 +568,12 @@
 				550FDD46203B182C00999C8A /* Race.swift in Sources */,
 				550B2E9020174AAE0027127F /* log_in.swift in Sources */,
 				557F41652007E8DF0087239B /* GpsAndSensor.swift in Sources */,
+				554FCA0E2045D745009B0EE2 /* Existing_Events.swift in Sources */,
 				550AEE1B202F3B9100FC1978 /* event_information.swift in Sources */,
 				550AEE19202F37C200FC1978 /* Event.swift in Sources */,
 				5552C9512041AE0000598669 /* Event_list.swift in Sources */,
 				552CF840201FD5F700620C29 /* Add_event.swift in Sources */,
+				554FCA0C2045C942009B0EE2 /* Add_Championship.swift in Sources */,
 				557F41632007E8DF0087239B /* AppDelegate.swift in Sources */,
 				5552C9532041AE1800598669 /* Race_list.swift in Sources */,
 				550BBF9220266ABA0075AC79 /* added_invitees.swift in Sources */,
