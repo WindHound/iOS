@@ -8,11 +8,16 @@
 
 import UIKit
 
-class Add_Championship: UIViewController, UITextFieldDelegate {
+
+class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var Name: UITextField!
     
     var activeTextfield : UITextField!
+    
+    @IBOutlet weak var Selected_Events_Table: UITableView!
+    
+    var Selected_Events : NSMutableArray = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +74,44 @@ class Add_Championship: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Selected_Events.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Events", for: indexPath)
+        
+        cell.textLabel?.text = Selected_Events.object(at: indexPath.row) as? String
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.identifier
+        
+        if destination == "To Existing Event" {
+            let secondViewController = segue.destination as! Existing_events
+        
+            secondViewController.Already_added = self.Selected_Events
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            Selected_Events.removeObject(at: indexPath.row)
+            tableView.reloadData()
+        }
+    }
+
+    @IBAction func unwindToAddChamp(segue:UIStoryboardSegue) { }
     
 
     /*
