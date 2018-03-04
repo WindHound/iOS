@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Add_event: UIViewController {
+class Add_Race: UIViewController {
 
     @IBOutlet weak var textTitle: UITextField!
     
@@ -193,7 +193,7 @@ class Add_event: UIViewController {
 }
 
 
-extension Add_event : UITextFieldDelegate {
+extension Add_Race : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

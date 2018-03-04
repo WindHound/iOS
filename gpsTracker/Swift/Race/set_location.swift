@@ -92,7 +92,7 @@ class set_location: UIViewController, UISearchBarDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let add_event = segue.destination as! Add_event
+        let add_event = segue.destination as! Add_Race
         add_event.textLocation.text = location
         add_event.latitude = latitude
         add_event.longitude = longitude

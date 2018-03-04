@@ -11,6 +11,9 @@ import UIKit
 
 class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var Save_button: UIBarButtonItem!
+    @IBOutlet weak var New_Event_button: UIButton!
+    
     @IBOutlet weak var Name: UITextField!
     
     var activeTextfield : UITextField!
@@ -23,6 +26,10 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
         super.viewDidLoad()
         
         Name.delegate = self
+        
+        Save_button.isEnabled = false
+        
+        New_Event_button.isEnabled = false
         
         let center: NotificationCenter = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -38,6 +45,22 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextfield = textField
+        if textField == Name {
+            Save_button.isEnabled = false
+            New_Event_button.isEnabled = false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == Name {
+            if Name.text != "" {
+                Save_button.isEnabled = true
+                New_Event_button.isEnabled = true
+            } else {
+                Save_button.isEnabled = false
+                New_Event_button.isEnabled = false
+            }
+        }
     }
     
     @objc func keyboardDidShow(notification: Notification) {
@@ -101,6 +124,12 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
             let secondViewController = segue.destination as! Existing_events
         
             secondViewController.Already_added = self.Selected_Events
+        }
+        
+        if destination == "To Add Event" {
+            let secondViewController = segue.destination as! Add_Event
+            
+            secondViewController.fromwhere = "Add Championship"
         }
     }
     

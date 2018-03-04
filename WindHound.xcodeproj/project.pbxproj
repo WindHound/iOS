@@ -67,7 +67,7 @@
 		5512CCE2203B893500B17951 /* Profile_page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512CCE1203B893500B17951 /* Profile_page.swift */; };
 		55166B282029D879001A45A9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55166B292029D879001A45A9 /* SwiftyJSON.framework */; };
 		552865402022282E007D4707 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5528653F2022282E007D4707 /* LocationSearchTable.swift */; };
-		552CF840201FD5F700620C29 /* Add_event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552CF83F201FD5F700620C29 /* Add_event.swift */; };
+		552CF840201FD5F700620C29 /* Add_Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552CF83F201FD5F700620C29 /* Add_Race.swift */; };
 		554F424B2029CCBD0088534B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 554F424A2029CCBD0088534B /* Podfile */; };
 		554FCA0C2045C942009B0EE2 /* Add_Championship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554FCA0B2045C942009B0EE2 /* Add_Championship.swift */; };
 		554FCA102045DE7D009B0EE2 /* Existing_events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554FCA0F2045DE7D009B0EE2 /* Existing_events.swift */; };
@@ -75,6 +75,8 @@
 		5552C9532041AE1800598669 /* Race_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5552C9522041AE1800598669 /* Race_list.swift */; };
 		55548A142019444B00FC7E23 /* Championship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55548A132019444B00FC7E23 /* Championship.swift */; };
 		5559739520161FFF00CAEBDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5559739420161FFF00CAEBDC /* Assets.xcassets */; };
+		55686E20204AFA1E00D86201 /* Add_Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55686E1F204AFA1E00D86201 /* Add_Event.swift */; };
+		55686E22204C396900D86201 /* Existing_Championship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55686E21204C396900D86201 /* Existing_Championship.swift */; };
 		557F41632007E8DF0087239B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41622007E8DF0087239B /* AppDelegate.swift */; };
 		557F41652007E8DF0087239B /* GpsAndSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41642007E8DF0087239B /* GpsAndSensor.swift */; };
 		557F416D2007E8DF0087239B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 557F416B2007E8DF0087239B /* LaunchScreen.storyboard */; };
@@ -142,7 +144,7 @@
 		5512CCE1203B893500B17951 /* Profile_page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile_page.swift; sourceTree = "<group>"; };
 		55166B292029D879001A45A9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5528653F2022282E007D4707 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
-		552CF83F201FD5F700620C29 /* Add_event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_event.swift; sourceTree = "<group>"; };
+		552CF83F201FD5F700620C29 /* Add_Race.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_Race.swift; sourceTree = "<group>"; };
 		554F424A2029CCBD0088534B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		554FCA0B2045C942009B0EE2 /* Add_Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_Championship.swift; sourceTree = "<group>"; };
 		554FCA0F2045DE7D009B0EE2 /* Existing_events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_events.swift; sourceTree = "<group>"; };
@@ -150,6 +152,8 @@
 		5552C9522041AE1800598669 /* Race_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Race_list.swift; sourceTree = "<group>"; };
 		55548A132019444B00FC7E23 /* Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Championship.swift; sourceTree = "<group>"; };
 		5559739420161FFF00CAEBDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../xamarin/sailGPS/sailGPS/Assets.xcassets; sourceTree = "<group>"; };
+		55686E1F204AFA1E00D86201 /* Add_Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_Event.swift; sourceTree = "<group>"; };
+		55686E21204C396900D86201 /* Existing_Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_Championship.swift; sourceTree = "<group>"; };
 		557F415F2007E8DF0087239B /* WindHound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WindHound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		557F41622007E8DF0087239B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		557F41642007E8DF0087239B /* GpsAndSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpsAndSensor.swift; sourceTree = "<group>"; };
@@ -324,6 +328,56 @@
 			path = Race;
 			sourceTree = "<group>";
 		};
+		55686E23204C39A100D86201 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				557F41622007E8DF0087239B /* AppDelegate.swift */,
+				55686E26204C3A4E00D86201 /* Race */,
+				55686E25204C3A1F00D86201 /* Championship */,
+				55686E24204C3A0D00D86201 /* Event */,
+				5512CCE1203B893500B17951 /* Profile_page.swift */,
+				550833172035B8430007EC08 /* Select_page.swift */,
+				550B2E8F20174AAE0027127F /* log_in.swift */,
+				557F41642007E8DF0087239B /* GpsAndSensor.swift */,
+				550BBF9120266ABA0075AC79 /* added_invitees.swift */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
+		55686E24204C3A0D00D86201 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				550AEE18202F37C200FC1978 /* Event.swift */,
+				5552C9522041AE1800598669 /* Race_list.swift */,
+				55686E1F204AFA1E00D86201 /* Add_Event.swift */,
+				55686E21204C396900D86201 /* Existing_Championship.swift */,
+			);
+			path = Event;
+			sourceTree = "<group>";
+		};
+		55686E25204C3A1F00D86201 /* Championship */ = {
+			isa = PBXGroup;
+			children = (
+				55548A132019444B00FC7E23 /* Championship.swift */,
+				5552C9502041AE0000598669 /* Event_list.swift */,
+				554FCA0B2045C942009B0EE2 /* Add_Championship.swift */,
+				554FCA0F2045DE7D009B0EE2 /* Existing_events.swift */,
+			);
+			path = Championship;
+			sourceTree = "<group>";
+		};
+		55686E26204C3A4E00D86201 /* Race */ = {
+			isa = PBXGroup;
+			children = (
+				550FDD45203B182C00999C8A /* Race.swift */,
+				550AEE1A202F3B9100FC1978 /* event_information.swift */,
+				552CF83F201FD5F700620C29 /* Add_Race.swift */,
+				550B1D492020845900213E81 /* set_location.swift */,
+				5528653F2022282E007D4707 /* LocationSearchTable.swift */,
+			);
+			path = Race;
+			sourceTree = "<group>";
+		};
 		557F41562007E8DF0087239B = {
 			isa = PBXGroup;
 			children = (
@@ -346,26 +400,10 @@
 		557F41612007E8DF0087239B /* gpsTracker */ = {
 			isa = PBXGroup;
 			children = (
+				55686E23204C39A100D86201 /* Swift */,
 				550A679D202F884B00AE1019 /* Icons */,
 				557F416B2007E8DF0087239B /* LaunchScreen.storyboard */,
 				550AEE2B201653C700C0A986 /* Login_screen.storyboard */,
-				5512CCE1203B893500B17951 /* Profile_page.swift */,
-				550833172035B8430007EC08 /* Select_page.swift */,
-				550B2E8F20174AAE0027127F /* log_in.swift */,
-				55548A132019444B00FC7E23 /* Championship.swift */,
-				554FCA0B2045C942009B0EE2 /* Add_Championship.swift */,
-				554FCA0F2045DE7D009B0EE2 /* Existing_events.swift */,
-				5552C9502041AE0000598669 /* Event_list.swift */,
-				550AEE18202F37C200FC1978 /* Event.swift */,
-				5552C9522041AE1800598669 /* Race_list.swift */,
-				550FDD45203B182C00999C8A /* Race.swift */,
-				550AEE1A202F3B9100FC1978 /* event_information.swift */,
-				557F41642007E8DF0087239B /* GpsAndSensor.swift */,
-				552CF83F201FD5F700620C29 /* Add_event.swift */,
-				550B1D492020845900213E81 /* set_location.swift */,
-				5528653F2022282E007D4707 /* LocationSearchTable.swift */,
-				550BBF9120266ABA0075AC79 /* added_invitees.swift */,
-				557F41622007E8DF0087239B /* AppDelegate.swift */,
 				5559739420161FFF00CAEBDC /* Assets.xcassets */,
 				557F416E2007E8DF0087239B /* Info.plist */,
 			);
@@ -563,6 +601,7 @@
 				552865402022282E007D4707 /* LocationSearchTable.swift in Sources */,
 				55548A142019444B00FC7E23 /* Championship.swift in Sources */,
 				550833182035B8430007EC08 /* Select_page.swift in Sources */,
+				55686E22204C396900D86201 /* Existing_Championship.swift in Sources */,
 				5512CCE2203B893500B17951 /* Profile_page.swift in Sources */,
 				550B1D4A2020845900213E81 /* set_location.swift in Sources */,
 				550FDD46203B182C00999C8A /* Race.swift in Sources */,
@@ -572,8 +611,9 @@
 				550AEE1B202F3B9100FC1978 /* event_information.swift in Sources */,
 				550AEE19202F37C200FC1978 /* Event.swift in Sources */,
 				5552C9512041AE0000598669 /* Event_list.swift in Sources */,
-				552CF840201FD5F700620C29 /* Add_event.swift in Sources */,
+				552CF840201FD5F700620C29 /* Add_Race.swift in Sources */,
 				554FCA0C2045C942009B0EE2 /* Add_Championship.swift in Sources */,
+				55686E20204AFA1E00D86201 /* Add_Event.swift in Sources */,
 				557F41632007E8DF0087239B /* AppDelegate.swift in Sources */,
 				5552C9532041AE1800598669 /* Race_list.swift in Sources */,
 				550BBF9220266ABA0075AC79 /* added_invitees.swift in Sources */,
