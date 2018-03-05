@@ -77,6 +77,8 @@
 		5559739520161FFF00CAEBDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5559739420161FFF00CAEBDC /* Assets.xcassets */; };
 		55686E20204AFA1E00D86201 /* Add_Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55686E1F204AFA1E00D86201 /* Add_Event.swift */; };
 		55686E22204C396900D86201 /* Existing_Championship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55686E21204C396900D86201 /* Existing_Championship.swift */; };
+		55686E28204CA9EF00D86201 /* Existing_Races.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55686E27204CA9EF00D86201 /* Existing_Races.swift */; };
+		55686E2A204CC9F000D86201 /* Existing_Admins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55686E29204CC9F000D86201 /* Existing_Admins.swift */; };
 		557F41632007E8DF0087239B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41622007E8DF0087239B /* AppDelegate.swift */; };
 		557F41652007E8DF0087239B /* GpsAndSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41642007E8DF0087239B /* GpsAndSensor.swift */; };
 		557F416D2007E8DF0087239B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 557F416B2007E8DF0087239B /* LaunchScreen.storyboard */; };
@@ -154,6 +156,8 @@
 		5559739420161FFF00CAEBDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../xamarin/sailGPS/sailGPS/Assets.xcassets; sourceTree = "<group>"; };
 		55686E1F204AFA1E00D86201 /* Add_Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_Event.swift; sourceTree = "<group>"; };
 		55686E21204C396900D86201 /* Existing_Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_Championship.swift; sourceTree = "<group>"; };
+		55686E27204CA9EF00D86201 /* Existing_Races.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_Races.swift; sourceTree = "<group>"; };
+		55686E29204CC9F000D86201 /* Existing_Admins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_Admins.swift; sourceTree = "<group>"; };
 		557F415F2007E8DF0087239B /* WindHound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WindHound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		557F41622007E8DF0087239B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		557F41642007E8DF0087239B /* GpsAndSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpsAndSensor.swift; sourceTree = "<group>"; };
@@ -340,6 +344,7 @@
 				550B2E8F20174AAE0027127F /* log_in.swift */,
 				557F41642007E8DF0087239B /* GpsAndSensor.swift */,
 				550BBF9120266ABA0075AC79 /* added_invitees.swift */,
+				55686E29204CC9F000D86201 /* Existing_Admins.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 				5552C9522041AE1800598669 /* Race_list.swift */,
 				55686E1F204AFA1E00D86201 /* Add_Event.swift */,
 				55686E21204C396900D86201 /* Existing_Championship.swift */,
+				55686E27204CA9EF00D86201 /* Existing_Races.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -611,12 +617,14 @@
 				550AEE1B202F3B9100FC1978 /* event_information.swift in Sources */,
 				550AEE19202F37C200FC1978 /* Event.swift in Sources */,
 				5552C9512041AE0000598669 /* Event_list.swift in Sources */,
+				55686E2A204CC9F000D86201 /* Existing_Admins.swift in Sources */,
 				552CF840201FD5F700620C29 /* Add_Race.swift in Sources */,
 				554FCA0C2045C942009B0EE2 /* Add_Championship.swift in Sources */,
 				55686E20204AFA1E00D86201 /* Add_Event.swift in Sources */,
 				557F41632007E8DF0087239B /* AppDelegate.swift in Sources */,
 				5552C9532041AE1800598669 /* Race_list.swift in Sources */,
 				550BBF9220266ABA0075AC79 /* added_invitees.swift in Sources */,
+				55686E28204CA9EF00D86201 /* Existing_Races.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,15 +9,35 @@
 import UIKit
 
 class Existing_Championship: UITableViewController {
+    private var Championships : NSMutableArray = []
+    
+    private var Selected_Championships : NSMutableArray = []
+    
+    var Already_added : NSMutableArray = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationItem.title = "Existing Championships"
+        
+        let add = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(add_button))
+        
+        self.navigationItem.rightBarButtonItems = [add]
+        
+        navigationItem.rightBarButtonItem?.isEnabled = false
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        for i in 1...10 {
+            Championships.add("Championships\(i)")
+        }
+        
+        if Already_added.count != 0 {
+            for i in 0...(Already_added.count - 1) {
+                Championships.remove(Already_added.object(at: i))
+            }
+        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,23 +49,67 @@ class Existing_Championship: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return Championships.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Championships", for: indexPath)
+        
+        cell.textLabel?.text = Championships.object(at: indexPath.row) as? String
 
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark {
+            // Remove checkmark
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            Selected_Championships.remove(Championships[indexPath.row])
+            
+            print(Selected_Championships)
+            
+            if (Selected_Championships.count == 0) {
+                navigationItem.rightBarButtonItem?.isEnabled = false
+            }
+        } else {
+            // Checkmark
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+            
+            Selected_Championships.add(Championships[indexPath.row])
+            
+            print(Selected_Championships)
+            
+            
+            if navigationItem.rightBarButtonItem?.isEnabled == false {
+                navigationItem.rightBarButtonItem?.isEnabled = true
+            }
+            
+        }
+    }
+    
+    @IBAction func add_button() {
+        performSegue(withIdentifier: "Back To Add Event", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.identifier
+        
+        if destination == "Back To Add Event" {
+            let secondViewController = segue.destination as! Add_Event
+            secondViewController.championships.addObjects(from: self.Selected_Championships as! [Any])
+            secondViewController.Selected_Championships.reloadData()
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

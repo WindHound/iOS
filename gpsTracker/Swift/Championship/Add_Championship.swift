@@ -12,7 +12,6 @@ import UIKit
 class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var Save_button: UIBarButtonItem!
-    @IBOutlet weak var New_Event_button: UIButton!
     
     @IBOutlet weak var Name: UITextField!
     
@@ -20,7 +19,11 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
     
     @IBOutlet weak var Selected_Events_Table: UITableView!
     
+    @IBOutlet weak var Selected_Admins_Table: UITableView!
+    
     var Selected_Events : NSMutableArray = []
+    
+    var Selected_Admins : NSMutableArray = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +31,7 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
         Name.delegate = self
         
         Save_button.isEnabled = false
-        
-        New_Event_button.isEnabled = false
-        
+
         let center: NotificationCenter = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -47,7 +48,6 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
         activeTextfield = textField
         if textField == Name {
             Save_button.isEnabled = false
-            New_Event_button.isEnabled = false
         }
     }
     
@@ -55,10 +55,8 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
         if textField == Name {
             if Name.text != "" {
                 Save_button.isEnabled = true
-                New_Event_button.isEnabled = true
             } else {
                 Save_button.isEnabled = false
-                New_Event_button.isEnabled = false
             }
         }
     }
@@ -102,10 +100,22 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if tableView == Selected_Admins_Table {
+            return Selected_Admins.count
+        }
         return Selected_Events.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if tableView == Selected_Admins_Table {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Admins", for: indexPath)
+            
+            cell.textLabel?.text = Selected_Admins.object(at: indexPath.row) as? String
+        }
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Events", for: indexPath)
         
         cell.textLabel?.text = Selected_Events.object(at: indexPath.row) as? String
@@ -130,6 +140,14 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
             let secondViewController = segue.destination as! Add_Event
             
             secondViewController.fromwhere = "Add Championship"
+            
+            secondViewController.championships.add(self.Name.text as Any)
+        }
+    }
+    
+    @IBAction func New_Event_Button_pressed(_ sender: Any) {
+        if (Name.text == "") {
+            createAlert(title: "Empty Championship name", message: "To create a new event, please enter championship name", name: "Name")
         }
     }
     
@@ -138,6 +156,27 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
             Selected_Events.removeObject(at: indexPath.row)
             tableView.reloadData()
         }
+    }
+    
+    func createAlert(title:String, message:String, name: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel) {
+            (action) in if name == "Name" {
+                self.Name .becomeFirstResponder()
+            }
+            
+        }
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+        // Reference purpose
+        //        let openAction = UIAlertAction(title: "Open Settings", style: .default) {(action) in
+        //            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+        //                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        //            }
+        //        }
     }
 
     @IBAction func unwindToAddChamp(segue:UIStoryboardSegue) { }
