@@ -1,20 +1,20 @@
 //
-//  Existing_Championship.swift
+//  Existing_Admins.swift
 //  WindHound
 //
-//  Created by 신종훈 on 04/03/2018.
+//  Created by 신종훈 on 05/03/2018.
 //  Copyright © 2018 신종훈. All rights reserved.
 //
 
 import UIKit
 
-class Existing_Championship: UITableViewController {
-    
-    private var Championships : NSMutableArray = []
-    
-    private var Selected_Championships : NSMutableArray = []
+class Existing_Admins: UITableViewController {
     
     var fromwhere : String = ""
+    
+    private var Admins : NSMutableArray = []
+    
+    private var Selected_Admins : NSMutableArray = []
     
     var Already_added : NSMutableArray = []
 
@@ -22,7 +22,7 @@ class Existing_Championship: UITableViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationItem.title = "Existing Championships"
+        self.navigationItem.title = "Add Admins"
         
         let add = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(add_button))
         
@@ -31,14 +31,16 @@ class Existing_Championship: UITableViewController {
         navigationItem.rightBarButtonItem?.isEnabled = false
         
         for i in 1...10 {
-            Championships.add("Championships\(i)")
+            Admins.add("Admins\(i)")
         }
         
         if Already_added.count != 0 {
             for i in 0...(Already_added.count - 1) {
-                Championships.remove(Already_added.object(at: i))
+                Admins.remove(Already_added.object(at: i))
             }
         }
+        
+        print(fromwhere)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -48,18 +50,11 @@ class Existing_Championship: UITableViewController {
     }
     
     @IBAction func add_button() {
+        if fromwhere == "Add Championship"  {
+            performSegue(withIdentifier: "Back To Add Champ", sender: self)
+        }
         if fromwhere == "Add Event" {
             performSegue(withIdentifier: "Back To Add Event", sender: self)
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destination = segue.identifier
-        
-        if destination == "Back To Add Event" {
-            let secondViewController = segue.destination as! Add_Event
-            secondViewController.Selected_Championships.addObjects(from: self.Selected_Championships as! [Any])
-            secondViewController.Selected_Championships_Table.reloadData()
         }
     }
 
@@ -77,16 +72,18 @@ class Existing_Championship: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return Championships.count
+        return Admins.count
     }
+
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Championships", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Admins", for: indexPath)
+        
+        cell.textLabel?.text = Admins.object(at: indexPath.row) as? String
 
-        cell.textLabel?.text = Championships.object(at: indexPath.row) as? String
         return cell
     }
- 
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark {
             // Remove checkmark
@@ -94,11 +91,11 @@ class Existing_Championship: UITableViewController {
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            Selected_Championships.remove(Championships[indexPath.row])
+            Selected_Admins.remove(Admins[indexPath.row])
             
-            print(Selected_Championships)
+            print(Selected_Admins)
             
-            if (Selected_Championships.count == 0) {
+            if (Selected_Admins.count == 0) {
                 navigationItem.rightBarButtonItem?.isEnabled = false
             }
         } else {
@@ -107,9 +104,9 @@ class Existing_Championship: UITableViewController {
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            Selected_Championships.add(Championships[indexPath.row])
+            Selected_Admins.add(Admins[indexPath.row])
             
-            print(Selected_Championships)
+            print(Selected_Admins)
             
             
             if navigationItem.rightBarButtonItem?.isEnabled == false {
@@ -118,7 +115,23 @@ class Existing_Championship: UITableViewController {
             
         }
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.identifier
+        
+        if destination == "Back To Add Champ" {
+            let secondViewController = segue.destination as! Add_Championship
+            secondViewController.Selected_Admins.addObjects(from: self.Selected_Admins as! [Any])
+            secondViewController.Selected_Admins_Table.reloadData()
+        }
+        
+        if destination == "Back To Add Event" {
+            let secondViewController = segue.destination as! Add_Event
+            secondViewController.Selected_Admins.addObjects(from: self.Selected_Admins as! [Any])
+            secondViewController.Selected_Admins_Table.reloadData()
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

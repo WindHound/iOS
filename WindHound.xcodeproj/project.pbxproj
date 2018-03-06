@@ -68,6 +68,7 @@
 		55166B282029D879001A45A9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55166B292029D879001A45A9 /* SwiftyJSON.framework */; };
 		552865402022282E007D4707 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5528653F2022282E007D4707 /* LocationSearchTable.swift */; };
 		552CF840201FD5F700620C29 /* Add_Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552CF83F201FD5F700620C29 /* Add_Race.swift */; };
+		553FD97A204D6BBE00198BC5 /* Existing_Admins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553FD979204D6BBE00198BC5 /* Existing_Admins.swift */; };
 		554F424B2029CCBD0088534B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 554F424A2029CCBD0088534B /* Podfile */; };
 		554FCA0C2045C942009B0EE2 /* Add_Championship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554FCA0B2045C942009B0EE2 /* Add_Championship.swift */; };
 		554FCA102045DE7D009B0EE2 /* Existing_events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554FCA0F2045DE7D009B0EE2 /* Existing_events.swift */; };
@@ -145,6 +146,7 @@
 		55166B292029D879001A45A9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5528653F2022282E007D4707 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		552CF83F201FD5F700620C29 /* Add_Race.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_Race.swift; sourceTree = "<group>"; };
+		553FD979204D6BBE00198BC5 /* Existing_Admins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_Admins.swift; sourceTree = "<group>"; };
 		554F424A2029CCBD0088534B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		554FCA0B2045C942009B0EE2 /* Add_Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_Championship.swift; sourceTree = "<group>"; };
 		554FCA0F2045DE7D009B0EE2 /* Existing_events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_events.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				550B2E8F20174AAE0027127F /* log_in.swift */,
 				557F41642007E8DF0087239B /* GpsAndSensor.swift */,
 				550BBF9120266ABA0075AC79 /* added_invitees.swift */,
+				553FD979204D6BBE00198BC5 /* Existing_Admins.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 				55686E22204C396900D86201 /* Existing_Championship.swift in Sources */,
 				5512CCE2203B893500B17951 /* Profile_page.swift in Sources */,
 				550B1D4A2020845900213E81 /* set_location.swift in Sources */,
+				553FD97A204D6BBE00198BC5 /* Existing_Admins.swift in Sources */,
 				550FDD46203B182C00999C8A /* Race.swift in Sources */,
 				550B2E9020174AAE0027127F /* log_in.swift in Sources */,
 				554FCA102045DE7D009B0EE2 /* Existing_events.swift in Sources */,
