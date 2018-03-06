@@ -47,7 +47,7 @@
 		550A67F5202F925500AE1019 /* Net_Connected.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 550A67F3202F925500AE1019 /* Net_Connected.pdf */; };
 		550AEE19202F37C200FC1978 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550AEE18202F37C200FC1978 /* Event.swift */; };
 		550AEE1B202F3B9100FC1978 /* event_information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550AEE1A202F3B9100FC1978 /* event_information.swift */; };
-		550AEE2C201653C700C0A986 /* Login_screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550AEE2B201653C700C0A986 /* Login_screen.storyboard */; };
+		550AEE2C201653C700C0A986 /* MainApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550AEE2B201653C700C0A986 /* MainApp.storyboard */; };
 		550B1D4A2020845900213E81 /* set_location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B1D492020845900213E81 /* set_location.swift */; };
 		550B2E9020174AAE0027127F /* log_in.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B2E8F20174AAE0027127F /* log_in.swift */; };
 		550BBF9220266ABA0075AC79 /* added_invitees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BBF9120266ABA0075AC79 /* added_invitees.swift */; };
@@ -81,6 +81,7 @@
 		557F41632007E8DF0087239B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41622007E8DF0087239B /* AppDelegate.swift */; };
 		557F41652007E8DF0087239B /* GpsAndSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41642007E8DF0087239B /* GpsAndSensor.swift */; };
 		557F416D2007E8DF0087239B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 557F416B2007E8DF0087239B /* LaunchScreen.storyboard */; };
+		55C34D50204F0F4B001F9389 /* Existing_Races.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C34D4F204F0F4B001F9389 /* Existing_Races.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,7 +125,7 @@
 		550A67F3202F925500AE1019 /* Net_Connected.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Net_Connected.pdf; sourceTree = "<group>"; };
 		550AEE18202F37C200FC1978 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		550AEE1A202F3B9100FC1978 /* event_information.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = event_information.swift; sourceTree = "<group>"; };
-		550AEE2B201653C700C0A986 /* Login_screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login_screen.storyboard; sourceTree = "<group>"; };
+		550AEE2B201653C700C0A986 /* MainApp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainApp.storyboard; sourceTree = "<group>"; };
 		550B1D492020845900213E81 /* set_location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = set_location.swift; sourceTree = "<group>"; };
 		550B2E8F20174AAE0027127F /* log_in.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = log_in.swift; sourceTree = "<group>"; };
 		550BBF9120266ABA0075AC79 /* added_invitees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = added_invitees.swift; sourceTree = "<group>"; };
@@ -161,6 +162,7 @@
 		557F41642007E8DF0087239B /* GpsAndSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpsAndSensor.swift; sourceTree = "<group>"; };
 		557F416C2007E8DF0087239B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		557F416E2007E8DF0087239B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55C34D4F204F0F4B001F9389 /* Existing_Races.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_Races.swift; sourceTree = "<group>"; };
 		EF9CF05843E5FBF14F617A45 /* Pods-gpsTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gpsTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gpsTracker/Pods-gpsTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		F4D1C942EE929B99CBC34F87 /* Pods-gpsTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gpsTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-gpsTracker/Pods-gpsTracker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -354,6 +356,7 @@
 				5552C9522041AE1800598669 /* Race_list.swift */,
 				55686E1F204AFA1E00D86201 /* Add_Event.swift */,
 				55686E21204C396900D86201 /* Existing_Championship.swift */,
+				55C34D4F204F0F4B001F9389 /* Existing_Races.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -406,7 +409,7 @@
 				55686E23204C39A100D86201 /* Swift */,
 				550A679D202F884B00AE1019 /* Icons */,
 				557F416B2007E8DF0087239B /* LaunchScreen.storyboard */,
-				550AEE2B201653C700C0A986 /* Login_screen.storyboard */,
+				550AEE2B201653C700C0A986 /* MainApp.storyboard */,
 				5559739420161FFF00CAEBDC /* Assets.xcassets */,
 				557F416E2007E8DF0087239B /* Info.plist */,
 			);
@@ -536,7 +539,7 @@
 				554F424B2029CCBD0088534B /* Podfile in Resources */,
 				550FDD2E203B0D6B00999C8A /* championship_20x20.png in Resources */,
 				550FDD43203B178D00999C8A /* Race_60x60.png in Resources */,
-				550AEE2C201653C700C0A986 /* Login_screen.storyboard in Resources */,
+				550AEE2C201653C700C0A986 /* MainApp.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,6 +604,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55C34D50204F0F4B001F9389 /* Existing_Races.swift in Sources */,
 				552865402022282E007D4707 /* LocationSearchTable.swift in Sources */,
 				55548A142019444B00FC7E23 /* Championship.swift in Sources */,
 				550833182035B8430007EC08 /* Select_page.swift in Sources */,

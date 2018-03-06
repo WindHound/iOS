@@ -15,8 +15,16 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
     @IBOutlet weak var New_Event_button: UIButton!
     
     @IBOutlet weak var Name: UITextField!
+    @IBOutlet weak var Start_date: UITextField!
+    @IBOutlet weak var End_date: UITextField!
+    
+    var startdate : String = ""
+    var enddate : String = ""
+    var currentdate : String = ""
     
     var activeTextfield : UITextField!
+    
+    let picker = UIDatePicker()
     
     @IBOutlet weak var Selected_Events_Table: UITableView!
     @IBOutlet weak var Selected_Admins_Table: UITableView!
@@ -29,14 +37,75 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
         super.viewDidLoad()
         
         Name.delegate = self
+        Start_date.delegate = self
+        End_date.delegate = self
         
         Save_button.isEnabled = false
+        
+        createDatePicer(forField: Start_date)
+        createDatePicer(forField: End_date)
         
         let center: NotificationCenter = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        let date = Date()
+        
+        let currentdateformatter = DateFormatter()
+        currentdateformatter.dateFormat = "yyyy-MM-dd"
+
+        
+        currentdate = currentdateformatter.string(from: date)
 
         // Do any additional setup after loading the view.
+    }
+    
+    func createDatePicer(forField field : UITextField) {
+        let datetoolbar = UIToolbar()
+        datetoolbar.sizeToFit()
+        
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        datetoolbar.setItems([done], animated: false)
+        
+        field.inputAccessoryView = datetoolbar
+        field.inputView = picker
+        
+    }
+    
+    @objc func donePressed() {
+        
+        //Start date
+        if activeTextfield == Start_date {
+            let startdateformatter = DateFormatter()
+            startdateformatter.dateFormat = "yyyy-MM-dd"
+      
+            let startdateString = startdateformatter.string(from: picker.date)
+            
+            startdate = startdateString
+            
+            if startdate < currentdate {
+                createAlert(title: "Invalid date", message: "Start date can't be before today.", name: "Start date")
+            }
+            Start_date.text = "\(startdateString)"
+        }
+        
+        // End date
+        if activeTextfield == End_date {
+            let enddateformatter = DateFormatter()
+            enddateformatter.dateFormat = "yyyy-MM-dd"
+
+            let enddateString = enddateformatter.string(from: picker.date)
+            
+            enddate = enddateString
+            
+            if enddate < startdate {
+                createAlert(title: "Invalid date", message: "End date can't be before start date", name: "End date")
+            } else {
+                 End_date.text = "\(enddateString)"
+            }
+        }
+        
+        self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -175,6 +244,14 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
         let cancelAction = UIAlertAction(title: "OK", style: .cancel) {
             (action) in if name == "Name" {
                 self.Name.becomeFirstResponder()
+            } else {
+                if name == "End date" {
+                    self.End_date.becomeFirstResponder()
+                } else {
+                    if name == "Start date" {
+                        self.Start_date.becomeFirstResponder()
+                    }
+                }
             }
             
         }

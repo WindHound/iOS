@@ -175,7 +175,7 @@ class Add_Race: UIViewController {
     }
     
     
-    @IBAction func unwindToAddEvent(segue:UIStoryboardSegue) { }
+    @IBAction func unwindToAddRace(segue:UIStoryboardSegue) { }
 
     
     
