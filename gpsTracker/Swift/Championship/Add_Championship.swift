@@ -36,6 +36,8 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        picker.datePickerMode = UIDatePickerMode.date
+        
         Name.delegate = self
         Start_date.delegate = self
         End_date.delegate = self
@@ -98,6 +100,7 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
             
             enddate = enddateString
             
+          
             if enddate < startdate {
                 createAlert(title: "Invalid date", message: "End date can't be before start date", name: "End date")
             } else {
@@ -201,6 +204,7 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
         if destination == "To Existing Event" {
             let secondViewController = segue.destination as! Existing_events
         
+            secondViewController.fromwhere = "Add Championship"
             secondViewController.Already_added = self.Selected_Events
         }
         

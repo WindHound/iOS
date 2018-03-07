@@ -16,6 +16,8 @@ class Existing_events: UITableViewController {
     
     var Already_added : NSMutableArray = []
     
+    var fromwhere : String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -105,7 +107,12 @@ class Existing_events: UITableViewController {
     }
     
     @IBAction func add_button() {
-        performSegue(withIdentifier: "Back To Add Champ", sender: self)
+        if fromwhere == "Add Championship" {
+            performSegue(withIdentifier: "Back To Add Champ", sender: self)
+        }
+        if fromwhere == "Add Race" {
+            performSegue(withIdentifier: "Back To Add Race", sender: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -113,6 +120,12 @@ class Existing_events: UITableViewController {
         
         if destination == "Back To Add Champ" {
             let secondViewController = segue.destination as! Add_Championship
+            secondViewController.Selected_Events.addObjects(from: self.Selected_Events as! [Any])
+            secondViewController.Selected_Events_Table.reloadData()
+        }
+        
+        if destination == "Back To Add Race" {
+            let secondViewController = segue.destination as! Add_Race
             secondViewController.Selected_Events.addObjects(from: self.Selected_Events as! [Any])
             secondViewController.Selected_Events_Table.reloadData()
         }

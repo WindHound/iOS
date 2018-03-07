@@ -36,6 +36,8 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        picker.datePickerMode = UIDatePickerMode.date
         
         Name.delegate = self
         Start_date.delegate = self
@@ -179,7 +181,6 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
                     createAlert(title: "Denied", message: "You can not delete this championship", name: "Error")
                 } else {
                     Selected_Championships.removeObject(at: indexPath.row)
-                    tableView.reloadData()
                 }
             }
             
@@ -226,6 +227,17 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
         if destination == "To Existing Champ" {
             let secondViewController = segue.destination as! Existing_Championship
             secondViewController.Already_added = Selected_Championships
+        }
+        
+        if destination == "To Add Race" {
+            let secondViewController = segue.destination as! Add_Race
+            secondViewController.fromwhere = "Add Event"
+            secondViewController.Selected_Events.add(Name.text as Any)
+            
+            if Selected_Admins.count != 0 {
+                secondViewController.Selected_Admins.addObjects(from: self.Selected_Admins as! [Any])
+            }
+            
         }
     }
     

@@ -56,6 +56,11 @@ class Existing_Admins: UITableViewController {
         if fromwhere == "Add Event" {
             performSegue(withIdentifier: "Back To Add Event", sender: self)
         }
+        
+        if fromwhere == "Add Race" {
+            performSegue(withIdentifier: "Back To Add Race", sender: self)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -127,6 +132,12 @@ class Existing_Admins: UITableViewController {
         
         if destination == "Back To Add Event" {
             let secondViewController = segue.destination as! Add_Event
+            secondViewController.Selected_Admins.addObjects(from: self.Selected_Admins as! [Any])
+            secondViewController.Selected_Admins_Table.reloadData()
+        }
+        
+        if destination == "Back To Add Race" {
+            let secondViewController = segue.destination as! Add_Race
             secondViewController.Selected_Admins.addObjects(from: self.Selected_Admins as! [Any])
             secondViewController.Selected_Admins_Table.reloadData()
         }

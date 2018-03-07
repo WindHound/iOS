@@ -129,6 +129,13 @@ class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
                 secondViewController.UpOrHis = "History"
             }
         }
+        
+        if destination == "To Add Race" {
+            let secondViewController = segue.destination as! Add_Race
+            
+            secondViewController.fromwhere = "Race"
+            
+        }
     }
     
     @IBAction func unwindToRaceList(segue:UIStoryboardSegue) { }

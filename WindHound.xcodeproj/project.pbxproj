@@ -336,9 +336,9 @@
 			isa = PBXGroup;
 			children = (
 				557F41622007E8DF0087239B /* AppDelegate.swift */,
-				55686E26204C3A4E00D86201 /* Race */,
 				55686E25204C3A1F00D86201 /* Championship */,
 				55686E24204C3A0D00D86201 /* Event */,
+				55686E26204C3A4E00D86201 /* Race */,
 				5512CCE1203B893500B17951 /* Profile_page.swift */,
 				550833172035B8430007EC08 /* Select_page.swift */,
 				550B2E8F20174AAE0027127F /* log_in.swift */,

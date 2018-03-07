@@ -8,26 +8,32 @@
 
 import UIKit
 
-class Add_Race: UIViewController {
+class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet weak var textTitle: UITextField!
-    
     @IBOutlet weak var textLocation: UITextField!
-    
     @IBOutlet weak var textStartdate: UITextField!
-    
     @IBOutlet weak var textEnddate: UITextField!
-    
-    @IBOutlet weak var textInvitees: UITextField!
     
     var latitude : Double!
     var longitude : Double!
     
     var activeTextField : UITextField!
     
-    var initialdate : String!
+    var starttime : String = ""
+    var endtime : String = ""
+    var currenttime : String = ""
     
-    var invitees : [String] = []
+    var fromwhere : String = ""
+    
+    var Selected_Events : NSMutableArray = []
+    var Selected_Admins : NSMutableArray = []
+    var Selected_Boats : NSMutableArray = []
+    
+    @IBOutlet weak var Selected_Admins_Table: UITableView!
+    @IBOutlet weak var Selected_Events_Table: UITableView!
+    @IBOutlet weak var Selected_Boats_Table: UITableView!
+    
     
     @IBOutlet weak var add_button: UIBarButtonItem!
     
@@ -39,7 +45,8 @@ class Add_Race: UIViewController {
         
         textTitle.delegate = self
         textLocation.delegate = self
-        textInvitees.delegate = self
+        textStartdate.delegate = self
+        textEnddate.delegate = self
         add_button.isEnabled = false
         
         // To repond when user presses date text fields
@@ -49,117 +56,107 @@ class Add_Race: UIViewController {
         // Initial start date when view is loaded
         let date = Date()
         
-        let startformatter = DateFormatter()
-        startformatter.dateStyle = .medium
-        startformatter.timeStyle = .short
+        let currentdateformatter = DateFormatter()
+        currentdateformatter.dateFormat = "yyyy-MM-dd HH:mm"
         
-        textStartdate.text = "\(startformatter.string(from:date))"
-        
-        startformatter.timeStyle = .none
-        
-        initialdate = startformatter.string(from:date)
-        
-        // Initial end date when view is loaded
-        let calendar = Calendar.current
-        
-        let hour = (calendar.component(.hour, from: date) + 1)
-        let minute = calendar.component(.minute, from: date)
-        
-        textEnddate.text = "\(hour):\(minute)"
-        
-        // Initial invitees text field text
-        textInvitees.text = "None"
-        
+        currenttime = currentdateformatter.string(from: date)
+
+        print(currenttime)
         
     }
     
-    // Below functions are for assigning current active text field
-    @IBAction func textStart_touched(_ sender: Any) {
-        activeTextField = textStartdate
-    }
     
-    
-    @IBAction func textEnd_touched(_ sender: Any) {
-        activeTextField = textEnddate
-    }
-    
-    @IBAction func textLocation_touched(_ sender: Any) {
-        activeTextField = textLocation
-    }
-    
-    
-    @IBAction func textInvitees_touched(_ sender: Any) {
-        activeTextField = textInvitees
-    }
-    
-    // Function to display differnet view controller when the location text field is pressed
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
-        if activeTextField == textLocation {
-            performSegue(withIdentifier: "location_clicked", sender: self)
-            return false
-        } else if activeTextField == textInvitees{
-           performSegue(withIdentifier: "invitees_clicked", sender: self)
-            return false
-        } else {
-            return true
-        }
-    }
-    
-    
-    // Function to create date picker
+    //Function to create date picker
     func createDatePicker(forField field : UITextField) {
         // toolbar
         let datetoolbar = UIToolbar()
         datetoolbar.sizeToFit()
-        
+
         // done button for toolbar
         let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
         datetoolbar.setItems([done], animated: false)
-        
+
         field.inputAccessoryView = datetoolbar
         field.inputView =  picker
-        
-        
+
+
     }
     
     @objc func donePressed() {
         // format date
-        
+
         // Start date
         if activeTextField == textStartdate {
             let startdateformatter = DateFormatter()
-            startdateformatter.dateStyle = .medium
-            startdateformatter.timeStyle = .short
+            startdateformatter.dateFormat = "yyyy-MM-dd HH:mm"
             let startdateString = startdateformatter.string(from: picker.date)
+
+            starttime = startdateString
             
-            textStartdate.text = "\(startdateString)"
-            
-            startdateformatter.timeStyle = .none
-            
-            initialdate = startdateformatter.string(from: picker.date)
-            
+            if starttime < currenttime {
+                createAlert(title: "Invalid date", message: "Start date can't be before today", name: "Start date")
+            } else {
+                textStartdate.text = "\(startdateString)"
+            }
         }
-        
-        
+
+
         //End date
         if activeTextField == textEnddate {
             let enddateformatter = DateFormatter()
-            enddateformatter.dateStyle = .medium
-            enddateformatter.timeStyle = .none
-            let comparedateString = enddateformatter.string(from: picker.date)
+            enddateformatter.dateFormat = "yyyy-MM-dd HH:mm"
             
-            if comparedateString == initialdate {
-                enddateformatter.dateStyle = .none
-            }
-            enddateformatter.timeStyle = .short
             let enddateString = enddateformatter.string(from: picker.date)
             
-            textEnddate.text = "\(enddateString)"
+            endtime = enddateString
+            
+            if endtime < starttime {
+                createAlert(title: "Invalid date", message: "End date can't be before start date" , name: "End date")
+            } else {
+                textEnddate.text = "\(enddateString)"
+            }
         }
         
         self.view.endEditing(true)
+
+    }
+    
+    func createAlert(title:String, message:String, name: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel) {
+            (action) in if name == "Name" {
+                self.textTitle.becomeFirstResponder()
+            } else {
+                if name == "End date" {
+                    self.textEnddate.becomeFirstResponder()
+                } else {
+                    if name == "Start date" {
+                        self.textStartdate.becomeFirstResponder()
+                    }
+                }
+            }
+            
+        }
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+        // Reference purpose
+        //        let openAction = UIAlertAction(title: "Open Settings", style: .default) {(action) in
+        //            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+        //                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        //            }
+        //        }
+    }
+    
+    @IBAction func Cancel_Button_Pressed(_ sender: Any) {
+        if fromwhere == "Race" {
+            performSegue(withIdentifier: "Back To Race", sender: self)
+        }
+        if fromwhere == "Add Event" {
+            performSegue(withIdentifier: "Back To Add Event", sender: self)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -174,6 +171,120 @@ class Add_Race: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == Selected_Admins_Table {
+            return Selected_Admins.count
+        }
+        if tableView == Selected_Events_Table {
+            return Selected_Events.count
+        }
+        return Selected_Boats.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView == Selected_Admins_Table {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Admins", for: indexPath)
+            
+            cell.textLabel?.text = Selected_Admins.object(at: indexPath.row) as? String
+            
+            return cell
+        }
+        if tableView == Selected_Events_Table {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Events", for: indexPath)
+            
+            cell.textLabel?.text = Selected_Events.object(at: indexPath.row) as? String
+            
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Boats", for: indexPath)
+        
+        cell.textLabel?.text = Selected_Boats.object(at: indexPath.row) as? String
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.identifier
+        
+        if destination == "To Existing Admins" {
+            let secondViewController = segue.destination as! Existing_Admins
+            
+            secondViewController.Already_added = self.Selected_Admins
+            
+            secondViewController.fromwhere = "Add Race"
+        }
+        
+        if destination == "To Existing Events" {
+            let secondViewController = segue.destination as! Existing_events
+            
+            secondViewController.Already_added = self.Selected_Events
+            secondViewController.fromwhere = "Add Race"
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+        if textField == textTitle {
+            add_button.isEnabled = false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == textTitle {
+            if textTitle.text != "" {
+                add_button.isEnabled = true
+            } else {
+                add_button.isEnabled = false
+            }
+        }
+    }
+    
+    // Function to display differnet view controller when the location text field is pressed
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        if textField == textLocation {
+            performSegue(withIdentifier: "location_clicked", sender: self)
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            if tableView == Selected_Events_Table {
+                if (indexPath.row == 0) {
+                    createAlert(title: "Denied", message: "You can not delete this event", name: "Error")
+                } else {
+                    Selected_Events.removeObject(at: indexPath.row)
+                }
+            }
+            
+            if tableView == Selected_Admins_Table {
+                Selected_Admins.removeObject(at: indexPath.row)
+            }
+            
+            if tableView == Selected_Boats_Table {
+                Selected_Boats.removeObject(at: indexPath.row)
+            }
+            
+            tableView.reloadData()
+        }
+    }
     
     @IBAction func unwindToAddRace(segue:UIStoryboardSegue) { }
 
@@ -190,12 +301,4 @@ class Add_Race: UIViewController {
     }
     */
 
-}
-
-
-extension Add_Race : UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
 }
