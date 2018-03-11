@@ -1,20 +1,22 @@
 //
-//  Select_page.swift
-//  gpsTracker
+//  Related_Boats.swift
+//  WindHound
 //
-//  Created by David Shin on 15/02/2018.
-//  Copyright © 2018 David Shin. All rights reserved.
+//  Created by 신종훈 on 10/03/2018.
+//  Copyright © 2018 신종훈. All rights reserved.
 //
 
 import UIKit
 
-class Select_page: UIViewController {
+class Related_Boats: UIViewController {
+
+    @IBOutlet weak var toolbar: UIToolbar!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
-//        CGRect      buttonFrame = button.frame;
-//        buttonFrame.size = CGSizeMake(150, 70);
+        toolbar.clipsToBounds = true
+
+        super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
@@ -23,8 +25,6 @@ class Select_page: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func unwindToCategoryList(segue:UIStoryboardSegue) { }
     
 
     /*

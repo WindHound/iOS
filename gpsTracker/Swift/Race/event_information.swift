@@ -16,6 +16,8 @@ class event_information: UIViewController {
     @IBOutlet weak var Edit_button: UIBarButtonItem!
     @IBOutlet weak var Mutipurpose_button: UIBarButtonItem!
     
+    @IBOutlet weak var Boat_Label: UILabel!
+    
     var UpOrHis = ""
     var fromwhere = ""
     
@@ -31,6 +33,7 @@ class event_information: UIViewController {
             Edit_button.isEnabled = false
             Edit_button.tintColor = UIColor.clear
             Mutipurpose_button.title = "Replay"
+            Boat_Label.text = "Recorded Boat"
         }
 
         // Do any additional setup after loading the view.

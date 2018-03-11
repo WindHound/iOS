@@ -14,6 +14,7 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     @IBOutlet weak var textLocation: UITextField!
     @IBOutlet weak var textStartdate: UITextField!
     @IBOutlet weak var textEnddate: UITextField!
+    @IBOutlet weak var textRace: UITextField!
     
     var latitude : Double!
     var longitude : Double!
@@ -47,7 +48,12 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         textLocation.delegate = self
         textStartdate.delegate = self
         textEnddate.delegate = self
+        textRace.delegate = self
         add_button.isEnabled = false
+        
+        if Selected_Boats.count != 0 {
+            textRace.text = "\(Selected_Boats.count)"
+        }
         
         // To repond when user presses date text fields
         createDatePicker(forField: textStartdate)
@@ -141,13 +147,7 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
-        
-        // Reference purpose
-        //        let openAction = UIAlertAction(title: "Open Settings", style: .default) {(action) in
-        //            if let url = URL(string: UIApplicationOpenSettingsURLString) {
-        //                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        //            }
-        //        }
+    
     }
     
     @IBAction func Cancel_Button_Pressed(_ sender: Any) {
@@ -229,6 +229,12 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
             secondViewController.Already_added = self.Selected_Events
             secondViewController.fromwhere = "Add Race"
         }
+        
+        if destination == "To Add Boat" {
+            let secondViewController = segue.destination as! Add_Boat
+            
+            secondViewController.Added_Boats = self.Selected_Boats
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -258,6 +264,9 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         
         if textField == textLocation {
             performSegue(withIdentifier: "location_clicked", sender: self)
+            return false
+        } else if textField == textRace {
+            performSegue(withIdentifier: "To Add Boat", sender: self)
             return false
         } else {
             return true

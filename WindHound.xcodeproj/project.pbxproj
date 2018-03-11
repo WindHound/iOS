@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5011C7D4ABB4948DA5ED2A1E /* Pods_gpsTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D50E1CB167872A24CD9BA8 /* Pods_gpsTracker.framework */; };
-		550833182035B8430007EC08 /* Select_page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550833172035B8430007EC08 /* Select_page.swift */; };
 		550A67B4202F916400AE1019 /* sailing_icon_20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 550A67A0202F916200AE1019 /* sailing_icon_20x20.png */; };
 		550A67B5202F916400AE1019 /* sailing_icon_180x180.png in Resources */ = {isa = PBXBuildFile; fileRef = 550A67A1202F916200AE1019 /* sailing_icon_180x180.png */; };
 		550A67B6202F916400AE1019 /* sailing_icon_240x240.png in Resources */ = {isa = PBXBuildFile; fileRef = 550A67A2202F916200AE1019 /* sailing_icon_240x240.png */; };
@@ -50,7 +49,6 @@
 		550AEE2C201653C700C0A986 /* MainApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550AEE2B201653C700C0A986 /* MainApp.storyboard */; };
 		550B1D4A2020845900213E81 /* set_location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B1D492020845900213E81 /* set_location.swift */; };
 		550B2E9020174AAE0027127F /* log_in.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B2E8F20174AAE0027127F /* log_in.swift */; };
-		550BBF9220266ABA0075AC79 /* added_invitees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550BBF9120266ABA0075AC79 /* added_invitees.swift */; };
 		550FDD2E203B0D6B00999C8A /* championship_20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 550FDD2B203B0D6A00999C8A /* championship_20x20.png */; };
 		550FDD2F203B0D6B00999C8A /* championship_60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 550FDD2C203B0D6A00999C8A /* championship_60x60.png */; };
 		550FDD30203B0D6B00999C8A /* championship_40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 550FDD2D203B0D6B00999C8A /* championship_40x40.png */; };
@@ -78,6 +76,8 @@
 		5559739520161FFF00CAEBDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5559739420161FFF00CAEBDC /* Assets.xcassets */; };
 		55686E20204AFA1E00D86201 /* Add_Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55686E1F204AFA1E00D86201 /* Add_Event.swift */; };
 		55686E22204C396900D86201 /* Existing_Championship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55686E21204C396900D86201 /* Existing_Championship.swift */; };
+		556BDED220547C6400822130 /* Related_Boats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BDED120547C6400822130 /* Related_Boats.swift */; };
+		556BDED5205481A400822130 /* Add_Boat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BDED4205481A400822130 /* Add_Boat.swift */; };
 		557F41632007E8DF0087239B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41622007E8DF0087239B /* AppDelegate.swift */; };
 		557F41652007E8DF0087239B /* GpsAndSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41642007E8DF0087239B /* GpsAndSensor.swift */; };
 		557F416D2007E8DF0087239B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 557F416B2007E8DF0087239B /* LaunchScreen.storyboard */; };
@@ -86,7 +86,6 @@
 
 /* Begin PBXFileReference section */
 		52D50E1CB167872A24CD9BA8 /* Pods_gpsTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gpsTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		550833172035B8430007EC08 /* Select_page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Select_page.swift; sourceTree = "<group>"; };
 		550A67A0202F916200AE1019 /* sailing_icon_20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sailing_icon_20x20.png; sourceTree = "<group>"; };
 		550A67A1202F916200AE1019 /* sailing_icon_180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sailing_icon_180x180.png; sourceTree = "<group>"; };
 		550A67A2202F916200AE1019 /* sailing_icon_240x240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sailing_icon_240x240.png; sourceTree = "<group>"; };
@@ -128,7 +127,6 @@
 		550AEE2B201653C700C0A986 /* MainApp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainApp.storyboard; sourceTree = "<group>"; };
 		550B1D492020845900213E81 /* set_location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = set_location.swift; sourceTree = "<group>"; };
 		550B2E8F20174AAE0027127F /* log_in.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = log_in.swift; sourceTree = "<group>"; };
-		550BBF9120266ABA0075AC79 /* added_invitees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = added_invitees.swift; sourceTree = "<group>"; };
 		550FDD2B203B0D6A00999C8A /* championship_20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = championship_20x20.png; sourceTree = "<group>"; };
 		550FDD2C203B0D6A00999C8A /* championship_60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = championship_60x60.png; sourceTree = "<group>"; };
 		550FDD2D203B0D6B00999C8A /* championship_40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = championship_40x40.png; sourceTree = "<group>"; };
@@ -157,6 +155,8 @@
 		5559739420161FFF00CAEBDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../xamarin/sailGPS/sailGPS/Assets.xcassets; sourceTree = "<group>"; };
 		55686E1F204AFA1E00D86201 /* Add_Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_Event.swift; sourceTree = "<group>"; };
 		55686E21204C396900D86201 /* Existing_Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_Championship.swift; sourceTree = "<group>"; };
+		556BDED120547C6400822130 /* Related_Boats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Related_Boats.swift; sourceTree = "<group>"; };
+		556BDED4205481A400822130 /* Add_Boat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_Boat.swift; sourceTree = "<group>"; };
 		557F415F2007E8DF0087239B /* WindHound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WindHound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		557F41622007E8DF0087239B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		557F41642007E8DF0087239B /* GpsAndSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GpsAndSensor.swift; sourceTree = "<group>"; };
@@ -339,11 +339,9 @@
 				55686E25204C3A1F00D86201 /* Championship */,
 				55686E24204C3A0D00D86201 /* Event */,
 				55686E26204C3A4E00D86201 /* Race */,
-				5512CCE1203B893500B17951 /* Profile_page.swift */,
-				550833172035B8430007EC08 /* Select_page.swift */,
+				556BDED320547C8300822130 /* Racing */,
 				550B2E8F20174AAE0027127F /* log_in.swift */,
-				557F41642007E8DF0087239B /* GpsAndSensor.swift */,
-				550BBF9120266ABA0075AC79 /* added_invitees.swift */,
+				5512CCE1203B893500B17951 /* Profile_page.swift */,
 				553FD979204D6BBE00198BC5 /* Existing_Admins.swift */,
 			);
 			path = Swift;
@@ -380,8 +378,18 @@
 				552CF83F201FD5F700620C29 /* Add_Race.swift */,
 				550B1D492020845900213E81 /* set_location.swift */,
 				5528653F2022282E007D4707 /* LocationSearchTable.swift */,
+				556BDED4205481A400822130 /* Add_Boat.swift */,
 			);
 			path = Race;
+			sourceTree = "<group>";
+		};
+		556BDED320547C8300822130 /* Racing */ = {
+			isa = PBXGroup;
+			children = (
+				556BDED120547C6400822130 /* Related_Boats.swift */,
+				557F41642007E8DF0087239B /* GpsAndSensor.swift */,
+			);
+			path = Racing;
 			sourceTree = "<group>";
 		};
 		557F41562007E8DF0087239B = {
@@ -605,9 +613,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				55C34D50204F0F4B001F9389 /* Existing_Races.swift in Sources */,
+				556BDED220547C6400822130 /* Related_Boats.swift in Sources */,
 				552865402022282E007D4707 /* LocationSearchTable.swift in Sources */,
 				55548A142019444B00FC7E23 /* Championship.swift in Sources */,
-				550833182035B8430007EC08 /* Select_page.swift in Sources */,
 				55686E22204C396900D86201 /* Existing_Championship.swift in Sources */,
 				5512CCE2203B893500B17951 /* Profile_page.swift in Sources */,
 				550B1D4A2020845900213E81 /* set_location.swift in Sources */,
@@ -621,10 +629,10 @@
 				5552C9512041AE0000598669 /* Event_list.swift in Sources */,
 				552CF840201FD5F700620C29 /* Add_Race.swift in Sources */,
 				554FCA0C2045C942009B0EE2 /* Add_Championship.swift in Sources */,
+				556BDED5205481A400822130 /* Add_Boat.swift in Sources */,
 				55686E20204AFA1E00D86201 /* Add_Event.swift in Sources */,
 				557F41632007E8DF0087239B /* AppDelegate.swift in Sources */,
 				5552C9532041AE1800598669 /* Race_list.swift in Sources */,
-				550BBF9220266ABA0075AC79 /* added_invitees.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -52,7 +52,24 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
         history_table.delegate = His
         history_table.dataSource = His
         
-        // Do any additional setup after loading the view.
+//        let jsonUrlString = "http://192.168.43.7:8080/structure/get/event/0"
+//
+//        guard let url = URL(string: jsonUrlString) else {
+//            return
+//        }
+//
+//        URLSession.shared.dataTask(with: url) { (data, response, err) in
+//
+//            guard let data = data else {return}
+//
+//            let dataAsString = String(data: data, encoding: .utf8)
+//
+//            print("I'm here")
+//            print(dataAsString)
+//            print("Now I'm here")
+//            }.resume()
+//
+//        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -105,6 +122,8 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
         
         return 50
     }
+    
+    
     
     internal func UpTo(datasource: Any) {
         performSegue(withIdentifier: "Up_To_Race", sender: self)
