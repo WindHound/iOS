@@ -8,7 +8,7 @@
 
 import UIKit
 
-class event_information: UIViewController {
+class event_information: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var raceTitle: UILabel!
@@ -17,6 +17,10 @@ class event_information: UIViewController {
     @IBOutlet weak var Mutipurpose_button: UIBarButtonItem!
     
     @IBOutlet weak var Boat_Label: UILabel!
+    
+    @IBOutlet weak var Boat: UITextField!
+    
+    var Chosen_Boat : String = ""
     
     var UpOrHis = ""
     var fromwhere = ""
@@ -29,11 +33,14 @@ class event_information: UIViewController {
         print(fromwhere)
         print(UpOrHis)
         
+        Boat.delegate = self
+        
         if UpOrHis == "History" {
             Edit_button.isEnabled = false
             Edit_button.tintColor = UIColor.clear
             Mutipurpose_button.title = "Replay"
             Boat_Label.text = "Recorded Boat"
+            Boat.isUserInteractionEnabled = false
         }
 
         // Do any additional setup after loading the view.
@@ -62,6 +69,15 @@ class event_information: UIViewController {
         
         if fromwhere == "Race" {
             self.performSegue(withIdentifier: "Back To Race", sender: self)
+        }
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == Boat {
+            performSegue(withIdentifier: "To Related Boat", sender: self)
+            return false
+        } else {
+            return true
         }
     }
     
