@@ -12,6 +12,13 @@ class NewRaceViewController: UIViewController
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
     
+    private var race: Race?
+    
+    private let locationManager = LocationManager.shared
+    private var seconds = 0
+    private var timer: Timer?
+    private var distance = Measurement(value: 0, unit: UnitLength.meters)
+    private var locationList: [CLLocation] = []
     
     override func viewDidLoad()
     {
@@ -57,13 +64,6 @@ class NewRaceViewController: UIViewController
         present(alertController, animated: true)
     }
     
-    private var race: Race?
-    
-    private let locationManager = LocationManager.shared
-    private var seconds = 0
-    private var timer: Timer?
-    private var distance = Measurement(value: 0, unit: UnitLength.meters)
-    private var locationList: [CLLocation] = []
     
     //Start Race
     private func startRace()

@@ -4,15 +4,14 @@ import CoreLocation
 
 class RaceDetailsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate
 {
-
     @IBOutlet weak var distanceLabel: UILabel!
-//  @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
     
+    var race: Race!
     
-    //Map
+//Map
         @IBOutlet weak var mapView: MKMapView!
  /*
         //Starting Position - DEMO - SHOULD BE FIRST GPS LOCATION
@@ -50,7 +49,7 @@ class RaceDetailsViewController: UIViewController, UICollectionViewDataSource, U
         {
             super.viewDidLoad()
             //Initialise map
-          //  centerMapOnLocation(location: initialLocation)
+            //centerMapOnLocation(location: initialLocation)
             configureView()
             // Do any additional setup after loading the view, typically from a nib.
         }
@@ -85,11 +84,7 @@ class RaceDetailsViewController: UIViewController, UICollectionViewDataSource, U
             return cell
         }
     
-    //Race Replay
-    
-    var race: Race!
-
-    
+//Race Replay
     private func configureView()
     {
         let distance = Measurement(value: race.distance, unit: UnitLength.meters)
