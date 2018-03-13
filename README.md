@@ -47,7 +47,7 @@ Function defs and variables are lower camel case; Classes and Extensions are upp
 
 Please use width 4 soft tabs and adhere to the NASA SOFTWARE ENGINEERING LABORATORY SERIES SEL-94-003 C STYLE GUIDE (http://homepages.inf.ed.ac.uk/dts/pm/Papers/nasa-c-style.pdf). Something like this:
 
-``` 
+```swift
 let totalFooBar = 3.25
 
 func greetPerson(person: String) -> String
