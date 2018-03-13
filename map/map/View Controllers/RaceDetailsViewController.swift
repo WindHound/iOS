@@ -108,7 +108,8 @@ class RaceDetailsViewController: UIViewController, UICollectionViewDataSource, U
         loadMap()
     }
     
-    private func mapRegion() -> MKCoordinateRegion? {
+    private func mapRegion() -> MKCoordinateRegion?
+    {
         guard
             let locations = race.locations,
             locations.count > 0

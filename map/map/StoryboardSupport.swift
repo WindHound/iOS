@@ -1,17 +1,22 @@
 import UIKit
 
-protocol StoryboardIdentifiable {
+protocol StoryboardIdentifiable
+{
     static var storyboardIdentifier: String { get }
 }
 
-extension StoryboardIdentifiable where Self: UIViewController {
-    static var storyboardIdentifier: String {
+extension StoryboardIdentifiable where Self: UIViewController
+{
+    static var storyboardIdentifier: String
+    {
         return String(describing: self)
     }
 }
 
-extension StoryboardIdentifiable where Self: UITableViewCell {
-    static var storyboardIdentifier: String {
+extension StoryboardIdentifiable where Self: UITableViewCell
+{
+    static var storyboardIdentifier: String
+    {
         return String(describing: self)
     }
 }
