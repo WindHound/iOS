@@ -108,5 +108,5 @@ Storyboard constraints - Auto Layout
 ```  
 Nice to have:
 ```
-UI
+Consistent UI across platforms
 ```
