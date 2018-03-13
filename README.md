@@ -8,6 +8,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## The Vision
 
+This is what we have planed for the second release of our app ![](https://cdn.rawgit.com/jongracecox/anybadge/master/examples/awesomeness.svg)
+
+<a href="https://media.giphy.com/media/1irfUpkCCMLrnYUji8/giphy.gif"><img src ="https://media.giphy.com/media/1irfUpkCCMLrnYUji8/giphy.gif" title="iOS Demo Gif"/></a>
 ![](https://media.giphy.com/media/1irfUpkCCMLrnYUji8/giphy.gif)
 
 ### Prerequisites
