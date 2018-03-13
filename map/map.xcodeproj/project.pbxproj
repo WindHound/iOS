@@ -81,7 +81,6 @@
 				94ADDCC620534470004F3270 /* View Controllers */,
 				94ADDCC8205344CE004F3270 /* CoreData */,
 				94ADDC8220527111004F3270 /* Assets.xcassets */,
-				94ADDCC3205326FB004F3270 /* StoryboardSupport.swift */,
 				94ADDCC52053444C004F3270 /* Supporting Files */,
 			);
 			path = map;
@@ -95,6 +94,7 @@
 				94ADDCC920534563004F3270 /* MulticolorPolyline.swift */,
 				94A5229420545F0000D591E3 /* UnitExtensions.swift */,
 				94A5229620545F4A00D591E3 /* FormatDisplay.swift */,
+				94ADDCC3205326FB004F3270 /* StoryboardSupport.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";

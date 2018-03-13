@@ -76,7 +76,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ry3-Iv-ymt">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                         <subviews>
-                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ydB-Jl-OBV">
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ydB-Jl-OBV">
                                                 <rect key="frame" x="0.0" y="1" width="375" height="400"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="400" id="VKS-id-MgT"/>

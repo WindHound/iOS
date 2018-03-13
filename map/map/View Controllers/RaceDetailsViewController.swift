@@ -1,5 +1,6 @@
 import UIKit
 import MapKit
+import CoreLocation
 
 class RaceDetailsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate
 {
@@ -104,7 +105,7 @@ class RaceDetailsViewController: UIViewController, UICollectionViewDataSource, U
         dateLabel.text = formattedDate
         timeLabel.text = "Time:  \(formattedTime)"
         speedLabel.text = "Speed:  \(formattedSpeed)"
-        
+
         loadMap()
     }
     
@@ -171,6 +172,7 @@ class RaceDetailsViewController: UIViewController, UICollectionViewDataSource, U
             }
         
         mapView.setRegion(region, animated: true)
+        mapView.mapType = MKMapType.satellite
         mapView.add(polyLine())
     }
     
