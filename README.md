@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 This is what we have planed for the second release of our app ![](https://cdn.rawgit.com/jongracecox/anybadge/master/examples/awesomeness.svg)
 
 <p align="center">
-<img align="center" src="iOS Map Demo.gif" width="100%" alt="API Giphy logo"/>
+<img align="center" src="https://media.giphy.com/media/1irfUpkCCMLrnYUji8/giphy.gif" width="100%" alt="iOS Map Demo"/>
 </p>
 
 <a href="https://media.giphy.com/media/1irfUpkCCMLrnYUji8/giphy.gif"><img src ="https://media.giphy.com/media/1irfUpkCCMLrnYUji8/giphy.gif" title="iOS Demo Gif"/></a>
