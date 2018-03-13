@@ -67,8 +67,10 @@ The device type is set to Universal. Before we deploy, we need to integrate it
 
 ## Built With
 
-* LLVM LTO (FINAL RELEASE)
-* LLVM VECTORIZATION (FINAL RELEASE)
+```
+LLVM LTO (FINAL RELEASE)
+LLVM VECTORIZATION (FINAL RELEASE)
+```
 
 ## Contributing
 
