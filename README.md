@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-To download
+To download (http://blog.osteele.com/2008/05/my-git-workflow/)
 
 ```
 $ cd dir
