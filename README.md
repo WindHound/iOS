@@ -86,7 +86,12 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Future Work
 
-* Issues:       MKPolyline not always rendering  
-*               Map resize and drag on smaller devices  
-*  
-* Nice to have: UI  
+Issues:
+```
+MKPolyline not always rendering  
+Map resize and drag on smaller devices  
+```  
+Nice to have:
+```
+UI
+```
