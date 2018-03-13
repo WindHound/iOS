@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## The Vision
 
-![Alt Text](https://media.giphy.com/media/1irfUpkCCMLrnYUji8/giphy.gif)
+![](https://media.giphy.com/media/1irfUpkCCMLrnYUji8/giphy.gif)
 
 ### Prerequisites
 
