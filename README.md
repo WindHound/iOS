@@ -22,12 +22,12 @@ Xcode 9.2 (9C40b)
 Command line tools for Xcode 9.2
 ```
 
-Might work on older Xcode but since Swift 4 is required 9.0 is the oldest supported version
+Should work on older Xcode but since Swift 4 is required 9.0 is the oldest supported version (I used 4.1; some features might not be supported in Swift 4 although this is unlikely)
 
 
 ### iOS Version
 
-The code was tested on iPhone 6 and newer with iOS (10, 10.3.1 and 11.1) 
+The code was tested on iPhone 6 and newer with 3 iOS versions 
 
 ```
 iOS 10.0
@@ -37,22 +37,26 @@ iOS 11.1
 
 ### Coding style
 
-Try and have max 100 characters per line. Makes it easier to work with the Assistant editor
+Try and have max 100 characters per line. Makes it easier to work with the Assistant editor. You can set a vertical guide at
 
 ```
 Preferences > Text Editing > Page guide at column: 100
 ```
 
-Function defs are lower camel case; Classes and Extensions are upper camel case
+Function defs and variables are lower camel case; Classes and Extensions are upper camel case
 
 Please use width 4 soft tabs and adhere to the NASA SOFTWARE ENGINEERING LABORATORY SERIES SEL-94-003 C STYLE GUIDE (http://homepages.inf.ed.ac.uk/dts/pm/Papers/nasa-c-style.pdf). Something like this:
 
 ``` 
-int total;
-int func1(void)
+let totalFooBar = 3.25
+
+func greetPerson(person: String) -> String
 {
-float total;
+    let greeting = "Hello, " + person + "!"
+    return greeting
 }
+
+print(greet(person: "Anna"))
 ```
 
 ## Deployment
@@ -91,7 +95,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 Issues:
 ```
 MKPolyline not always rendering  
-Map resize and drag on smaller devices  
+Map resize and drag on smaller devices
+Storyboard constraints - Auto Layout
 ```  
 Nice to have:
 ```
