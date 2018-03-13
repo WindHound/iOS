@@ -6,6 +6,10 @@ Map page for iOS app
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+## The Vision
+
+![Alt Text](https://media.giphy.com/media/1irfUpkCCMLrnYUji8/giphy.gif)
+
 ### Prerequisites
 
 To download (http://blog.osteele.com/2008/05/my-git-workflow/)
