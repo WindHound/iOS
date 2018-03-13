@@ -1,7 +1,5 @@
 # iOS Map  
   
-# Project Title
-
 Map page for iOS app
 
 ## Getting Started
