@@ -8,14 +8,24 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-You will need to use
+To download
+
+```
+$ cd dir
+$ git pull origin
+```
+
+You will also need to use
 
 ```
 Xcode 9.2 (9C40b)
-Command line tools
+Command line tools for Xcode 9.2
 ```
 
-### Installing
+Might work on older Xcode but since Swift 4 is required 9.0 is the oldest supported version
+
+
+### iOS Version
 
 The code was tested on iPhone 6 and newer with iOS (10, 10.3.1 and 11.1) 
 
@@ -25,7 +35,7 @@ iOS 10.3.1
 iOS 11.1
 ```
 
-### And coding style tests
+### Coding style
 
 Try and have max 100 characters per line. Makes it easier to work with the Assistant editor
 
@@ -53,7 +63,7 @@ Current deployment target is
 iOS 10.3
 ```
 
-The device type is set to Universal
+The device type is set to Universal. Before we deploy, we need to integrate it
 
 ## Built With
 
@@ -68,7 +78,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 * **Matei Sterian** - *Initial work* - [Grakkus](https://github.com/Grakkus)
 
-* **David Sterian** - *Edits and Additions* - [Dongnamu](https://github.com/Dongnamu)
+* **David Shin** - *Edits and Additions* - [Dongnamu](https://github.com/Dongnamu)
 
 ## License
 
@@ -77,6 +87,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Future Work
 
 * Issues:       MKPolyline not always rendering  
-*              Map resize and drag on smaller devices  
+*               Map resize and drag on smaller devices  
 *  
 * Nice to have: UI  
