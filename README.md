@@ -11,16 +11,8 @@ These instructions will get you a copy of the project up and running on your loc
 This is what we have planed for the second release of our app ![](https://cdn.rawgit.com/jongracecox/anybadge/master/examples/awesomeness.svg)
 
 <p align="center">
-<img align="center" src="iOS_Map_Demo.gif" width="100%" alt="iOS Map Demo"/>
+<img align="center" src="iOS_Map_Demo.gif" width="25%" alt="iOS Map Demo"/>
 </p>
-
-<a href="https://media.giphy.com/media/1irfUpkCCMLrnYUji8/giphy.gif"><img src ="https://media.giphy.com/media/1irfUpkCCMLrnYUji8/giphy.gif" title="iOS Demo Gif"/></a>
-![](https://media.giphy.com/media/1irfUpkCCMLrnYUji8/giphy.gif)
-
-<div style="width:100%;height:0;padding-bottom:179%;position:relative;"><iframe src="https://giphy.com/embed/1irfUpkCCMLrnYUji8" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/1irfUpkCCMLrnYUji8">via GIPHY</a></p>
-
-<iframe src="https://giphy.com/embed/1irfUpkCCMLrnYUji8" width="268" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/1irfUpkCCMLrnYUji8">via GIPHY</a></p>
-
 
 ### Prerequisites
 
