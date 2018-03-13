@@ -1,0 +1,60 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Users/mateisterian/Documents/Git/iOS/build/Debug-iphonesimulator/Pods_gpsTracker.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "Pods-gpsTracker-umbrella.h",
+          'external-contents': "/Users/mateisterian/Documents/Git/iOS/Pods/Target Support Files/Pods-gpsTracker/Pods-gpsTracker-umbrella.h"
+        },
+        {
+          'type': 'file',
+          'name': "Pods_gpsTracker-Swift.h",
+          'external-contents': "/Users/mateisterian/Documents/Git/iOS/build/Debug-iphonesimulator/Pods_gpsTracker.framework/Headers/Pods_gpsTracker-Swift.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/mateisterian/Documents/Git/iOS/build/Debug-iphonesimulator/Pods_gpsTracker.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/mateisterian/Documents/Git/iOS/build/Pods.build/Debug-iphonesimulator/Pods-gpsTracker.build/module.modulemap"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/mateisterian/Documents/Git/iOS/build/Debug-iphonesimulator/SwiftyJSON/SwiftyJSON.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "SwiftyJSON-Swift.h",
+          'external-contents': "/Users/mateisterian/Documents/Git/iOS/build/Debug-iphonesimulator/SwiftyJSON/SwiftyJSON.framework/Headers/SwiftyJSON-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "SwiftyJSON-umbrella.h",
+          'external-contents': "/Users/mateisterian/Documents/Git/iOS/Pods/Target Support Files/SwiftyJSON/SwiftyJSON-umbrella.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/mateisterian/Documents/Git/iOS/build/Debug-iphonesimulator/SwiftyJSON/SwiftyJSON.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/mateisterian/Documents/Git/iOS/build/Pods.build/Debug-iphonesimulator/SwiftyJSON.build/module.modulemap"
+        }
+      ]
+    }
+  ]
+}
