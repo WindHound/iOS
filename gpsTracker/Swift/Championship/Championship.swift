@@ -13,17 +13,16 @@ struct Championships : Decodable {
     let admins : [Int]
     let endDate : Int
     let id : Int
-    let managers : [Int]
+    let managers : [Int] // null
     let name : String
     let startDate : Int
-    let subordinates : [Int]
+    let subordinates : [Int] // Event
 }
 
-private var upcoming_champ : NSMutableArray = []
+private var upcoming_champ = [Championships]()
 private var tenupcoming_champ : [String] = []
-private var history_champ : NSMutableArray = []
+private var history_champ = [Championships]()
 private var tenhistory_champ : [String] = []
-private var All_Championship : [Int] = []
 
 
 protocol UpcomingDelegate: class {
@@ -49,7 +48,7 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
     
     private var HistoryCellExpanded : Bool = false
     
-    var initialiser : NSMutableArray = []
+    var All_Championship : [Int] = []
     
     var baseURL : String = "http://192.168.137.1:8080/"
     
@@ -57,8 +56,6 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
     
     var specificURL : String = "structure/championship/get/"
     
-    var isempty : Bool = false
-
 //    var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
@@ -72,7 +69,6 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
         let jsonUrlString = URL(string: "\(baseURL)\(allURL)")
         
         let session = URLSession.shared
-        
 //        activityIndicator.startAnimating()
 //        UIApplication.shared.beginIgnoringInteractionEvents()
         session.dataTask(with: jsonUrlString!) { (data, response, error) in
@@ -84,7 +80,7 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
                     let ids = json as! [Int]
                     
                     if ids.count != 0 {
-                        All_Championship = ids
+                        self.All_Championship = ids
                         self.updatearray()
                         
                     }
@@ -93,6 +89,9 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
                 } catch {
                     print("ERROR")
                 }
+            }
+            if let error = error {
+                print(error)
             }
             
             }.resume()
@@ -142,9 +141,17 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
                     let enddate = Date(timeIntervalSince1970: TimeInterval(serverenddate/1000))
                     
                     if enddate < currentDate {
-                        history_champ.add(championship)
+                        history_champ.append(championship)
                     } else {
-                        upcoming_champ.add(championship)
+                        upcoming_champ.append(championship)
+                    }
+                    
+                    if history_champ.count > 1 {
+                        history_champ.sort(by: {$1.startDate > $0.startDate})
+                    }
+                    
+                    if upcoming_champ.count > 1 {
+                        upcoming_champ.sort(by: {$0.startDate < $1.startDate})
                     }
                     
                     DispatchQueue.main.async { // Correct
@@ -154,6 +161,10 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
                     
                 } catch {
                     print("ERROR")
+                }
+                
+                if let error = error {
+                    print(error)
                 }
             }).resume()
         }
@@ -284,9 +295,7 @@ class Upcoming : UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Upcoming_champ", for: indexPath)
         
-        let championship = upcoming_champ.object(at: indexPath.row)
-        
-        print(championship)
+        let championship = upcoming_champ[indexPath.row]
         
         
         cell.textLabel?.text = (championship as! Championships).name
@@ -329,8 +338,8 @@ class History : UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "History_champ", for: indexPath)
         
-        let championship = history_champ.object(at: indexPath.row)
-        
+        let championship = history_champ[indexPath.row]
+
         cell.textLabel?.text = (championship as! Championships).name
         
         return cell

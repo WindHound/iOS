@@ -9,18 +9,19 @@
 import UIKit
 
 struct Events : Decodable {
-    let admins : [Int]
     let id : Int
-    let managers : [Int]
     let name : String
-    let subordinates : [Int]
+    let subordinates : [Int] // Race
+    let managers : [Int] // Championship
+    let admins : [Int]
+    let startDate : Int
+    let endDate : Int
 }
 
-private var upcoming_event : [String] = []
+private var upcoming_event = [Events]()
 private var tenupcoming_event : [String] = []
-private var history_event : [String] = []
+private var history_event = [Events]()
 private var tenhistory_event : [String] = []
-
 
 private var Up = EventUpcoming()
 
@@ -40,68 +41,54 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
     
     private var HistoryCellExpanded : Bool = false
     
+    var baseURL : String = "http://192.168.137.1:8080/"
+    
+    var allURL : String = "/structure/event/all/"
+    
+    var specificURL : String = "structure/event/get/"
+
+    var All_Event : [Int] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
         
-        guard let jsonUrlString = URL(string: "http://192.168.137.1:8080/structure/event/all/") else {return}
-
-        let session = URLSession.shared
+        let jsonUrlString = URL(string: "\(baseURL)\(allURL)")
         
-        session.dataTask(with: jsonUrlString) { (data, response, error) in
+        let session = URLSession.shared
+        session.dataTask(with: jsonUrlString!) { (data, response, error) in
             
-//            guard let data = data else {return}
-//
-//            do {
-//                let course = try JSONDecoder().decode(Events.self, from: data)
-//
-//                upcoming_event.add(course)
-//
-//                self.upcoming_table.reloadData()
-//
-//                print(upcoming_event.count)
-//
-//            } catch {
-//                print("ERROR")
-//            }
-            
-//            admins =     (
-//                1
-//            );
-//            id = 0;
-//            managers =     (
-//                1,
-//                2
-//            );
-//            name = "event_id0";
-//            subordinates =     (
-//                1
-//            );
             
             if let data = data {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     let ids = json as! [Int]
+                    
+                    if ids.count != 0 {
+                        self.All_Event = ids
+                        print(self.All_Event[0])
+                        self.updatearray()
+                    }
                 } catch {
-
+                    print("ERROR")
                 }
             }
             if let error = error {
                 print(error)
-                print("Error")
             }
+            
             }.resume()
         
-        for i in 1...10 {
-            upcoming_event.append("Event\(i)")
-            history_event.append("Event\(i)")
-        }
-        
-        for i in 11...20 {
-            tenupcoming_event.append("Event\(i)")
-            tenhistory_event.append("Event\(i)")
-        }
+//        for i in 1...10 {
+//            upcoming_event.append("Event\(i)")
+//            history_event.append("Event\(i)")
+//        }
+//
+//        for i in 11...20 {
+//            tenupcoming_event.append("Event\(i)")
+//            tenhistory_event.append("Event\(i)")
+//        }
         
         Up.delegate = self
         His.delegate = self
@@ -110,10 +97,56 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
         upcoming_table.dataSource = Up
         history_table.delegate = His
         history_table.dataSource = His
-        
-        
 
-        // Do any additional setup after loading the view.
+    }
+    
+    func updatearray() {
+        let currentDate = Date()
+        
+        for i in 0...(All_Event.count - 1) {
+            let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(All_Event[i])")
+            
+            let session = URLSession.shared
+            session.dataTask(with: (jsonUrlString!), completionHandler: {(data, response, error) -> Void in
+                guard let data = data else {return}
+                do {
+                    
+                    let event = try JSONDecoder().decode(Events.self, from: data)
+                    
+                    print(event)
+                    
+                    let serverenddate = event.endDate
+                    
+                    let enddate = Date(timeIntervalSince1970: TimeInterval(serverenddate/1000))
+                    
+                    if enddate < currentDate {
+                        history_event.append(event)
+                    } else {
+                        upcoming_event.append(event)
+                    }
+                    
+                    if history_event.count > 1 {
+                        history_event.sort(by: {$1.startDate > $0.startDate})
+                    }
+                    
+                    if upcoming_event.count > 1 {
+                        upcoming_event.sort(by: {$0.startDate < $1.startDate})
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.upcoming_table.reloadData()
+                        self.history_table.reloadData()
+                    }
+                    
+                } catch {
+                    print("ERROR")
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+            }).resume()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -229,26 +262,23 @@ class EventUpcoming : UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Upcoming_event", for: indexPath)
-        
-//        let event = upcoming_event[indexPath.row] as! Events
-        
-//        print(event.name)
-        
-//        cell.textLabel?.text = event.name
 
-        cell.textLabel?.text = upcoming_event[indexPath.row]
+        let event = upcoming_event[indexPath.row]
+    
+        cell.textLabel?.text = (event as! Events).name
+        
         return cell
     }
     
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == upcoming_event.count {
-            for i in 0...9 {
-                upcoming_event.append(tenupcoming_event[i])
-            }
-            tableView.reloadData()
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if indexPath.row + 1 == upcoming_event.count {
+//            for i in 0...9 {
+//                upcoming_event.append(tenupcoming_event[i])
+//            }
+//            tableView.reloadData()
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.UpTo(datasource: self)
@@ -271,19 +301,22 @@ class EventHistory : UIView, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "History_event", for: indexPath)
         
-        cell.textLabel?.text = history_event[indexPath.row]
+        let event = history_event[indexPath.row]
+        
+        cell.textLabel?.text = (event as! Events).name
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == history_event.count {
-            for i in 0...9 {
-                history_event.append(tenhistory_event[i])
-            }
-            
-            tableView.reloadData()
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if indexPath.row + 1 == history_event.count {
+//            for i in 0...9 {
+//                history_event.append(tenhistory_event[i])
+//            }
+//
+//            tableView.reloadData()
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.HistTo(datesource: self)
