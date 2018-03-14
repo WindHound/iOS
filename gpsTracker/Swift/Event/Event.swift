@@ -8,14 +8,25 @@
 
 import UIKit
 
+struct Events : Decodable {
+    let admins : [Int]
+    let id : Int
+    let managers : [Int]
+    let name : String
+    let subordinates : [Int]
+}
+
 private var upcoming_event : [String] = []
 private var tenupcoming_event : [String] = []
 private var history_event : [String] = []
 private var tenhistory_event : [String] = []
 
+
 private var Up = EventUpcoming()
 
 private var His = EventHistory()
+
+
 
 class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
 
@@ -33,6 +44,54 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        
+        guard let jsonUrlString = URL(string: "http://192.168.137.1:8080/structure/event/all/") else {return}
+
+        let session = URLSession.shared
+        
+        session.dataTask(with: jsonUrlString) { (data, response, error) in
+            
+//            guard let data = data else {return}
+//
+//            do {
+//                let course = try JSONDecoder().decode(Events.self, from: data)
+//
+//                upcoming_event.add(course)
+//
+//                self.upcoming_table.reloadData()
+//
+//                print(upcoming_event.count)
+//
+//            } catch {
+//                print("ERROR")
+//            }
+            
+//            admins =     (
+//                1
+//            );
+//            id = 0;
+//            managers =     (
+//                1,
+//                2
+//            );
+//            name = "event_id0";
+//            subordinates =     (
+//                1
+//            );
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    let ids = json as! [Int]
+                } catch {
+
+                }
+            }
+            if let error = error {
+                print(error)
+                print("Error")
+            }
+            }.resume()
         
         for i in 1...10 {
             upcoming_event.append("Event\(i)")
@@ -52,24 +111,9 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
         history_table.delegate = His
         history_table.dataSource = His
         
-//        let jsonUrlString = "http://192.168.43.7:8080/structure/get/event/0"
-//
-//        guard let url = URL(string: jsonUrlString) else {
-//            return
-//        }
-//
-//        URLSession.shared.dataTask(with: url) { (data, response, err) in
-//
-//            guard let data = data else {return}
-//
-//            let dataAsString = String(data: data, encoding: .utf8)
-//
-//            print("I'm here")
-//            print(dataAsString)
-//            print("Now I'm here")
-//            }.resume()
-//
-//        // Do any additional setup after loading the view.
+        
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -186,6 +230,12 @@ class EventUpcoming : UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Upcoming_event", for: indexPath)
         
+//        let event = upcoming_event[indexPath.row] as! Events
+        
+//        print(event.name)
+        
+//        cell.textLabel?.text = event.name
+
         cell.textLabel?.text = upcoming_event[indexPath.row]
         return cell
     }

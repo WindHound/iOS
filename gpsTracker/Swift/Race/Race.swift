@@ -111,7 +111,7 @@ class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
     internal func HistTo(datesource: Any) {
         performSegue(withIdentifier: "Hist To Info", sender: self)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.identifier
         

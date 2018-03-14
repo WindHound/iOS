@@ -9,10 +9,22 @@
 import UIKit
 import Foundation
 
-private var upcoming_champ : [String] = []
+struct Championships : Decodable {
+    let admins : [Int]
+    let endDate : Int
+    let id : Int
+    let managers : [Int]
+    let name : String
+    let startDate : Int
+    let subordinates : [Int]
+}
+
+private var upcoming_champ : NSMutableArray = []
 private var tenupcoming_champ : [String] = []
-private var history_champ : [String] = []
+private var history_champ : NSMutableArray = []
 private var tenhistory_champ : [String] = []
+private var All_Championship : [Int] = []
+
 
 protocol UpcomingDelegate: class {
     func UpTo(datasource: Any)
@@ -37,21 +49,55 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
     
     private var HistoryCellExpanded : Bool = false
     
+    var initialiser : NSMutableArray = []
+    
+    var baseURL : String = "http://192.168.137.1:8080/"
+    
+    var allURL : String = "structure/championship/all/"
+    
+    var specificURL : String = "structure/championship/get/"
+    
+    var isempty : Bool = false
+
+//    var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for i in 1...10 {
-            upcoming_champ.append("Championship\(i)")
-            history_champ.append("Championship\(i)")
-        }
+//        activityIndicator.center = self.view.center
+//        activityIndicator.hidesWhenStopped = true
+//        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+//        view.addSubview(activityIndicator)
         
-        for i in 11...20 {
-            tenupcoming_champ.append("Championship\(i)")
-            tenhistory_champ.append("Championship\(i)")
-        }
+        let jsonUrlString = URL(string: "\(baseURL)\(allURL)")
         
+        let session = URLSession.shared
         
-        
+//        activityIndicator.startAnimating()
+//        UIApplication.shared.beginIgnoringInteractionEvents()
+        session.dataTask(with: jsonUrlString!) { (data, response, error) in
+            if let data = data {
+                do {
+
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    
+                    let ids = json as! [Int]
+                    
+                    if ids.count != 0 {
+                        All_Championship = ids
+                        self.updatearray()
+                        
+                    }
+                    
+                    //                    print("\(upcoming_champ.count) after update function")
+                } catch {
+                    print("ERROR")
+                }
+            }
+            
+            }.resume()
+//        activityIndicator.stopAnimating()
+//        UIApplication.shared.endIgnoringInteractionEvents()
         Up.delegate = self
         His.delegate = self
         
@@ -59,8 +105,59 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
         upcoming_table.dataSource = Up
         history_table.delegate = His
         history_table.dataSource = His
+        
+        
+//        for i in 1...10 {
+//            upcoming_champ.append("Championship\(i)")
+//            history_champ.append("Championship\(i)")
+//        }
+//
+//        for i in 11...20 {
+//            tenupcoming_champ.append("Championship\(i)")
+//            tenhistory_champ.append("Championship\(i)")
+//        }
 
         // Do any additional setup after loading the view.
+    }
+    
+    func updatearray() {
+        
+        let currentDate = Date()
+        
+        for i in 0...(All_Championship.count - 1) {
+            let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(All_Championship[i])")
+            
+            let session = URLSession.shared
+            
+            session.dataTask(with: (jsonUrlString!), completionHandler: { (data, response, error) -> Void in
+                guard let data = data else {return}
+                
+                do {
+                    
+                    let championship = try JSONDecoder().decode(Championships.self, from: data)
+                    print(championship)
+                    
+                    let serverenddate = championship.endDate
+                    
+                    let enddate = Date(timeIntervalSince1970: TimeInterval(serverenddate/1000))
+                    
+                    if enddate < currentDate {
+                        history_champ.add(championship)
+                    } else {
+                        upcoming_champ.add(championship)
+                    }
+                    
+                    DispatchQueue.main.async { // Correct
+                        self.upcoming_table.reloadData()
+                        self.history_table.reloadData()
+                    }
+                    
+                } catch {
+                    print("ERROR")
+                }
+            }).resume()
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -166,70 +263,89 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
 
 }
 
-class Upcoming : UIView, UITableViewDelegate, UITableViewDataSource {
+class Upcoming : UITableViewController {
     
     var delegate : UpcomingDelegate?
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+    }
+    
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return upcoming_champ.count
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Upcoming_champ", for: indexPath)
         
-        cell.textLabel?.text = upcoming_champ[indexPath.row]
+        let championship = upcoming_champ.object(at: indexPath.row)
+        
+        print(championship)
+        
+        
+        cell.textLabel?.text = (championship as! Championships).name
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == upcoming_champ.count {
-            for i in 0...9 {
-                upcoming_champ.append(tenupcoming_champ[i])
-            }
-            tableView.reloadData()
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        
+////        if indexPath.row + 1 == upcoming_champ.count {
+////            for i in 0...9 {
+////                upcoming_champ.append(tenupcoming_champ[i])
+////            }
+////            tableView.reloadData()
+////        }
+//    }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.UpTo(datasource: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }
 
-class History : UIView, UITableViewDataSource, UITableViewDelegate {
+class History : UITableViewController{
     
     var delegate : HistoryDelegate?
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return history_champ.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "History_champ", for: indexPath)
         
-        cell.textLabel?.text = history_champ[indexPath.row]
+        let championship = history_champ.object(at: indexPath.row)
+        
+        cell.textLabel?.text = (championship as! Championships).name
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == history_champ.count {
-            for i in 0...9 {
-                history_champ.append(tenhistory_champ[i])
-            }
-            tableView.reloadData()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if indexPath.row + 1 == history_champ.count {
+//            for i in 0...9 {
+//                history_champ.append(tenhistory_champ[i])
+//            }
+//            tableView.reloadData()
+//        }
+//    }
+//
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.HistTo(datesource: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }

@@ -22,8 +22,8 @@ class event_information: UIViewController, UITextFieldDelegate {
     
     var Chosen_Boat : String = ""
     
-    var UpOrHis = ""
-    var fromwhere = ""
+    var UpOrHis : String = ""
+    var fromwhere : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
