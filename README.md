@@ -14,7 +14,7 @@ This is what we have planed for the second release of our app ![](https://cdn.ra
 <img align="center" src="iOS_Map_Demo.gif" width="25%" alt="iOS Map Demo"/>
 </p>
 
-### Prerequisites
+## Prerequisites
 
 To download (http://blog.osteele.com/2008/05/my-git-workflow/)
 
@@ -33,7 +33,7 @@ Command line tools for Xcode 9.2
 Should work on older Xcode but since Swift 4 is required 9.0 is the oldest supported version (I used 4.1; some features might not be supported in Swift 4 although this is unlikely)
 
 
-### iOS Version
+## iOS Version
 
 The code was tested on iPhone 6 and newer with 3 iOS versions 
 
@@ -43,7 +43,7 @@ iOS 10.3.1
 iOS 11.1
 ```
 
-### Coding style
+## Coding style
 
 Try and have max 100 characters per line. Makes it easier to work with the Assistant editor. You can set a vertical guide at
 
@@ -77,7 +77,7 @@ iOS 10.3
 
 The device type is set to Universal. Before we deploy, we need to integrate it
 
-## Built With
+## Compiled With (408/2013)
 
 ```
 LLVM LTO (FINAL RELEASE)
