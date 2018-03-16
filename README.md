@@ -16,7 +16,9 @@ This is what we have planed for the second release of our app ![](https://cdn.ra
 
 ## Where we are now
 
-<p>
+Fri 16 Mar 11:27
+
+<p align="center">
   <img align="left" src="Test 1 - Large.png" width="25%"/>
   <img align="center" src="Test 1 - Small.png" width="25%"/>
   <img align="right" src="Test 1 - Rotated.png" width="25%"/>
