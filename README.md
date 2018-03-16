@@ -77,7 +77,7 @@ iOS 10.3
 
 The device type is set to Universal. Before we deploy, we need to integrate it
 
-## Built With
+## Compiled With (408/2013)
 
 ```
 LLVM LTO (FINAL RELEASE)
