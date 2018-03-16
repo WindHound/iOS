@@ -45,28 +45,25 @@ class NewRaceViewController: UIViewController
     //Tap Stop Button
     @IBAction func stopTapped()
     {
-        let alertController =       UIAlertController  (title: "End Recording?",
-                                                        message: "Do you wish to end your Recording?",
-                                                        preferredStyle: .actionSheet)
+        let alertController = UIAlertController (title: "End Recording?",
+                                                 message: "Do you wish to end your Recording?",
+                                                 preferredStyle: .actionSheet)
         
-        alertController.addAction(UIAlertAction    (title: "Cancel", style: .cancel))
+        alertController.addAction(UIAlertAction (title: "Cancel", style: .cancel))
         
-        alertController.addAction(UIAlertAction    (title: "Save", style: .default)
+        alertController.addAction(UIAlertAction (title: "Save", style: .default)
         { _ in
             self.stopRace()
             self.saveRace()
             self.performSegue(withIdentifier: .details, sender: nil)
         })
-        
-        alertController.addAction(UIAlertAction    (title: "Discard", style: .destructive)
+        alertController.addAction(UIAlertAction (title: "Discard", style: .destructive)
         { _ in
             self.stopRace()
             _ = self.navigationController?.popToRootViewController(animated: true)
         })
-        
         present(alertController, animated: true)
     }
-    
     
     //Start Race
     private func startRace()

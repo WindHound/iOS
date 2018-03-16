@@ -11,42 +11,7 @@ class RaceDetailsViewController: UIViewController, UICollectionViewDataSource, U
     
     var race: Race!
     
-    //Map Init
-    /*
-     //Starting Position - DEMO - SHOULD BE FIRST GPS LOCATION
-     let initialLocation = CLLocation(latitude: 51.455896, longitude: -2.603118)
-     
-     //Radius of Map in meters
-     let regionRadius: CLLocationDistance = 1000
-     func centerMapOnLocation(location: CLLocation) {
-     let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-     regionRadius, regionRadius)
-     mapView.setRegion(coordinateRegion, animated: true)
-     }
-     
-     
-     //Location Permission -- Also in .plist
-     let locationManager = CLLocationManager()
-     func checkLocationAuthorizationStatus() {
-     if CLLocationManager.authorizationStatus() == .authorizedWhenInUse
-     {
-     mapView.showsUserLocation = true
-     } else
-     {
-     locationManager.requestWhenInUseAuthorization()
-     }
-     }
-     
-     override func viewDidAppear(_ animated: Bool)
-     {
-     super.viewDidAppear(animated)
-     checkLocationAuthorizationStatus()
-     }
-     
-     */
-    
 //Race Replay
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -106,37 +71,24 @@ class RaceDetailsViewController: UIViewController, UICollectionViewDataSource, U
         return MKCoordinateRegion(center: center, span: span)
     }
     
-/*
-     private func polyLine() -> MKPolyline {
-     guard let locations = race.locations else {
-     return MKPolyline()
-     }
-     
-     let coords: [CLLocationCoordinate2D] = locations.map { location in
-     let location = location as! Location
-     return CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-     }
-     return MKPolyline(coordinates: coords, count: coords.count)
-     }
-*/
     private func polyLine() -> [MulticolorPolyline]
     {
         
-        // 1
+        // Polyline segments -> coordinate pairs (describe each segment and speed)
         let locations = race.locations?.array as! [Location]
         var coordinates: [(CLLocation, CLLocation)] = []
         var speeds: [Double] = []
         var minSpeed = Double.greatestFiniteMagnitude
         var maxSpeed = 0.0
         
-        // 2
+        // Endpoint -> CLLocation object and save as pairs
         for (first, second) in zip(locations, locations.dropFirst())
         {
             let start = CLLocation(latitude: first.latitude, longitude: first.longitude)
             let end = CLLocation(latitude: second.latitude, longitude: second.longitude)
             coordinates.append((start, end))
             
-            //3
+            // Calculate Speed
             let distance = end.distance(from: start)
             let time = second.timestamp!.timeIntervalSince(first.timestamp! as Date)
             let speed = time > 0 ? distance / time : 0
@@ -145,10 +97,10 @@ class RaceDetailsViewController: UIViewController, UICollectionViewDataSource, U
             maxSpeed = max(maxSpeed, speed)
         }
         
-        //4
+        // Average speed for recording
         let midSpeed = speeds.reduce(0, +) / Double(speeds.count)
         
-        //5
+        // Create new MulticolorPolyline and set color
         var segments: [MulticolorPolyline] = []
         for ((start, end), speed) in zip(coordinates, speeds)
         {
@@ -217,21 +169,16 @@ class RaceDetailsViewController: UIViewController, UICollectionViewDataSource, U
         
         mapView.setRegion(region, animated: true)
         mapView.addOverlays(polyLine())
-       // mapView.mapType = MKMapType.satellite
-    //    mapView.add(polyLine())
+        //mapView.mapType = MKMapType.satellite
+        //mapView.add(polyLine())
     }
-    
-    
-    
-    
-    //Collection View
-    
+
+//Collection View
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     //LeaderboardImageArray
     var LeaderboardImageArray = [UIImage(named: "sailboat-1"), UIImage(named: "sailboat-2"), UIImage(named: "sailboat-3"), UIImage(named: "sailboat-4"), UIImage(named: "sailboat-5"), UIImage(named: "sailboat-6")]
