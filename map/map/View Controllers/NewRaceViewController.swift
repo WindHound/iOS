@@ -101,8 +101,8 @@ class NewRaceViewController: UIViewController
     private func startLocationUpdates()
     {
         locationManager.delegate = self
-        locationManager.activityType = .fitness // need to change
-        locationManager.distanceFilter = 10
+        locationManager.activityType = .otherNavigation
+        locationManager.distanceFilter = 5
         locationManager.startUpdatingLocation()
     }
     

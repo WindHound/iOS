@@ -26,6 +26,8 @@ class UnitConverterSpeed: UnitConverter
     }
 }
 
+//NOT GOOD 
+
 extension UnitSpeed
 {
     class var nauticalMiles: UnitSpeed
