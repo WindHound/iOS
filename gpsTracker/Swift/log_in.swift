@@ -8,6 +8,8 @@
 
 import UIKit
 
+var baseURL : String = "http://192.168.137.1:8080/"
+
 class log_in: UIViewController {
 
     @IBOutlet weak var textUsername: UITextField!

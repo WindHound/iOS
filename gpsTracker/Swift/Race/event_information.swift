@@ -17,23 +17,51 @@ class event_information: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var Mutipurpose_button: UIBarButtonItem!
     
     @IBOutlet weak var Boat_Label: UILabel!
+    @IBOutlet weak var Race_name: UILabel!
     
     @IBOutlet weak var Boat: UITextField!
+    @IBOutlet weak var RaceDate: UITextField!
+    @IBOutlet weak var StartTime: UITextField!
+    @IBOutlet weak var EndTime: UITextField!
     
-    var Chosen_Boat : String = ""
+    var Chosen_Boat : Int = 0
     
     var UpOrHis : String = ""
     var fromwhere : String = ""
+    
+    var raceID : Int = 0
+    var name : String = ""
+    var boatID : [Int] = []
+    var startDate : Int = 0
+    var endDate : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         toolbar.clipsToBounds = true
+        Race_name.text = name
         
         print(fromwhere)
         print(UpOrHis)
         
         Boat.delegate = self
+        
+        let DateStart = Date(timeIntervalSince1970: TimeInterval(startDate/1000))
+        let DateEnd = Date(timeIntervalSince1970: TimeInterval(endDate/1000))
+        
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-MM-dd"
+        
+        let timeformatter = DateFormatter()
+        timeformatter.dateFormat = "HH:mm"
+
+        let date = dateformatter.string(from: DateStart)
+        let starttime = timeformatter.string(from: DateStart)
+        let endtime = timeformatter.string(from: DateEnd)
+        
+        RaceDate.text = date
+        StartTime.text = starttime
+        EndTime.text = endtime
         
         if UpOrHis == "History" {
             Edit_button.isEnabled = false
@@ -78,6 +106,15 @@ class event_information: UIViewController, UITextFieldDelegate {
             return false
         } else {
             return true
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.identifier
+        
+        if destination == "To Related Boat" {
+            let secondViewController = segue.destination as! Related_Boats
+            secondViewController.Boats = self.boatID
         }
     }
     

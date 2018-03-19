@@ -12,19 +12,15 @@ class Related_Boats: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
     @IBOutlet weak var toolbar: UIToolbar!
     
-    var Boats : NSMutableArray = []
+    var Boats : [Int] = []
     
-    var Chosen_Boat : String = ""
+    var Chosen_Boat : Int = 0
     
     var Cancel : Bool = false
     
     override func viewDidLoad() {
         
         toolbar.clipsToBounds = true
-        
-        for i in 1...10 {
-            Boats.add("Boats\(i)")
-        }
 
         super.viewDidLoad()
 
@@ -52,13 +48,13 @@ class Related_Boats: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Boats", for: indexPath)
         
-        cell.textLabel?.text = Boats.object(at: indexPath.row) as? String
+        cell.textLabel?.text = String(Boats[indexPath.row])
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Chosen_Boat = "\(Boats.object(at: indexPath.row))"
+        Chosen_Boat = Boats[indexPath.row]
         performSegue(withIdentifier: "Back To Race Information", sender: self)
     }
     
@@ -71,7 +67,7 @@ class Related_Boats: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 
                 secondViewController.Chosen_Boat = self.Chosen_Boat
                 
-                secondViewController.Boat.text = secondViewController.Chosen_Boat
+                secondViewController.Boat.text = String(secondViewController.Chosen_Boat)
             }
         }
     }

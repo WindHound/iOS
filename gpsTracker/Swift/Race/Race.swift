@@ -8,9 +8,18 @@
 
 import UIKit
 
-private var upcoming_race : [String] = []
+struct Races : Decodable {
+    let id : Int
+    let name : String
+    let subordinates : [Int] // Boat
+    let managers : [Int] // Race
+    let admins : [Int]
+    let startDate : Int
+    var endDate : Int
+}
+private var upcoming_race : [Races] = []
 private var tenupcoming_race : [String] = []
-private var history_race : [String] = []
+private var history_race : [Races] = []
 private var tenhistory_race : [String] = []
 
 private var Up = RaceUpcoming()
@@ -26,22 +35,52 @@ class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
     private var UpcomingCellExpanded : Bool = true
     private var HistoryCellExpanded : Bool = false
     
+    var allURL : String = "structure/race/all/"
+   
+    var specificURL : String = "structure/race/get/"
     
-
+    var All_Races : [Int] = []
+    
+    var raceIndex : Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
         
-        for i in 1...10 {
-            upcoming_race.append("Race\(i)")
-            history_race.append("Race\(i)")
-        }
+        let jsonUrlString = URL(string: "\(baseURL)\(allURL)")
+
+        let session = URLSession.shared
+        session.dataTask(with: jsonUrlString!) { (data, response, error) in
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    let ids = json as! [Int]
+                    
+                    if ids.count != 0 {
+                        self.All_Races = ids
+                        self.updatearray()
+                    }
+                } catch {
+                    print("ERROR")
+                }
+            }
+            
+            if let error = error {
+                print(error)
+            }
+        }.resume()
         
-        for i in 11...20 {
-            tenupcoming_race.append("Race\(i)")
-            tenhistory_race.append("Race\(i)")
-        }
+//        for i in 1...10 {
+//            upcoming_race.append("Race\(i)")
+//            history_race.append("Race\(i)")
+//        }
+//
+//        for i in 11...20 {
+//            tenupcoming_race.append("Race\(i)")
+//            tenhistory_race.append("Race\(i)")
+//        }
         
         Up.delegate = self
         His.delegate = self
@@ -52,6 +91,55 @@ class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
         history_table.dataSource = His
 
         // Do any additional setup after loading the view.
+    }
+    
+    func updatearray() {
+        let currentDate = Date()
+        
+        for i in 0...(All_Races.count - 1) {
+            let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(All_Races[i])")
+            
+            let session = URLSession.shared
+            session.dataTask(with: (jsonUrlString)!, completionHandler: {(data, response, error) -> Void in
+                guard let data = data else {return}
+                
+                do {
+                    var race = try JSONDecoder().decode(Races.self, from: data)
+                    
+                    print(race)
+                    
+                    let serverEndDate = race.endDate
+                    
+//                    let endDate = Date(timeIntervalSince1970: TimeInterval(serverEndDate/1000))
+                    let endDate = Date(timeIntervalSince1970: TimeInterval(1614718600000/1000)) // This need to be deleted
+                    
+                    if endDate < currentDate {
+                        history_race.append(race)
+                    } else {
+                        upcoming_race.append(race)
+                    }
+                    
+                    if history_race.count > 1 {
+                        history_race.sort(by: {$1.startDate > $0.startDate})
+                    }
+                    
+                    if upcoming_race.count > 1 {
+                        upcoming_race.sort(by: {$0.startDate < $1.startDate})
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.upcoming_table.reloadData()
+                        self.history_table.reloadData()
+                    }
+                } catch {
+                    print("ERROR")
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+            }).resume()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -104,12 +192,14 @@ class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
         return 50
     }
     
-    internal func UpTo(datasource: Any) {
+    internal func UpTo(datasource: Any, index: Int) {
         performSegue(withIdentifier: "Up To Info", sender: self)
+        raceIndex = index
     }
     
-    internal func HistTo(datesource: Any) {
+    internal func HistTo(datesource: Any, index: Int) {
         performSegue(withIdentifier: "Hist To Info", sender: self)
+        raceIndex = index
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -124,9 +214,21 @@ class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
             let secondViewController = segue.destination as! event_information
             secondViewController.fromwhere = "Race"
             if destination == "Up To Info" {
+                let race = upcoming_race[raceIndex]
                 secondViewController.UpOrHis = "Upcoming"
+                secondViewController.raceID = race.id
+                secondViewController.boatID = race.subordinates
+                secondViewController.name = race.name
+                secondViewController.startDate = race.startDate
+                secondViewController.endDate = race.endDate
             } else {
+                let race = history_race[raceIndex]
                 secondViewController.UpOrHis = "History"
+                secondViewController.raceID = race.id
+                secondViewController.boatID = race.subordinates
+                secondViewController.name = race.name
+                secondViewController.startDate = race.startDate
+                secondViewController.endDate = race.endDate
             }
         }
         
@@ -168,21 +270,24 @@ private class RaceUpcoming : NSObject, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Upcoming_race", for: indexPath)
         
-        cell.textLabel?.text = upcoming_race[indexPath.row]
+        let race = upcoming_race[indexPath.row]
+        
+        cell.textLabel?.text = race.name
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == upcoming_race.count {
-            for i in 0...9 {
-                upcoming_race.append(tenupcoming_race[i])
-            }
-            tableView.reloadData()
-        }
-    }
-    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if indexPath.row + 1 == upcoming_race.count {
+//            for i in 0...9 {
+//                upcoming_race.append(tenupcoming_race[i])
+//            }
+//            tableView.reloadData()
+//        }
+//    }
+//
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.UpTo(datasource: self)
+        delegate?.UpTo(datasource: self, index: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -202,23 +307,26 @@ private class RaceHistory : NSObject, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "History_race", for: indexPath)
         
-        cell.textLabel?.text = history_race[indexPath.row]
+        let race = history_race[indexPath.row]
+        
+        cell.textLabel?.text = race.name
+        
         return cell
         
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == history_race.count {
-            for i in 0...9 {
-                history_race.append(tenhistory_race[i])
-            }
-            
-            tableView.reloadData()
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if indexPath.row + 1 == history_race.count {
+//            for i in 0...9 {
+//                history_race.append(tenhistory_race[i])
+//            }
+//
+//            tableView.reloadData()
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.HistTo(datesource: self)
+        delegate?.HistTo(datesource: self, index: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

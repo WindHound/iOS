@@ -10,10 +10,16 @@ import UIKit
 
 class Event_list: UITableViewController {
     
-    var detailed_events : [String] = []
+    var detailed_events : [Events] = []
     
     var UpOrHis : String = ""
-
+    
+    var eventID : [Int] = []
+    
+    var specificURL : String = "structure/event/get/"
+    
+    var raceIndex : Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,16 +32,45 @@ class Event_list: UITableViewController {
         
         self.navigationItem.rightBarButtonItems = [profile, add, search]
         
-        for i in 1...10 {
-            detailed_events.append("Event\(i)")
+        updatearray()
+    }
+    
+    func updatearray() {
+        for i in 0...(eventID.count - 1) {
+            let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(eventID[i])")
+            
+            let session = URLSession.shared
+            session.dataTask(with: (jsonUrlString!), completionHandler: {(data, response, error) -> Void in
+                guard let data = data else {return}
+                do {
+                    
+                    let event = try JSONDecoder().decode(Events.self, from: data)
+                    
+                    print(event)
+                    
+                    self.detailed_events.append(event)
+                    
+                    if self.UpOrHis == "History" {
+                        self.detailed_events.sort(by: {$1.startDate > $0.startDate})
+                    }
+                    
+                    if self.UpOrHis == "Upcoming" {
+                        self.detailed_events.sort(by: {$0.startDate < $1.startDate})
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                    
+                } catch {
+                    print("ERROR")
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+            }).resume()
         }
-
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     @objc func profile_tapped() {
@@ -60,8 +95,16 @@ class Event_list: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Detailed_Event", for: indexPath)
         
-        cell.textLabel?.text = detailed_events[indexPath.row]
+        let event = detailed_events[indexPath.row]
+        
+        cell.textLabel?.text = event.name
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        raceIndex = indexPath.row
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "To_Race", sender: self)
     }
     
     @IBAction func unwindToDetailedEvent(segue:UIStoryboardSegue) { }
@@ -76,6 +119,9 @@ class Event_list: UITableViewController {
         
         if direction == "To_Race" {
             let secondViewController = segue.destination as! Race_list
+            
+            let race = detailed_events[raceIndex]
+            secondViewController.raceID = race.subordinates
             secondViewController.UpOrHis = self.UpOrHis
         }
     }

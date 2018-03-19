@@ -10,9 +10,13 @@ import UIKit
 
 class Race_list: UITableViewController {
     
-    var detailed_races : [String] = []
+    var detailed_races : [Races] = []
     
     var UpOrHis : String = ""
+    
+    var raceID : [Int] = []
+        
+    var specificURL : String = "structure/race/get/"
 
 
     override func viewDidLoad() {
@@ -26,16 +30,44 @@ class Race_list: UITableViewController {
         let profile = UIBarButtonItem(image: #imageLiteral(resourceName: "Profile_icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(profile_tapped))
         
         self.navigationItem.rightBarButtonItems = [profile, add, search]
+        updatearray()
         
-        for i in 1...10 {
-            detailed_races.append("Race\(i)")
+    }
+    
+    func updatearray() {
+        for i in 0...(raceID.count - 1) {
+            let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(raceID[i])")
+            
+            let session = URLSession.shared
+            session.dataTask(with: (jsonUrlString!), completionHandler: { (data, response, error) -> Void in
+                guard let data = data else {return}
+                
+                do {
+                    let race = try JSONDecoder().decode(Races.self, from: data)
+                    
+                    print(race)
+                    
+                    self.detailed_races.append(race)
+                    if self.UpOrHis == "History" {
+                        self.detailed_races.sort(by: {$1.startDate > $0.startDate})
+                    }
+                    
+                    if self.UpOrHis == "Upcoming" {
+                        self.detailed_races.sort(by: {$0.startDate < $1.startDate})
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                } catch {
+                    print("ERROR")
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+            }).resume()
         }
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,7 +109,10 @@ class Race_list: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Detailed_Race", for: indexPath)
         
-        cell.textLabel?.text = detailed_races[indexPath.row]
+        let race = detailed_races[indexPath.row]
+        
+        cell.textLabel?.text = race.name
+        
         return cell
     }
 

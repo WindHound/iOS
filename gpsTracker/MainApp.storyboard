@@ -374,44 +374,38 @@
                                                 <color key="textColor" red="0.090196078430000007" green="0.65098039220000004" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="okJ-aG-f1O">
-                                                <rect key="frame" x="10" y="48" width="300" height="24"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Start time" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="69Q-Wg-lKe">
-                                                <rect key="frame" x="10" y="115" width="300" height="24"/>
+                                                <rect key="frame" x="10" y="110" width="300" height="24"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DR-Je-QAH">
-                                                <rect key="frame" x="10" y="87" width="300" height="18"/>
+                                                <rect key="frame" x="10" y="82" width="300" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.090196078430000007" green="0.65098039220000004" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agT-OK-r9M">
-                                                <rect key="frame" x="10" y="154" width="300" height="18"/>
+                                                <rect key="frame" x="10" y="149" width="300" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.090196078430000007" green="0.65098039220000004" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="End Time" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bGl-Vz-MkE">
-                                                <rect key="frame" x="10" y="187" width="300" height="24"/>
+                                                <rect key="frame" x="10" y="177" width="300" height="24"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a boat to record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3F0-rU-z7I">
-                                                <rect key="frame" x="10" y="226" width="300" height="18"/>
+                                                <rect key="frame" x="10" y="216" width="300" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.090196078430000007" green="0.65098039220000004" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Boat" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kk2-2i-M1R">
-                                                <rect key="frame" x="10" y="259" width="300" height="24"/>
+                                                <rect key="frame" x="10" y="244" width="300" height="24"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -419,30 +413,36 @@
                                                     <segue destination="dse-8S-M04" kind="show" identifier="To Related Boat" id="4Cr-Tp-W1P"/>
                                                 </connections>
                                             </textField>
+                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IGG-Cs-WM5">
+                                                <rect key="frame" x="10" y="43" width="300" height="24"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="agT-OK-r9M" firstAttribute="top" secondItem="69Q-Wg-lKe" secondAttribute="bottom" constant="15" id="3Ru-GR-ebK"/>
-                                            <constraint firstItem="kk2-2i-M1R" firstAttribute="top" secondItem="3F0-rU-z7I" secondAttribute="bottom" constant="15" id="4zM-0e-TXF"/>
+                                            <constraint firstItem="kk2-2i-M1R" firstAttribute="top" secondItem="3F0-rU-z7I" secondAttribute="bottom" constant="10" id="4zM-0e-TXF"/>
                                             <constraint firstItem="1f3-x9-xS6" firstAttribute="top" secondItem="U2P-v2-au8" secondAttribute="top" constant="15" id="5iX-gK-SOD"/>
-                                            <constraint firstItem="bGl-Vz-MkE" firstAttribute="top" secondItem="agT-OK-r9M" secondAttribute="bottom" constant="15" id="CCj-Vb-8SB"/>
+                                            <constraint firstItem="IGG-Cs-WM5" firstAttribute="leading" secondItem="U2P-v2-au8" secondAttribute="leading" constant="10" id="AaD-1O-IXP"/>
+                                            <constraint firstItem="bGl-Vz-MkE" firstAttribute="top" secondItem="agT-OK-r9M" secondAttribute="bottom" constant="10" id="CCj-Vb-8SB"/>
                                             <constraint firstItem="kk2-2i-M1R" firstAttribute="leading" secondItem="U2P-v2-au8" secondAttribute="leading" constant="10" id="DkN-2l-EbJ"/>
+                                            <constraint firstItem="IGG-Cs-WM5" firstAttribute="top" secondItem="1f3-x9-xS6" secondAttribute="bottom" constant="10" id="Fz2-QJ-WnT"/>
                                             <constraint firstAttribute="height" constant="310" id="JBh-6L-mU2"/>
                                             <constraint firstAttribute="trailing" secondItem="agT-OK-r9M" secondAttribute="trailing" constant="10" id="JZv-v8-0Yv"/>
-                                            <constraint firstItem="okJ-aG-f1O" firstAttribute="leading" secondItem="U2P-v2-au8" secondAttribute="leading" constant="10" id="UDR-nl-Zka"/>
+                                            <constraint firstAttribute="trailing" secondItem="IGG-Cs-WM5" secondAttribute="trailing" constant="10" id="R9X-B9-iq0"/>
                                             <constraint firstAttribute="trailing" secondItem="5DR-Je-QAH" secondAttribute="trailing" constant="10" id="X5N-kt-iBe"/>
-                                            <constraint firstAttribute="trailing" secondItem="okJ-aG-f1O" secondAttribute="trailing" constant="10" id="YtN-Qe-PJn"/>
                                             <constraint firstAttribute="trailing" secondItem="1f3-x9-xS6" secondAttribute="trailing" constant="10" id="ZGA-Km-oHr"/>
                                             <constraint firstAttribute="trailing" secondItem="kk2-2i-M1R" secondAttribute="trailing" constant="10" id="aZr-eM-Fkm"/>
                                             <constraint firstItem="69Q-Wg-lKe" firstAttribute="leading" secondItem="U2P-v2-au8" secondAttribute="leading" constant="10" id="fpR-gG-2F5"/>
                                             <constraint firstItem="3F0-rU-z7I" firstAttribute="leading" secondItem="U2P-v2-au8" secondAttribute="leading" constant="10" id="fuf-CB-fGR"/>
                                             <constraint firstItem="agT-OK-r9M" firstAttribute="leading" secondItem="U2P-v2-au8" secondAttribute="leading" constant="10" id="g1D-ak-ip8"/>
                                             <constraint firstAttribute="trailing" secondItem="69Q-Wg-lKe" secondAttribute="trailing" constant="10" id="g82-oP-jFq"/>
-                                            <constraint firstItem="okJ-aG-f1O" firstAttribute="top" secondItem="1f3-x9-xS6" secondAttribute="bottom" constant="15" id="k5P-4W-7u2"/>
                                             <constraint firstItem="bGl-Vz-MkE" firstAttribute="leading" secondItem="U2P-v2-au8" secondAttribute="leading" constant="10" id="ktg-2r-IQV"/>
                                             <constraint firstAttribute="trailing" secondItem="3F0-rU-z7I" secondAttribute="trailing" constant="10" id="lWT-HT-a6d"/>
                                             <constraint firstItem="1f3-x9-xS6" firstAttribute="leading" secondItem="U2P-v2-au8" secondAttribute="leading" constant="10" id="naL-sJ-efh"/>
-                                            <constraint firstItem="5DR-Je-QAH" firstAttribute="top" secondItem="okJ-aG-f1O" secondAttribute="bottom" constant="15" id="tuv-cf-jjV"/>
+                                            <constraint firstItem="5DR-Je-QAH" firstAttribute="top" secondItem="IGG-Cs-WM5" secondAttribute="bottom" constant="15" id="qiF-s2-aKe"/>
                                             <constraint firstItem="3F0-rU-z7I" firstAttribute="top" secondItem="bGl-Vz-MkE" secondAttribute="bottom" constant="15" id="uhE-iw-2oG"/>
                                             <constraint firstAttribute="trailing" secondItem="bGl-Vz-MkE" secondAttribute="trailing" constant="10" id="wOR-Qt-WK8"/>
                                             <constraint firstItem="69Q-Wg-lKe" firstAttribute="top" secondItem="5DR-Je-QAH" secondAttribute="bottom" constant="10" id="x42-Sc-ePo"/>
@@ -489,7 +489,11 @@
                         <outlet property="Boat" destination="kk2-2i-M1R" id="5dd-2y-afx"/>
                         <outlet property="Boat_Label" destination="3F0-rU-z7I" id="lpe-Cv-weU"/>
                         <outlet property="Edit_button" destination="fQb-1U-f7i" id="Lxa-Vd-TZd"/>
+                        <outlet property="EndTime" destination="bGl-Vz-MkE" id="SqG-5d-LN5"/>
                         <outlet property="Mutipurpose_button" destination="4Ar-eM-QuW" id="Rih-gw-7hq"/>
+                        <outlet property="RaceDate" destination="IGG-Cs-WM5" id="gfM-Dy-W8W"/>
+                        <outlet property="Race_name" destination="KXJ-Wx-ONV" id="dMD-SN-ETO"/>
+                        <outlet property="StartTime" destination="69Q-Wg-lKe" id="eSW-cf-3xr"/>
                         <outlet property="raceTitle" destination="KXJ-Wx-ONV" id="QFL-za-Xwi"/>
                         <outlet property="toolbar" destination="HLN-W3-tmb" id="k7d-MG-v2G"/>
                         <segue destination="tht-hK-9Ar" kind="unwind" identifier="Back_To_Race_List" unwindAction="unwindToDetailedRaceWithSegue:" id="xle-I0-l5X"/>
@@ -1364,9 +1368,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="pY0-7z-LEB" kind="show" identifier="To_Race" id="XI3-to-Z0N"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1376,6 +1377,7 @@
                     </tableView>
                     <connections>
                         <segue destination="fgw-gB-dAu" kind="showDetail" identifier="To_Profile" id="Gbk-Sd-3aG"/>
+                        <segue destination="pY0-7z-LEB" kind="show" identifier="To_Race" id="XOU-FU-gGo"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qHZ-2r-OO6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2238,13 +2240,13 @@
         <image name="log_in_background" width="621" height="1104"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fte-uU-173"/>
+        <segue reference="XOU-FU-gGo"/>
         <segue reference="plq-d2-ZHt"/>
         <segue reference="8uC-EP-KLL"/>
         <segue reference="Sk9-pb-fuB"/>
         <segue reference="Hwa-x3-jEx"/>
         <segue reference="3B3-rP-ZRQ"/>
         <segue reference="yIK-qN-H3e"/>
-        <segue reference="ufz-43-ejv"/>
+        <segue reference="Gbk-Sd-3aG"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -40,14 +40,14 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
     private var UpcomingCellExpanded : Bool = true
     
     private var HistoryCellExpanded : Bool = false
-    
-    var baseURL : String = "http://192.168.137.1:8080/"
-    
-    var allURL : String = "/structure/event/all/"
+        
+    var allURL : String = "structure/event/all/"
     
     var specificURL : String = "structure/event/get/"
 
     var All_Event : [Int] = []
+    
+    var raceIndex : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +78,7 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
                 print(error)
             }
             
-            }.resume()
+        }.resume()
         
 //        for i in 1...10 {
 //            upcoming_event.append("Event\(i)")
@@ -202,11 +202,13 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
     
     
     
-    internal func UpTo(datasource: Any) {
+    internal func UpTo(datasource: Any, index: Int) {
+        raceIndex = index
         performSegue(withIdentifier: "Up_To_Race", sender: self)
     }
     
-    internal func HistTo(datesource: Any) {
+    internal func HistTo(datesource: Any, index: Int) {
+        raceIndex = index
         performSegue(withIdentifier: "Hist_To_Race", sender: self)
     }
     
@@ -221,8 +223,12 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
         if destination == "Up_To_Race" || destination == "Hist_To_Race" {
             let secondViewController = segue.destination as! Race_list
             if destination == "Up_To_Race" {
+                let race = upcoming_event[raceIndex]
+                secondViewController.raceID = race.subordinates
                 secondViewController.UpOrHis = "Upcoming"
             } else {
+                let race = history_event[raceIndex]
+                secondViewController.raceID = race.subordinates
                 secondViewController.UpOrHis = "History"
             }
         }
@@ -265,7 +271,7 @@ class EventUpcoming : UIView, UITableViewDelegate, UITableViewDataSource {
 
         let event = upcoming_event[indexPath.row]
     
-        cell.textLabel?.text = (event as! Events).name
+        cell.textLabel?.text = event.name
         
         return cell
     }
@@ -281,7 +287,7 @@ class EventUpcoming : UIView, UITableViewDelegate, UITableViewDataSource {
 //    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.UpTo(datasource: self)
+        delegate?.UpTo(datasource: self, index: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -303,7 +309,7 @@ class EventHistory : UIView, UITableViewDataSource, UITableViewDelegate {
         
         let event = history_event[indexPath.row]
         
-        cell.textLabel?.text = (event as! Events).name
+        cell.textLabel?.text = event.name
         
         return cell
     }
@@ -319,7 +325,7 @@ class EventHistory : UIView, UITableViewDataSource, UITableViewDelegate {
 //    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.HistTo(datesource: self)
+        delegate?.HistTo(datesource: self, index: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

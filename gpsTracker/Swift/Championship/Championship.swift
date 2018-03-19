@@ -26,11 +26,11 @@ private var tenhistory_champ : [String] = []
 
 
 protocol UpcomingDelegate: class {
-    func UpTo(datasource: Any)
+    func UpTo(datasource: Any, index: Int)
 }
 
 protocol HistoryDelegate: class {
-    func HistTo(datesource: Any)
+    func HistTo(datesource: Any, index: Int)
 }
 
 private var Up = Upcoming()
@@ -49,12 +49,12 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
     private var HistoryCellExpanded : Bool = false
     
     var All_Championship : [Int] = []
-    
-    var baseURL : String = "http://192.168.137.1:8080/"
-    
+        
     var allURL : String = "structure/championship/all/"
     
     var specificURL : String = "structure/championship/get/"
+    
+    var eventIndex : Int = 0
     
 //    var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -194,8 +194,12 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
             let secondViewController = segue.destination as! Event_list
             
             if destination == "Up_To_Event" {
+                let event = upcoming_champ[eventIndex]
+                secondViewController.eventID = event.subordinates
                 secondViewController.UpOrHis = "Upcoming"
             } else {
+                let event = history_champ[eventIndex]
+                secondViewController.eventID = event.subordinates
                 secondViewController.UpOrHis = "History"
             }
         }
@@ -226,11 +230,13 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
     
     }
     
-    internal func UpTo(datasource: Any) {
+    internal func UpTo(datasource: Any, index: Int) {
+        eventIndex = index
         performSegue(withIdentifier: "Up_To_Event", sender: self)
     }
     
-    internal func HistTo(datesource: Any) {
+    internal func HistTo(datesource: Any, index: Int) {
+        eventIndex = index
         performSegue(withIdentifier: "Hist_To_Event", sender: self)
     }
     
@@ -298,7 +304,7 @@ class Upcoming : UITableViewController {
         let championship = upcoming_champ[indexPath.row]
         
         
-        cell.textLabel?.text = (championship as! Championships).name
+        cell.textLabel?.text = championship.name
         return cell
     }
     
@@ -313,7 +319,7 @@ class Upcoming : UITableViewController {
 //    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.UpTo(datasource: self)
+        delegate?.UpTo(datasource: self, index: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -340,7 +346,7 @@ class History : UITableViewController{
         
         let championship = history_champ[indexPath.row]
 
-        cell.textLabel?.text = (championship as! Championships).name
+        cell.textLabel?.text = (championship).name
         
         return cell
     }
@@ -355,7 +361,7 @@ class History : UITableViewController{
 //    }
 //
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.HistTo(datesource: self)
+        delegate?.HistTo(datesource: self, index: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
