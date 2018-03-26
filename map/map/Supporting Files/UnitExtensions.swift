@@ -2,6 +2,7 @@ import Foundation
 
 class UnitConverterSpeed: UnitConverter
 {
+    
     private let coefficient: Double
     
     init(coefficient: Double)
@@ -34,4 +35,5 @@ extension UnitSpeed
     {
         return UnitSpeed(symbol: "nm", converter: UnitConverterSpeed(coefficient: 1.0 / 1.66)) //TEST
     }
+    
 }

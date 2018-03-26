@@ -1,6 +1,7 @@
 import CoreData
 
-class CoreDataStack {
+class CoreDataStack
+{
     
     static let persistentContainer: NSPersistentContainer =
     {
@@ -33,4 +34,5 @@ class CoreDataStack {
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
+    
 }

@@ -204,4 +204,5 @@ extension NewRaceViewController: MKMapViewDelegate
         renderer.lineWidth = 3
         return renderer
     }
+    
 }

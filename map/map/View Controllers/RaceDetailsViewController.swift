@@ -3,6 +3,7 @@ import MapKit
 
 class RaceDetailsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate
 {
+    
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -216,4 +217,5 @@ extension RaceDetailsViewController: MKMapViewDelegate
         renderer.lineWidth = 3
         return renderer
     }
+    
 }

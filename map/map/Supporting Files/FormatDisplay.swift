@@ -2,6 +2,7 @@ import Foundation
 
 struct FormatDisplay
 {
+    
     static func distance(_ distance: Double) -> String
     {
         let distanceMeasurement = Measurement(value: distance, unit: UnitLength.meters)
@@ -39,4 +40,5 @@ struct FormatDisplay
         formatter.dateStyle = .medium
         return formatter.string(from: timestamp)
     }
+    
 }
