@@ -14,6 +14,16 @@ This is what we have planed for the second release of our app ![](https://cdn.ra
 <img align="center" src="iOS_Map_Demo.gif" width="25%" alt="iOS Map Demo"/>
 </p>
 
+## Where we are now
+
+Fri 16 Mar 11:27
+
+<p align="center">
+  <img align="left" src="Test 1 - Large.png" width="25%"/>
+  <img align="center" src="Test 1 - Small.png" width="25%"/>
+  <img align="right" src="Test 1 - Rotated.png" width="25%"/>
+</p>
+
 ## Prerequisites
 
 To download (http://blog.osteele.com/2008/05/my-git-workflow/)
