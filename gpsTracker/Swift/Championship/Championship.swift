@@ -18,6 +18,16 @@ struct Championships : Decodable {
     let startDate : Int
     let subordinates : [Int] // Event
 }
+// Reference purpose
+//var numPages: Int {
+//    get{
+//        return categoriesPerPage.count
+//    }
+//    set(v){
+//        self.categoriesPerPage = v;
+//    }
+//}
+//
 
 private var upcoming_champ = [Championships]()
 private var tenupcoming_champ : [String] = []
@@ -50,7 +60,7 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
     
     var All_Championship : [Int] = []
         
-    var allURL : String = "structure/championship/all/"
+    var allURL : String = "structure/championship/all"
     
     var specificURL : String = "structure/championship/get/"
     

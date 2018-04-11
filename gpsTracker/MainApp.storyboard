@@ -827,6 +827,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add" id="FzS-Df-BaE">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="Add_Pressed:" destination="OO6-VZ-vR1" id="Ctw-mM-q1b"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="375" height="1064"/>
@@ -1605,6 +1608,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="m34-vM-dyT">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="Save_Pressed:" destination="W4s-P2-PzK" id="qff-HQ-HPN"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <size key="freeformSize" width="375" height="914"/>
@@ -2243,7 +2249,7 @@
         <segue reference="XOU-FU-gGo"/>
         <segue reference="plq-d2-ZHt"/>
         <segue reference="8uC-EP-KLL"/>
-        <segue reference="Sk9-pb-fuB"/>
+        <segue reference="OqR-y3-SyR"/>
         <segue reference="Hwa-x3-jEx"/>
         <segue reference="3B3-rP-ZRQ"/>
         <segue reference="yIK-qN-H3e"/>

@@ -41,7 +41,7 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
     
     private var HistoryCellExpanded : Bool = false
         
-    var allURL : String = "structure/event/all/"
+    var allURL : String = "structure/event/all"
     
     var specificURL : String = "structure/event/get/"
 

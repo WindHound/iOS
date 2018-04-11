@@ -67,7 +67,9 @@ class Related_Boats: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 
                 secondViewController.Chosen_Boat = self.Chosen_Boat
                 
-                secondViewController.Boat.text = String(secondViewController.Chosen_Boat)
+                if Chosen_Boat != 0 {
+                    secondViewController.Boat.text = String(secondViewController.Chosen_Boat)
+                }
             }
         }
     }

@@ -8,9 +8,16 @@
 
 import UIKit
 
+struct Boats {
+    var id : Int = 0
+    var name : String = ""
+    var admins : [Int] = []
+    var competitors : [Int] = []
+    var races : [Int] = []
+}
 class Add_Boat: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
-    var Added_Boats : NSMutableArray = []
+    var Added_Boats : [Boats] = []
 
     @IBOutlet weak var Name: UITextField!
     @IBOutlet weak var Boats: UITableView!
@@ -38,7 +45,7 @@ class Add_Boat: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         
         if destination == "Back To Add Race" {
             let secondViweController = segue.destination as! Add_Race
-            secondViweController.Selected_Boats = self.Added_Boats
+//            secondViweController.Selected_Boats = self.Added_Boats
             secondViweController.textRace.text = "\(self.Added_Boats.count)"
         }
     }
@@ -47,7 +54,6 @@ class Add_Boat: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         if Name.text == "" {
             createAlert(title: "Invalid Name", message: "Empty Boat Name. Please enter the boat name", name: "Name")
         } else {
-            Added_Boats.add(Name.text as Any)
             Boats.reloadData()
             Name.text = ""
         }
@@ -83,7 +89,9 @@ class Add_Boat: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Boats", for: indexPath)
         
-        cell.textLabel?.text = Added_Boats.object(at: indexPath.row) as? String
+        let boat = Added_Boats[indexPath.row]
+        
+        cell.textLabel?.text = boat.name
         
         return cell
     }
@@ -94,7 +102,7 @@ class Add_Boat: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            Added_Boats.removeObject(at: indexPath.row)
+            Added_Boats.remove(at: indexPath.row)
         }
         tableView.reloadData()
     }

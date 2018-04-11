@@ -15,7 +15,7 @@ struct Races : Decodable {
     let managers : [Int] // Race
     let admins : [Int]
     let startDate : Int
-    var endDate : Int
+    let endDate : Int
 }
 private var upcoming_race : [Races] = []
 private var tenupcoming_race : [String] = []
@@ -35,7 +35,7 @@ class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
     private var UpcomingCellExpanded : Bool = true
     private var HistoryCellExpanded : Bool = false
     
-    var allURL : String = "structure/race/all/"
+    var allURL : String = "structure/race/all"
    
     var specificURL : String = "structure/race/get/"
     
@@ -104,7 +104,8 @@ class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
                 guard let data = data else {return}
                 
                 do {
-                    var race = try JSONDecoder().decode(Races.self, from: data)
+                    
+                    let race = try JSONDecoder().decode(Races.self, from: data)
                     
                     print(race)
                     
@@ -193,13 +194,13 @@ class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
     }
     
     internal func UpTo(datasource: Any, index: Int) {
-        performSegue(withIdentifier: "Up To Info", sender: self)
         raceIndex = index
+        performSegue(withIdentifier: "Up To Info", sender: self)
     }
     
     internal func HistTo(datesource: Any, index: Int) {
-        performSegue(withIdentifier: "Hist To Info", sender: self)
         raceIndex = index
+        performSegue(withIdentifier: "Hist To Info", sender: self)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

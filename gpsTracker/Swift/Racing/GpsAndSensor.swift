@@ -10,33 +10,44 @@ import UIKit
 import CoreLocation
 import CoreMotion
 
-struct sailboat {
-    let id: String
-    let longitude : String
-    let latitude : String
-    let speed : String
-    let accXvalue : String
-    let accYvalue : String
-    let accZvalue : String
-    let gyrXvalue : String
-    let gyrYvalue : String
-    let gyrZvalue : String
-    let comp : String
+struct sailboat : Encodable {
+    var competitorID: Int
+    var boatID : Int
+    var raceID : Int
+    var timeMilli : Int
+    var longitude : Float
+    var latitude : Float
+    var x : [Float] // accelerometer
+    var y : [Float]
+    var z : [Float]
+    var dX : [Float] // gyroscope
+    var dY : [Float]
+    var dZ : [Float]
+    var angle : [Float]
 }
+
 
 class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
     
+    var competitorID : Int = 0
+    var boatID : Int = 0
+    var raceID : Int = 0
     var lat : Double = 0.0
     var long : Double = 0.0
     var speed = String()
-    var accXvalues : [String] = []
-    var accYvalues : [String] = []
-    var accZvalues : [String] = []
-    var gyrXvalues : [String] = []
-    var gyrYvalues : [String] = []
-    var gyrZvalues : [String] = []
-    var comp : [String] = []
-    var compass = String()
+    var x : [Float] = []
+    var y : [Float] = []
+    var z : [Float] = []
+    var dX : [Float] = []
+    var dY : [Float] = []
+    var dZ : [Float] = []
+    var angle : [Float] = []
+    var compass : Float = 0
+    var gyrX : Float = 0
+    var gyrY : Float = 0
+    var gyrZ : Float = 0
+    
+    let date = Date()
     
     var producedfile : [String] = []
     var filetosend : [String] = []
@@ -52,6 +63,8 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     var motionManager = CMMotionManager()
+    
+    var postURL : String = "movedata/add"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,17 +92,33 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
     
     func updateSensors() {
         
+//        let amount = 10.000001
+//        let formatter = NumberFormatter()
+//        formatter.numberStyle = .decimal
+//        formatter.maximumFractionDigits = 2
+//        let formattedAmount = formatter.string(from: amount as NSNumber)!
+//        print(formattedAmount) // 10
+        
         motionManager.startAccelerometerUpdates()
         motionManager.startGyroUpdates()
         motionManager.startAccelerometerUpdates(to: OperationQueue.current!, withHandler: {(data, error) in
             if let myData = data
             {
-                if self.accXvalues.count < 60 {
-                    self.accXvalues.append(String(format: "%.2f", ((myData.acceleration.x) * -10)))
-                    self.accYvalues.append(String(format: "%.2f", ((myData.acceleration.y) * -10)))
-                    self.accZvalues.append(String(format: "%.2f", ((myData.acceleration.z) * -10)))
-                    self.comp.append(self.compass)
-
+                if self.x.count < 60 {
+                    self.x.append(Float(((myData.acceleration.x) * -10)))
+                    self.y.append(Float(((myData.acceleration.y) * -10)))
+                    self.z.append(Float(((myData.acceleration.z) * -10)))
+                    self.angle.append(self.compass)
+                    if self.dX.last == self.gyrX {
+                        self.dX.append(0)
+                        self.dY.append(0)
+                        self.dZ.append(0)
+                    } else {
+                        self.dX.append(self.gyrX)
+                        self.dY.append(self.gyrY)
+                        self.dZ.append(self.gyrZ)
+                    }
+                    
                 }
                 
             }
@@ -98,10 +127,10 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
         motionManager.startGyroUpdates(to: OperationQueue.current!, withHandler: {(data, error) in
             if let myData = data
             {
-                if self.gyrXvalues.count < 60 {
-                    self.gyrXvalues.append(String(format:"%.2f", myData.rotationRate.x))
-                    self.gyrYvalues.append(String(format:"%.2f", myData.rotationRate.y))
-                    self.gyrZvalues.append(String(format:"%.2f", myData.rotationRate.z))
+                if self.dX.count < 60 {
+                    self.gyrX = Float((myData.rotationRate.x))
+                    self.gyrY = Float((myData.rotationRate.y))
+                    self.gyrZ = Float((myData.rotationRate.z))
                 }
             }
         })
@@ -119,13 +148,13 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
     }
     
     func clearArrays() {
-        accXvalues.removeAll()
-        accYvalues.removeAll()
-        accZvalues.removeAll()
-        gyrXvalues.removeAll()
-        gyrYvalues.removeAll()
-        gyrZvalues.removeAll()
-        comp.removeAll()
+        x.removeAll()
+        y.removeAll()
+        z.removeAll()
+        dX.removeAll()
+        dY.removeAll()
+        dZ.removeAll()
+        angle.removeAll()
     }
     
     // Location manager functions
@@ -138,17 +167,17 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
                 timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GpsAndSensor.action), userInfo: nil, repeats: true)
             }
             
-            print(location.coordinate)
+//            print(location.coordinate)
             lat = location.coordinate.latitude
             long = location.coordinate.longitude
-            speed = String(location.speed)
+//            speed = String(location.speed)
         }
     }
     
    
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
 
-        compass = String(format: "%.0f", newHeading.trueHeading)
+        compass = Float(newHeading.trueHeading)
 
     }
     
@@ -166,12 +195,11 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
         let date = Date()
         
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
         
         var filename = String(describing: date)
         let endIndex = filename.index(filename.endIndex, offsetBy: -6)
-        filename = filename.substring(to: endIndex)
+        filename = String(filename[..<endIndex])
         
         saveUploadedFilesSet(fileName: filename)
 
@@ -181,33 +209,55 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
     // Function to save the data from the sensors and locations to json file
     func saveUploadedFilesSet(fileName:String) {
         
-        var data : [String : String] = [:]
+
+//        print("gyrX: \(dX)")
+//        print("gyrY: \(dY)")
+//        print("gyrZ: \(dZ)")
+
+        let newData = sailboat(competitorID: competitorID, boatID: boatID, raceID: raceID, timeMilli: Int(TimeInterval(date.timeIntervalSince1970 * 1000)), longitude: Float(long), latitude: Float(lat), x: x, y: y, z: z, dX: dX, dY: dY, dZ: dZ, angle: angle)
         
-        print("Id : 1, Time = \(fileName), Latitude: \(lat), Longitude: \(long)")
-        data["Id"] = "1"
-        data["Time"] = "\(fileName)"
-        data["Latitude"] = "\(lat)"
-        data["Longitude"] = "\(long)"
+        guard let jsonData = try? JSONEncoder().encode(newData) else {return}
         
+//        guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]) else {return}
+        
+//        print(json)
+        
+        guard let DocumentDirURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {return}
+            
+        let jsonURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension("json")
+            
+//        print(jsonURL)
         
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-        
-            let DocumentDirURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            
-            let jsonURL = DocumentDirURL.appendingPathComponent(fileName).appendingPathExtension("json")
-            print(jsonURL)
-            
-            do {
-                try jsonData.write(to: jsonURL)
-            } catch let error as Error {
-                print(error)
-            }
-            
-            
-        } catch let error as Error{
+            try jsonData.write(to: jsonURL)
+        } catch {
             print(error)
         }
+        
+        guard let url = URL (string: "\(baseURL)\(postURL)") else {return}
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-type")
+        request.httpBody = jsonData
+
+        let session = URLSession.shared
+        session.dataTask(with: request) {(data, response, error) in
+            if let response = response {
+                print(response)
+            }
+
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments])
+                    print(json)
+                } catch {
+                    print(error)
+                }
+            }
+        }.resume()
+
+        
         
         do {
             let DocumentDirURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -217,13 +267,10 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
             
             if let jsonReadData = jsonReadData {
                 let sailInfo = try JSONSerialization.jsonObject(with: jsonReadData as Data, options: .mutableContainers)
-                let readData = sailInfo as! [String : String]
-                let id = readData["I§d"], time = readData["Time"], latitude = readData["Latitude"], longitude = readData["Longitude"]
-                
-                print(id, time, latitude, longitude)
+//                print(sailInfo)
             }
             
-        } catch let error as Error {
+        } catch{
             print(error)
         }
         

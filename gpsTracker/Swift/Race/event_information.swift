@@ -24,7 +24,7 @@ class event_information: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var StartTime: UITextField!
     @IBOutlet weak var EndTime: UITextField!
     
-    var Chosen_Boat : Int = 0
+    var Chosen_Boat : Int!
     
     var UpOrHis : String = ""
     var fromwhere : String = ""
@@ -77,6 +77,9 @@ class event_information: UIViewController, UITextFieldDelegate {
     @IBAction func Mutipurpose_button_pressed(_ sender: Any) {
         
         if Mutipurpose_button.title == "Record" {
+            if Boat.text == "" {
+                createAlert(title: "Error", message: "Pleases choose a boat to record", name: "error")
+            }
             performSegue(withIdentifier: "To Record", sender: self)
         }
         
@@ -116,6 +119,33 @@ class event_information: UIViewController, UITextFieldDelegate {
             let secondViewController = segue.destination as! Related_Boats
             secondViewController.Boats = self.boatID
         }
+        
+        if destination == "To Record" {
+            let secondViewController = segue.destination as! GpsAndSensor
+            secondViewController.raceID = raceID
+            secondViewController.boatID = Chosen_Boat
+        }
+    }
+    
+    func createAlert(title:String, message:String, name: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel) {
+            (action) in if name == "error" {
+                
+            }
+            
+        }
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+        // Reference purpose
+        //        let openAction = UIAlertAction(title: "Open Settings", style: .default) {(action) in
+        //            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+        //                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        //            }
+        //        }
     }
     
     

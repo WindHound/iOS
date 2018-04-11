@@ -8,6 +8,27 @@
 
 import UIKit
 
+struct Race_Post : Encodable {
+    var id : Int?
+    var name : String
+    var subordinates : [Int]
+    var managers : [Int]
+    var admins : [Int]
+    var startDate : Int
+    var endDate : Int
+//    var latitude : Double
+//    var longitude : Double
+}
+
+//For event
+//Long          a_id,
+//String        a_name,
+//Calendar      a_startDate,
+//Calendar      a_endDate,
+//HashSet<Long> a_admins,
+//HashSet<Long> a_races,
+//HashSet<Long> a_championships
+
 class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet weak var textTitle: UITextField!
@@ -27,6 +48,10 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     
     var fromwhere : String = ""
     
+    var raceToAdd = Race_Post(id: 0 , name: "", subordinates: [], managers: [], admins: [], startDate: 0, endDate: 0)
+    
+    var requestURL : String = "structure/race/add"
+
     var Selected_Events : NSMutableArray = []
     var Selected_Admins : NSMutableArray = []
     var Selected_Boats : NSMutableArray = []
@@ -43,6 +68,7 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        requestID()
         
         textTitle.delegate = self
         textLocation.delegate = self
@@ -66,11 +92,43 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         currentdateformatter.dateFormat = "yyyy-MM-dd HH:mm"
         
         currenttime = currentdateformatter.string(from: date)
-
-        print(currenttime)
         
     }
     
+    func requestID() {
+        
+        let parameters = ["id": raceToAdd.id as Any, "name": raceToAdd.name, "startDate": raceToAdd.startDate, "endDate": raceToAdd.endDate, "admins": raceToAdd.admins, "managers": raceToAdd.managers, "subordinates": raceToAdd.subordinates] as [String : Any] // where raceToAdd.id is null at this point
+
+        guard let url = URL(string: "\(baseURL)\(requestURL)") else {return}
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+
+        guard let jsonBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+
+        request.httpBody = jsonBody
+
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) {(data, response, error) in
+            if let response = response {
+                print(response)
+            }
+
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print(json)
+                } catch {
+                    print(error)
+                }
+            }
+            }.resume()
+        
+        
+
+
+    }
+
     
     //Function to create date picker
     func createDatePicker(forField field : UITextField) {
@@ -120,6 +178,7 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
                 createAlert(title: "Invalid date", message: "End date can't be before start date" , name: "End date")
             } else {
                 textEnddate.text = "\(enddateString)"
+                
             }
         }
         
@@ -233,7 +292,7 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         if destination == "To Add Boat" {
             let secondViewController = segue.destination as! Add_Boat
             
-            secondViewController.Added_Boats = self.Selected_Boats
+//            secondViewController.Added_Boats = self.Selected_Boats
         }
     }
     
@@ -298,6 +357,48 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     @IBAction func unwindToAddRace(segue:UIStoryboardSegue) { }
 
     
+    @IBAction func Add_Pressed(_ sender: Any) {
+        raceToAdd.name = textTitle.text!
+        
+//        if latitude != nil && longitude != nil {
+//            raceToAdd.latitude = self.latitude
+//            raceToAdd.longitude = self.longitude
+//        }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        if endtime != "" {
+            let convertedDate = formatter.date(from: endtime)
+            let endServerTime =   TimeInterval((convertedDate?.timeIntervalSince1970)! * 1000)
+            raceToAdd.endDate = Int(endServerTime)
+        }
+        
+        if starttime != "" {
+            let convertedDate = formatter.date(from: starttime)
+            let startServerTime = TimeInterval((convertedDate?.timeIntervalSince1970)! * 1000)
+            raceToAdd.startDate = Int(startServerTime)
+        }
+        
+//        if Selected_Admins.count != 0 {
+//            raceToAdd.admins = Selected_Admins
+//        } This need extra work
+        
+//        if Selected_Boats.count != 0 {
+//            raceToAdd.subordinates = Selected_Boats
+//        }
+        
+
+//        func convertToUTC(dateToConvert:String) -> String {
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "dd-MM-yyyy hh:mm a"
+//            let convertedDate = formatter.date(from: dateToConvert)
+//            formatter.timeZone = TimeZone(identifier: "UTC")
+//            return formatter.string(from: convertedDate!)
+//
+//        }
+    }
+
     
 
     /*
