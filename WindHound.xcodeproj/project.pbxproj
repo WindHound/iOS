@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5011C7D4ABB4948DA5ED2A1E /* Pods_gpsTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D50E1CB167872A24CD9BA8 /* Pods_gpsTracker.framework */; };
 		550A67B4202F916400AE1019 /* sailing_icon_20x20.png in Resources */ = {isa = PBXBuildFile; fileRef = 550A67A0202F916200AE1019 /* sailing_icon_20x20.png */; };
 		550A67B5202F916400AE1019 /* sailing_icon_180x180.png in Resources */ = {isa = PBXBuildFile; fileRef = 550A67A1202F916200AE1019 /* sailing_icon_180x180.png */; };
 		550A67B6202F916400AE1019 /* sailing_icon_240x240.png in Resources */ = {isa = PBXBuildFile; fileRef = 550A67A2202F916200AE1019 /* sailing_icon_240x240.png */; };
@@ -74,6 +73,9 @@
 		5552C9532041AE1800598669 /* Race_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5552C9522041AE1800598669 /* Race_list.swift */; };
 		55548A142019444B00FC7E23 /* Championship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55548A132019444B00FC7E23 /* Championship.swift */; };
 		5559739520161FFF00CAEBDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5559739420161FFF00CAEBDC /* Assets.xcassets */; };
+		555A7D0E207FC5E600F0C639 /* Championship_Master.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A7D0D207FC5E600F0C639 /* Championship_Master.swift */; };
+		555A7D1C207FEA6800F0C639 /* Event_Master.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A7D1B207FEA6800F0C639 /* Event_Master.swift */; };
+		555A7D22207FF83D00F0C639 /* Race_Master.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A7D21207FF83D00F0C639 /* Race_Master.swift */; };
 		55686E20204AFA1E00D86201 /* Add_Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55686E1F204AFA1E00D86201 /* Add_Event.swift */; };
 		55686E22204C396900D86201 /* Existing_Championship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55686E21204C396900D86201 /* Existing_Championship.swift */; };
 		556BDED220547C6400822130 /* Related_Boats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556BDED120547C6400822130 /* Related_Boats.swift */; };
@@ -82,9 +84,12 @@
 		557F41652007E8DF0087239B /* GpsAndSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F41642007E8DF0087239B /* GpsAndSensor.swift */; };
 		557F416D2007E8DF0087239B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 557F416B2007E8DF0087239B /* LaunchScreen.storyboard */; };
 		55C34D50204F0F4B001F9389 /* Existing_Races.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C34D4F204F0F4B001F9389 /* Existing_Races.swift */; };
+		7E77EF6802720747C2408726 /* Pods_WindHound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006127C0B55CFF2F414B6CBC /* Pods_WindHound.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		006127C0B55CFF2F414B6CBC /* Pods_WindHound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WindHound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D6DB3D39A7DC3679F22AA13 /* Pods-WindHound.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WindHound.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WindHound/Pods-WindHound.debug.xcconfig"; sourceTree = "<group>"; };
 		52D50E1CB167872A24CD9BA8 /* Pods_gpsTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gpsTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		550A67A0202F916200AE1019 /* sailing_icon_20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sailing_icon_20x20.png; sourceTree = "<group>"; };
 		550A67A1202F916200AE1019 /* sailing_icon_180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sailing_icon_180x180.png; sourceTree = "<group>"; };
@@ -153,6 +158,9 @@
 		5552C9522041AE1800598669 /* Race_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Race_list.swift; sourceTree = "<group>"; };
 		55548A132019444B00FC7E23 /* Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Championship.swift; sourceTree = "<group>"; };
 		5559739420161FFF00CAEBDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../xamarin/sailGPS/sailGPS/Assets.xcassets; sourceTree = "<group>"; };
+		555A7D0D207FC5E600F0C639 /* Championship_Master.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Championship_Master.swift; sourceTree = "<group>"; };
+		555A7D1B207FEA6800F0C639 /* Event_Master.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event_Master.swift; sourceTree = "<group>"; };
+		555A7D21207FF83D00F0C639 /* Race_Master.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Race_Master.swift; sourceTree = "<group>"; };
 		55686E1F204AFA1E00D86201 /* Add_Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_Event.swift; sourceTree = "<group>"; };
 		55686E21204C396900D86201 /* Existing_Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_Championship.swift; sourceTree = "<group>"; };
 		556BDED120547C6400822130 /* Related_Boats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Related_Boats.swift; sourceTree = "<group>"; };
@@ -163,6 +171,7 @@
 		557F416C2007E8DF0087239B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		557F416E2007E8DF0087239B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55C34D4F204F0F4B001F9389 /* Existing_Races.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_Races.swift; sourceTree = "<group>"; };
+		61E7960EEC8A02CACA9DFADC /* Pods-WindHound.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WindHound.release.xcconfig"; path = "Pods/Target Support Files/Pods-WindHound/Pods-WindHound.release.xcconfig"; sourceTree = "<group>"; };
 		EF9CF05843E5FBF14F617A45 /* Pods-gpsTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gpsTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gpsTracker/Pods-gpsTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		F4D1C942EE929B99CBC34F87 /* Pods-gpsTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gpsTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-gpsTracker/Pods-gpsTracker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,7 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55166B282029D879001A45A9 /* SwiftyJSON.framework in Frameworks */,
-				5011C7D4ABB4948DA5ED2A1E /* Pods_gpsTracker.framework in Frameworks */,
+				7E77EF6802720747C2408726 /* Pods_WindHound.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +194,8 @@
 			children = (
 				EF9CF05843E5FBF14F617A45 /* Pods-gpsTracker.debug.xcconfig */,
 				F4D1C942EE929B99CBC34F87 /* Pods-gpsTracker.release.xcconfig */,
+				3D6DB3D39A7DC3679F22AA13 /* Pods-WindHound.debug.xcconfig */,
+				61E7960EEC8A02CACA9DFADC /* Pods-WindHound.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -350,6 +361,7 @@
 		55686E24204C3A0D00D86201 /* Event */ = {
 			isa = PBXGroup;
 			children = (
+				555A7D1B207FEA6800F0C639 /* Event_Master.swift */,
 				550AEE18202F37C200FC1978 /* Event.swift */,
 				5552C9522041AE1800598669 /* Race_list.swift */,
 				55686E1F204AFA1E00D86201 /* Add_Event.swift */,
@@ -362,6 +374,7 @@
 		55686E25204C3A1F00D86201 /* Championship */ = {
 			isa = PBXGroup;
 			children = (
+				555A7D0D207FC5E600F0C639 /* Championship_Master.swift */,
 				55548A132019444B00FC7E23 /* Championship.swift */,
 				5552C9502041AE0000598669 /* Event_list.swift */,
 				554FCA0B2045C942009B0EE2 /* Add_Championship.swift */,
@@ -373,6 +386,7 @@
 		55686E26204C3A4E00D86201 /* Race */ = {
 			isa = PBXGroup;
 			children = (
+				555A7D21207FF83D00F0C639 /* Race_Master.swift */,
 				550FDD45203B182C00999C8A /* Race.swift */,
 				550AEE1A202F3B9100FC1978 /* event_information.swift */,
 				552CF83F201FD5F700620C29 /* Add_Race.swift */,
@@ -430,6 +444,7 @@
 				5512BD4A202A5F2500C19DBB /* CoreLocation.framework */,
 				55166B292029D879001A45A9 /* SwiftyJSON.framework */,
 				52D50E1CB167872A24CD9BA8 /* Pods_gpsTracker.framework */,
+				006127C0B55CFF2F414B6CBC /* Pods_WindHound.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -560,7 +575,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-gpsTracker/Pods-gpsTracker-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-WindHound/Pods-WindHound-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -569,7 +584,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-gpsTracker/Pods-gpsTracker-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WindHound/Pods-WindHound-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7EA4FD844C937AA60305394B /* [CP] Check Pods Manifest.lock */ = {
@@ -583,7 +598,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-gpsTracker-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-WindHound-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -602,7 +617,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-gpsTracker/Pods-gpsTracker-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WindHound/Pods-WindHound-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -618,8 +633,11 @@
 				55548A142019444B00FC7E23 /* Championship.swift in Sources */,
 				55686E22204C396900D86201 /* Existing_Championship.swift in Sources */,
 				5512CCE2203B893500B17951 /* Profile_page.swift in Sources */,
+				555A7D0E207FC5E600F0C639 /* Championship_Master.swift in Sources */,
 				550B1D4A2020845900213E81 /* set_location.swift in Sources */,
 				553FD97A204D6BBE00198BC5 /* Existing_Admins.swift in Sources */,
+				555A7D1C207FEA6800F0C639 /* Event_Master.swift in Sources */,
+				555A7D22207FF83D00F0C639 /* Race_Master.swift in Sources */,
 				550FDD46203B182C00999C8A /* Race.swift in Sources */,
 				550B2E9020174AAE0027127F /* log_in.swift in Sources */,
 				554FCA102045DE7D009B0EE2 /* Existing_events.swift in Sources */,
@@ -759,7 +777,7 @@
 		};
 		557F41722007E8DF0087239B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EF9CF05843E5FBF14F617A45 /* Pods-gpsTracker.debug.xcconfig */;
+			baseConfigurationReference = 3D6DB3D39A7DC3679F22AA13 /* Pods-WindHound.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -776,7 +794,7 @@
 		};
 		557F41732007E8DF0087239B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4D1C942EE929B99CBC34F87 /* Pods-gpsTracker.release.xcconfig */;
+			baseConfigurationReference = 61E7960EEC8A02CACA9DFADC /* Pods-WindHound.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -8,16 +8,6 @@
 
 import UIKit
 
-struct Events : Decodable {
-    let id : Int
-    let name : String
-    let subordinates : [Int] // Race
-    let managers : [Int] // Championship
-    let admins : [Int]
-    let startDate : Int
-    let endDate : Int
-}
-
 private var upcoming_event = [Events]()
 private var tenupcoming_event : [String] = []
 private var history_event = [Events]()
@@ -63,6 +53,7 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
             if let data = data {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print(json)
                     let ids = json as! [Int]
                     
                     if ids.count != 0 {
@@ -71,7 +62,7 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
                         self.updatearray()
                     }
                 } catch {
-                    print("ERROR")
+                    print(error)
                 }
             }
             if let error = error {
@@ -239,8 +230,6 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
 //        tableView.reloadData()
 //    }
     
-    
-    @IBAction func unwindToEventList(segue:UIStoryboardSegue) { }
 
     /*
     // MARK: - Navigation

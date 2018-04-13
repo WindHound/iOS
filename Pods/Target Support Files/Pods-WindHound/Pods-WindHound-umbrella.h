@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_gpsTrackerVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_gpsTrackerVersionString[];
+FOUNDATION_EXPORT double Pods_WindHoundVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_WindHoundVersionString[];
 

@@ -8,15 +8,7 @@
 
 import UIKit
 
-struct Races : Decodable {
-    let id : Int
-    let name : String
-    let subordinates : [Int] // Boat
-    let managers : [Int] // Race
-    let admins : [Int]
-    let startDate : Int
-    let endDate : Int
-}
+
 private var upcoming_race : [Races] = []
 private var tenupcoming_race : [String] = []
 private var history_race : [Races] = []
@@ -241,7 +233,6 @@ class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
         }
     }
     
-    @IBAction func unwindToRaceList(segue:UIStoryboardSegue) { }
     
 
     /*

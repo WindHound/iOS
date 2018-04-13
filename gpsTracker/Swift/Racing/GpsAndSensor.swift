@@ -15,15 +15,15 @@ struct sailboat : Encodable {
     var boatID : Int
     var raceID : Int
     var timeMilli : Int
-    var longitude : Float
-    var latitude : Float
-    var x : [Float] // accelerometer
-    var y : [Float]
-    var z : [Float]
-    var dX : [Float] // gyroscope
-    var dY : [Float]
-    var dZ : [Float]
-    var angle : [Float]
+    var longitude : Double
+    var latitude : Double
+    var x : [Double] // accelerometer
+    var y : [Double]
+    var z : [Double]
+    var dX : [Double] // gyroscope
+    var dY : [Double]
+    var dZ : [Double]
+    var angle : [Int]
 }
 
 
@@ -35,17 +35,17 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
     var lat : Double = 0.0
     var long : Double = 0.0
     var speed = String()
-    var x : [Float] = []
-    var y : [Float] = []
-    var z : [Float] = []
-    var dX : [Float] = []
-    var dY : [Float] = []
-    var dZ : [Float] = []
-    var angle : [Float] = []
-    var compass : Float = 0
-    var gyrX : Float = 0
-    var gyrY : Float = 0
-    var gyrZ : Float = 0
+    var x : [Double] = []
+    var y : [Double] = []
+    var z : [Double] = []
+    var dX : [Double] = []
+    var dY : [Double] = []
+    var dZ : [Double] = []
+    var angle : [Int] = []
+    var compass : Double = 0
+    var gyrX : Double = 0
+    var gyrY : Double = 0
+    var gyrZ : Double = 0
     
     let date = Date()
     
@@ -84,9 +84,9 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
             
         }
         
-        motionManager.accelerometerUpdateInterval = 1/60
+        motionManager.accelerometerUpdateInterval = 1/5
         
-        motionManager.gyroUpdateInterval = 1/60
+        motionManager.gyroUpdateInterval = 1/5
         
     }
     
@@ -105,10 +105,10 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
             if let myData = data
             {
                 if self.x.count < 60 {
-                    self.x.append(Float(((myData.acceleration.x) * -10)))
-                    self.y.append(Float(((myData.acceleration.y) * -10)))
-                    self.z.append(Float(((myData.acceleration.z) * -10)))
-                    self.angle.append(self.compass)
+                    self.x.append((myData.acceleration.x) * -10)
+                    self.y.append((myData.acceleration.y) * -10)
+                    self.z.append((myData.acceleration.z) * -10)
+                    self.angle.append(Int(self.compass))
                     if self.dX.last == self.gyrX {
                         self.dX.append(0)
                         self.dY.append(0)
@@ -128,9 +128,9 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
             if let myData = data
             {
                 if self.dX.count < 60 {
-                    self.gyrX = Float((myData.rotationRate.x))
-                    self.gyrY = Float((myData.rotationRate.y))
-                    self.gyrZ = Float((myData.rotationRate.z))
+                    self.gyrX = (myData.rotationRate.x)
+                    self.gyrY = (myData.rotationRate.y)
+                    self.gyrZ = (myData.rotationRate.z)
                 }
             }
         })
@@ -177,7 +177,7 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
    
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
 
-        compass = Float(newHeading.trueHeading)
+        compass = newHeading.trueHeading
 
     }
     
@@ -214,13 +214,13 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
 //        print("gyrY: \(dY)")
 //        print("gyrZ: \(dZ)")
 
-        let newData = sailboat(competitorID: competitorID, boatID: boatID, raceID: raceID, timeMilli: Int(TimeInterval(date.timeIntervalSince1970 * 1000)), longitude: Float(long), latitude: Float(lat), x: x, y: y, z: z, dX: dX, dY: dY, dZ: dZ, angle: angle)
+        let newData = sailboat(competitorID: competitorID, boatID: boatID, raceID: raceID, timeMilli: Int(TimeInterval(date.timeIntervalSince1970 * 1000)), longitude: long, latitude: lat, x: x, y: y, z: z, dX: dX, dY: dY, dZ: dZ, angle: angle)
         
         guard let jsonData = try? JSONEncoder().encode(newData) else {return}
         
-//        guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]) else {return}
+        guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]) else {return}
         
-//        print(json)
+        print(json)
         
         guard let DocumentDirURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {return}
             
@@ -326,6 +326,16 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func stop(_ sender: Any) {
+        locationManager.stopUpdatingLocation()
+        locationManager.stopUpdatingHeading()
+        motionManager.stopAccelerometerUpdates()
+        motionManager.stopGyroUpdates()
+        
+        timer.invalidate()
+        
+        performSegue(withIdentifier: "Back To Info", sender: self)
+    }
+    
 }
 

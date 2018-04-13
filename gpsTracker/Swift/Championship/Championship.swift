@@ -9,15 +9,15 @@
 import UIKit
 import Foundation
 
-struct Championships : Decodable {
-    let admins : [Int]
-    let endDate : Int
-    let id : Int
-    let managers : [Int] // null
-    let name : String
-    let startDate : Int
-    let subordinates : [Int] // Event
-}
+//struct Championships : Decodable {
+//    let admins : [Int]
+//    let endDate : Int
+//    let id : Int
+//    let managers : [Int] // null
+//    let name : String
+//    let startDate : Int
+//    let subordinates : [Int] // Event
+//}
 // Reference purpose
 //var numPages: Int {
 //    get{
@@ -97,7 +97,7 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
                     
                     //                    print("\(upcoming_champ.count) after update function")
                 } catch {
-                    print("ERROR")
+                    print(error	)
                 }
             }
             if let error = error {
@@ -282,9 +282,7 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
         // Pass the selected object to the new view controller.
     }
     */
-    
-    @IBAction func unwindToChampList(segue:UIStoryboardSegue) { }
-    
+        
     
     
 

@@ -97,7 +97,7 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     
     func requestID() {
         
-        let parameters = ["id": raceToAdd.id as Any, "name": raceToAdd.name, "startDate": raceToAdd.startDate, "endDate": raceToAdd.endDate, "admins": raceToAdd.admins, "managers": raceToAdd.managers, "subordinates": raceToAdd.subordinates] as [String : Any] // where raceToAdd.id is null at this point
+        let parameters = ["id": Int?.self, "name": raceToAdd.name, "startDate": raceToAdd.startDate, "endDate": raceToAdd.endDate, "admins": raceToAdd.admins, "managers": raceToAdd.managers, "subordinates": raceToAdd.subordinates] as [String : Any] // where raceToAdd.id is null at this point
 
         guard let url = URL(string: "\(baseURL)\(requestURL)") else {return}
         var request = URLRequest(url: url)
