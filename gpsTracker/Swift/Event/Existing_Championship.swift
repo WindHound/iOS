@@ -10,11 +10,19 @@ import UIKit
 
 class Existing_Championship: UITableViewController {
     
-    private var Championships : NSMutableArray = []
+    @IBOutlet var Existing_Table: UITableView!
     
-    private var Selected_Championships : NSMutableArray = []
+    var Already_added : [Championships] = []
     
-    var Already_added : NSMutableArray = []
+    var allURL: String = "structure/championship/all"
+    
+    var specificURL : String = "structure/championship/get/"
+    
+    var All_Championship : [Int] = []
+    
+    var Upcoming_Champ : [Championships] = []
+    
+    var Selected_Champ : [Championships] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,21 +36,87 @@ class Existing_Championship: UITableViewController {
         
         navigationItem.rightBarButtonItem?.isEnabled = false
         
-        for i in 1...10 {
-            Championships.add("Championships\(i)")
-        }
+        let jsonUrlString = URL(string: "\(baseURL)\(allURL)")
         
-        if Already_added.count != 0 {
-            for i in 0...(Already_added.count - 1) {
-                Championships.remove(Already_added.object(at: i))
+        let session = URLSession.shared
+        
+        session.dataTask(with: jsonUrlString!) { (data, response, error) in
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    
+                    let ids = json as! [Int]
+                    
+                    if ids.count != 0 {
+                        self.All_Championship = ids
+                        self.updatearray()
+                    }
+                } catch {
+                    print(error)
+                }
             }
-        }
+        }.resume()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func updatearray() {
+        
+        let currentDate = Date()
+        
+        for i in 0...(All_Championship.count - 1) {
+            let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(All_Championship[i])")
+            
+            let session = URLSession.shared
+            
+            session.dataTask(with: (jsonUrlString!), completionHandler: { (data, response, error) -> Void in
+                guard let data = data else {return}
+                
+                do {
+                    
+                    let championship = try JSONDecoder().decode(Championships.self, from: data)
+                    
+                    print(championship)
+                    
+                    let serverenddate = championship.endDate
+                    
+                    let enddate = Date(timeIntervalSince1970: TimeInterval(serverenddate/1000))
+                    
+                    if enddate >= currentDate {
+                        var iscontain = false
+                        if self.Already_added.count != 0 {
+                            for i in 0...self.Already_added.count - 1 {
+                                if self.Already_added[i].id == championship.id {
+                                    iscontain = true
+                                    break
+                                }
+                            }
+                        }
+                        
+                        if !iscontain {
+                            self.Upcoming_Champ.append(championship)
+                            print(self.Upcoming_Champ)
+                        }
+                        
+                    }
+                    
+                    DispatchQueue.main.async { // Correct
+                        self.Existing_Table.reloadData()
+                    }
+                    
+                } catch {
+                    print(error)
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+            }).resume()
+        }
     }
     
     @IBAction func add_button() {
@@ -54,7 +128,7 @@ class Existing_Championship: UITableViewController {
         
         if destination == "Back To Add Event" {
             let secondViewController = segue.destination as! Add_Event
-            secondViewController.Selected_Championships.addObjects(from: self.Selected_Championships as! [Any])
+            secondViewController.Selected_Championships = self.Selected_Champ
             secondViewController.Selected_Championships_Table.reloadData()
         }
     }
@@ -73,13 +147,13 @@ class Existing_Championship: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return Championships.count
+        return Upcoming_Champ.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Championships", for: indexPath)
 
-        cell.textLabel?.text = Championships.object(at: indexPath.row) as? String
+        cell.textLabel?.text = Upcoming_Champ[indexPath.row].name
         return cell
     }
  
@@ -90,22 +164,28 @@ class Existing_Championship: UITableViewController {
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            Selected_Championships.remove(Championships[indexPath.row])
+            for i in 0...Selected_Champ.count - 1{
+                if Selected_Champ[i].id == Upcoming_Champ[indexPath.row].id {
+                    Selected_Champ.remove(at: i)
+                    break
+                }
+            }
             
-            print(Selected_Championships)
+            print(Selected_Champ)
             
-            if (Selected_Championships.count == 0) {
+            if (Selected_Champ.count == 0) {
                 navigationItem.rightBarButtonItem?.isEnabled = false
             }
+            
         } else {
             // Checkmark
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            Selected_Championships.add(Championships[indexPath.row])
+            Selected_Champ.append(Upcoming_Champ[indexPath.row])
             
-            print(Selected_Championships)
+            print(Selected_Champ)
             
             
             if navigationItem.rightBarButtonItem?.isEnabled == false {

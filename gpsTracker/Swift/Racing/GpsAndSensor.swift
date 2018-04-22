@@ -255,6 +255,10 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
                     print(error)
                 }
             }
+            
+            if let error = error {
+                print(error)
+            }
         }.resume()
 
         

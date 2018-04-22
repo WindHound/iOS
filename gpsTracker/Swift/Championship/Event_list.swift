@@ -36,41 +36,44 @@ class Event_list: UITableViewController {
     }
     
     func updatearray() {
-        for i in 0...(eventID.count - 1) {
-            let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(eventID[i])")
-            
-            let session = URLSession.shared
-            session.dataTask(with: (jsonUrlString!), completionHandler: {(data, response, error) -> Void in
-                guard let data = data else {return}
-                do {
-                    
-                    let event = try JSONDecoder().decode(Events.self, from: data)
-                    
-                    print(event)
-                    
-                    self.detailed_events.append(event)
-                    
-                    if self.UpOrHis == "History" {
-                        self.detailed_events.sort(by: {$1.startDate > $0.startDate})
-                    }
-                    
-                    if self.UpOrHis == "Upcoming" {
-                        self.detailed_events.sort(by: {$0.startDate < $1.startDate})
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                    
-                } catch {
-                    print("ERROR")
-                }
+        if (eventID.count != 0) {
+            for i in 0...(eventID.count - 1) {
+                let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(eventID[i])")
                 
-                if let error = error {
-                    print(error)
-                }
-            }).resume()
+                let session = URLSession.shared
+                session.dataTask(with: (jsonUrlString!), completionHandler: {(data, response, error) -> Void in
+                    guard let data = data else {return}
+                    do {
+                        
+                        let event = try JSONDecoder().decode(Events.self, from: data)
+                        
+                        print(event)
+                        
+                        self.detailed_events.append(event)
+                        
+                        if self.UpOrHis == "History" {
+                            self.detailed_events.sort(by: {$1.startDate > $0.startDate})
+                        }
+                        
+                        if self.UpOrHis == "Upcoming" {
+                            self.detailed_events.sort(by: {$0.startDate < $1.startDate})
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                        
+                    } catch {
+                        print(error)
+                    }
+                    
+                    if let error = error {
+                        print(error)
+                    }
+                }).resume()
+            }
         }
+    
     }
     
     @objc func profile_tapped() {
@@ -121,7 +124,7 @@ class Event_list: UITableViewController {
             let secondViewController = segue.destination as! Race_list
             
             let race = detailed_events[raceIndex]
-            secondViewController.raceID = race.subordinates
+            secondViewController.raceID = race.races
             secondViewController.UpOrHis = self.UpOrHis
         }
     }

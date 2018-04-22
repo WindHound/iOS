@@ -10,7 +10,10 @@ import UIKit
 
 //var baseURL : String = "http://WindHoundServerApp-cloud2017n04.apaas.us2.oraclecloud.com:8080/"
 
+//var baseURL : String = "http://192.168.138.1:8080/"
 var baseURL : String = "http://192.168.137.1:8080/"
+//var baseURL : String = "http://94.175.24.251:8080/"
+
 class log_in: UIViewController {
 
     @IBOutlet weak var textUsername: UITextField!
@@ -116,23 +119,10 @@ class log_in: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
         
-        // Reference purpose
-//        let openAction = UIAlertAction(title: "Open Settings", style: .default) {(action) in
-//            if let url = URL(string: UIApplicationOpenSettingsURLString) {
-//                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//            }
-//        }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    @IBAction func unwindTologin(segue:UIStoryboardSegue) {}
+    
 }
 
 extension log_in : UITextFieldDelegate {

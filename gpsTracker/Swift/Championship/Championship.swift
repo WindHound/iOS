@@ -205,11 +205,11 @@ class Championship: UITableViewController, UpcomingDelegate, HistoryDelegate{
             
             if destination == "Up_To_Event" {
                 let event = upcoming_champ[eventIndex]
-                secondViewController.eventID = event.subordinates
+                secondViewController.eventID = event.events
                 secondViewController.UpOrHis = "Upcoming"
             } else {
                 let event = history_champ[eventIndex]
-                secondViewController.eventID = event.subordinates
+                secondViewController.eventID = event.events
                 secondViewController.UpOrHis = "History"
             }
         }

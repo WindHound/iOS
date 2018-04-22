@@ -78,13 +78,18 @@ class event_information: UIViewController, UITextFieldDelegate {
         
         if Mutipurpose_button.title == "Record" {
             if Boat.text == "" {
-                createAlert(title: "Error", message: "Pleases choose a boat to record", name: "error")
+                createAlert(title: "Error", message: "Please choose a boat to record", name: "error")
+            } else {
+                performSegue(withIdentifier: "To Record", sender: self)
             }
-            performSegue(withIdentifier: "To Record", sender: self)
         }
         
         if Mutipurpose_button.title == "Replay" {
-            performSegue(withIdentifier: "To Replay", sender: self)
+            if Boat.text == "" {
+                createAlert(title: "Error", message: "Please choose a boat to replay", name: "error")
+            } else {
+                performSegue(withIdentifier: "To Replay", sender: self)
+            }
         }
     }
     

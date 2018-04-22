@@ -215,11 +215,11 @@ class Event: UITableViewController, UpcomingDelegate, HistoryDelegate{
             let secondViewController = segue.destination as! Race_list
             if destination == "Up_To_Race" {
                 let race = upcoming_event[raceIndex]
-                secondViewController.raceID = race.subordinates
+                secondViewController.raceID = race.races
                 secondViewController.UpOrHis = "Upcoming"
             } else {
                 let race = history_event[raceIndex]
-                secondViewController.raceID = race.subordinates
+                secondViewController.raceID = race.races
                 secondViewController.UpOrHis = "History"
             }
         }

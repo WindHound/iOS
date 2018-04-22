@@ -210,7 +210,7 @@ class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
                 let race = upcoming_race[raceIndex]
                 secondViewController.UpOrHis = "Upcoming"
                 secondViewController.raceID = race.id
-                secondViewController.boatID = race.subordinates
+                secondViewController.boatID = race.boats
                 secondViewController.name = race.name
                 secondViewController.startDate = race.startDate
                 secondViewController.endDate = race.endDate
@@ -218,7 +218,7 @@ class Race: UITableViewController , UpcomingDelegate, HistoryDelegate {
                 let race = history_race[raceIndex]
                 secondViewController.UpOrHis = "History"
                 secondViewController.raceID = race.id
-                secondViewController.boatID = race.subordinates
+                secondViewController.boatID = race.boats
                 secondViewController.name = race.name
                 secondViewController.startDate = race.startDate
                 secondViewController.endDate = race.endDate

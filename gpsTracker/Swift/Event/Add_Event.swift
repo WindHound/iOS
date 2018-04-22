@@ -17,8 +17,12 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
     @IBOutlet weak var Selected_Races_Table: UITableView!
     
     var Selected_Admins : NSMutableArray = []
-    var Selected_Championships : NSMutableArray = []
-    var Selected_Races : NSMutableArray = []
+    var Selected_Championships : [Championships] = []
+    var Selected_Races : [Races] = []
+    
+    var admins : [Int] = []
+    var championships : [Int] = []
+    var races : [Int] = []
     
     @IBOutlet weak var Save_button: UIBarButtonItem!
     
@@ -30,20 +34,36 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
     var enddate : String = ""
     var currentdate : String = ""
     
+    var startdateMilli : Int = 0
+    var enddateMilli : Int = 0
+    
+    var postURL : String = "structure/event/add"
+    
+    var id : Int? = nil
+    
+    var eventToAdd = Events(id: nil, name: "", startDate: 0, endDate: 0, admins: [], championships: [], races: [])
+    
     var activeTextfield : UITextField!
     
     let picker = UIDatePicker()
+    
+    var addPressed : Bool = false
+    
+    var toolBarName : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         picker.datePickerMode = UIDatePickerMode.date
         
+        self.navigationItem.title = toolBarName
+        
         Name.delegate = self
         Start_date.delegate = self
         End_Date.delegate = self
     
         Save_button.isEnabled = false
+        addPressed = false
         
         createDatePicer(forField: Start_date)
         createDatePicer(forField: End_Date)
@@ -80,11 +100,12 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
             let startdateString = startdateformatter.string(from: picker.date)
             
             startdate = startdateString
+            startdateMilli = Int(TimeInterval(picker.date.timeIntervalSince1970 * 1000))
             
             if startdate < currentdate {
                 createAlert(title: "Invalid date", message: "Start date can't be before today.", name: "Start date")
             }
-            Start_date.text = "\(startdateString)"
+            Start_date.text = startdateString
         }
         
         // End date
@@ -95,11 +116,12 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
             let enddateString = enddateformatter.string(from: picker.date)
             
             enddate = enddateString
+            enddateMilli = Int(TimeInterval(picker.date.timeIntervalSince1970 * 1000))
             
             if enddate < startdate {
                 createAlert(title: "Invalid date", message: "End date can't be before start date", name: "End date")
             } else {
-                End_Date.text = "\(enddateString)"
+                End_Date.text = enddateString
             }
         }
         
@@ -113,18 +135,22 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextfield = textField
-        if textField == Name {
+        Save_button.isEnabled = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if checkAddValid() {
+            Save_button.isEnabled = true
+        } else {
             Save_button.isEnabled = false
         }
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == Name {
-            if Name.text != "" {
-                Save_button.isEnabled = true
-            } else {
-                Save_button.isEnabled = false
-            }
+    func checkAddValid() -> Bool{
+        if Name.text != "" && Start_date.text != "" && End_Date.text != "" {
+            return true
+        } else {
+            return false
         }
     }
     
@@ -158,14 +184,14 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
         if tableView == Selected_Championships_Table {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Championships", for: indexPath)
             
-            cell.textLabel?.text = Selected_Championships.object(at: indexPath.row) as? String
+            cell.textLabel?.text = Selected_Championships[indexPath.row].name
             
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Races", for: indexPath)
         
-        cell.textLabel?.text = Selected_Races.object(at: indexPath.row) as? String
+        cell.textLabel?.text = Selected_Races[indexPath.row].name
         
         return cell
     }
@@ -180,7 +206,7 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
                 if (indexPath.row == 0) {
                     createAlert(title: "Denied", message: "You can not delete this championship", name: "Error")
                 } else {
-                    Selected_Championships.removeObject(at: indexPath.row)
+                    Selected_Championships.remove(at: indexPath.row)
                 }
             }
             
@@ -189,7 +215,7 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
             }
             
             if tableView == Selected_Races_Table {
-                Selected_Races.removeObject(at: indexPath.row)
+                Selected_Races.remove(at: indexPath.row)
             }
             tableView.reloadData()
         }
@@ -212,6 +238,15 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
     @IBAction func New_Race_Button_Pressed(_ sender: Any) {
         if Name.text == "" {
             createAlert(title: "Empty Event Name", message: "To create a new race, please enter event name", name: "Name")
+        } else {
+            if Start_date.text == "" {
+            createAlert(title: "Empty Start Date", message: "To create a new event, please enter the start date", name: "Start Date")
+
+            } else {
+                if End_Date.text == "" {
+                    createAlert(title: "Empty End Date", message: "To create a new event, please enter the end date", name: "End Date")
+                }
+            }
         }
     }
     
@@ -232,12 +267,25 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
         if destination == "To Add Race" {
             let secondViewController = segue.destination as! Add_Race
             secondViewController.fromwhere = "Add Event"
-            secondViewController.Selected_Events.add(Name.text as Any)
+            secondViewController.Selected_Events.append(eventToAdd)
             
             if Selected_Admins.count != 0 {
                 secondViewController.Selected_Admins.addObjects(from: self.Selected_Admins as! [Any])
             }
-            
+            secondViewController.toolBarName = "Add Race "
+        }
+        
+        if destination == "Back To Event" {
+            if addPressed {
+                let secondViewController = segue.destination as! Event_Master
+                secondViewController.upcoming_event = []
+                secondViewController.history_event = []
+                
+                if (id != nil) {
+                    secondViewController.All_Event.append(id!)
+                }
+                secondViewController.updatearray()
+            }
         }
     }
     
@@ -271,6 +319,81 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
     }
     
     @IBAction func unwindToAddEvent(segue:UIStoryboardSegue) { }
+    
+    @IBAction func Save_Pressed(_ sender: Any) {
+        championships = []
+        races = []
+        if Selected_Championships.count != 0 {
+            for i in 0...Selected_Championships.count - 1 {
+                championships.append(Selected_Championships[i].id!)
+            }
+        }
+        
+        if Selected_Races.count != 0 {
+            for i in 0...Selected_Races.count - 1 {
+                races.append(Selected_Races[i].id)
+            }
+        }
+        
+        print(championships)
+        print(races)
+        add()
+        addPressed = true
+        while (id == nil) {
+            
+        }
+        
+        if fromwhere == "Add Championship" {
+            performSegue(withIdentifier: "Back To Add Championship", sender: self)
+        } else {
+            performSegue(withIdentifier: "Back To Event", sender: self)
+        }
+    }
+    
+    func add() {
+        eventToAdd.name = Name.text!
+        eventToAdd.startDate = startdateMilli
+        eventToAdd.endDate = enddateMilli
+        eventToAdd.championships = self.championships
+        eventToAdd.races = self.races
+        
+        guard let jsonData = try? JSONEncoder().encode(eventToAdd) else {return}
+        
+        guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]) else {return}
+        
+        print(json)
+        
+        guard let url = URL (string: "\(baseURL)\(postURL)") else {return}
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-type")
+        request.httpBody = jsonData
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) {(data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments])
+                    self.eventToAdd.id = json as? Int
+                    self.id = json as? Int
+                } catch {
+                    print(error)
+                }
+            }
+            
+            if let error = error {
+                print(error)
+            }
+        }.resume()
+        
+        
+    }
+    
     
     /*
     // MARK: - Navigation

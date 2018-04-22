@@ -9,18 +9,16 @@
 import UIKit
 
 struct Races : Decodable {
-    let id : Int
-    let name : String
-    let subordinates : [Int] // Boat
-    let managers : [Int] // Race
-    let admins : [Int]
-    let startDate : Int
-    let endDate : Int
+    var id : Int
+    var name : String
+    var boats : [Int] // Boat
+    var events : [Int] // Event
+    var admins : [Int]
+    var startDate : Int
+    var endDate : Int
+    //    var latitude : Double
+    //    var longitude : Double
 }
-
-private var upcoming_race = [Races]()
-private var history_race = [Races]()
-private var display_race = [Races]()
 
 class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -36,9 +34,22 @@ class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     var raceIndex : Int = 0
     
+    var upcoming_race = [Races]()
+    var history_race = [Races]()
+    var display_race = [Races]()
+    
+    var isAdd : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let longTitleLabel = UILabel()
+        longTitleLabel.text = "WindHound"
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.sizeToFit()
+        
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        self.navigationItem.leftBarButtonItem = leftItem
         
         let jsonUrlString = URL(string: "\(baseURL)\(allURL)")
         
@@ -85,27 +96,27 @@ class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     
                     let serverEndDate = race.endDate
                     
-                    //                    let endDate = Date(timeIntervalSince1970: TimeInterval(serverEndDate/1000))
-                    let endDate = Date(timeIntervalSince1970: TimeInterval(1614718600000/1000)) // This need to be deleted
+                    let endDate = Date(timeIntervalSince1970: TimeInterval(serverEndDate/1000))
+//                    let endDate = Date(timeIntervalSince1970: TimeInterval(1614718600000/1000)) // This need to be deleted
                     
                     if endDate < currentDate {
-                        history_race.append(race)
+                        self.history_race.append(race)
                     } else {
-                        upcoming_race.append(race)
+                        self.upcoming_race.append(race)
                     }
                     
-                    if history_race.count > 1 {
-                        history_race.sort(by: {$1.startDate > $0.startDate})
+                    if self.history_race.count > 1 {
+                        self.history_race.sort(by: {$1.startDate > $0.startDate})
                     }
                     
-                    if upcoming_race.count > 1 {
-                        upcoming_race.sort(by: {$0.startDate < $1.startDate})
+                    if self.upcoming_race.count > 1 {
+                        self.upcoming_race.sort(by: {$0.startDate < $1.startDate})
                     }
                     
                     if (self.isUpcoming) {
-                        display_race = upcoming_race
+                        self.display_race = self.upcoming_race
                     } else {
-                        display_race = history_race
+                        self.display_race = self.history_race
                     }
                     
                     DispatchQueue.main.async {
@@ -188,7 +199,7 @@ class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource 
             secondViewController.fromwhere = "Race"
             let race = display_race[raceIndex]
             secondViewController.raceID = race.id
-            secondViewController.boatID = race.subordinates
+            secondViewController.boatID = race.boats
             secondViewController.name = race.name
             secondViewController.startDate = race.startDate
             secondViewController.endDate = race.endDate
@@ -203,11 +214,21 @@ class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource 
             let secondViewController = segue.destination as! Add_Race
             
             secondViewController.fromwhere = "Race"
+            
+            if isAdd {
+                secondViewController.toolBarName = "Add Race"
+            } else {
+                secondViewController.toolBarName = "Edit Race"
+            }
         }
     }
     
     @IBAction func unwindToRaceList(segue:UIStoryboardSegue) { }
     
+    @IBAction func Add_Pressed(_ sender: Any) {
+        isAdd = true
+        performSegue(withIdentifier: "To Add Race", sender: self)
+    }
     /*
     // MARK: - Navigation
 
@@ -219,3 +240,4 @@ class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource 
     */
 
 }
+

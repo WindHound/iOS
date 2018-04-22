@@ -11,18 +11,11 @@ import UIKit
 struct Championships : Decodable {
     let admins : [Int]
     let endDate : Int
-    let id : Int
-    let managers : [Int] // null
+    let id : Int?
     let name : String
     let startDate : Int
-    let subordinates : [Int] // Event
+    let events : [Int] // Event
 }
-
-private var upcoming_champ = [Championships]()
-private var history_champ = [Championships]()
-private var display_champ = [Championships]()
-
-
 
 class Championship_Master: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -38,8 +31,29 @@ class Championship_Master: UIViewController, UITableViewDelegate, UITableViewDat
     
     var eventIndex : Int = 0
     
+    var upcoming_champ = [Championships]()
+    var history_champ = [Championships]()
+    var display_champ = [Championships]()
+    
+    var isAdd : Bool = true
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let longTitleLabel = UILabel()
+        longTitleLabel.text = "WindHound"
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.sizeToFit()
+        
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        self.navigationItem.leftBarButtonItem = leftItem
+        
+        getChampionship()
+ 
+    }
+    
+    func getChampionship() {
         
         let jsonUrlString = URL(string: "\(baseURL)\(allURL)")
         
@@ -62,16 +76,14 @@ class Championship_Master: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     //                    print("\(upcoming_champ.count) after update function")
                 } catch {
-                    print(error    )
+                    print(error)
                 }
             }
             if let error = error {
                 print(error)
             }
             
-        }.resume()
- 
-        // Do any additional setup after loading the view.
+            }.resume()
     }
     
     func updatearray() {
@@ -96,23 +108,23 @@ class Championship_Master: UIViewController, UITableViewDelegate, UITableViewDat
                     let enddate = Date(timeIntervalSince1970: TimeInterval(serverenddate/1000))
                     
                     if enddate < currentDate {
-                        history_champ.append(championship)
+                        self.history_champ.append(championship)
                     } else {
-                        upcoming_champ.append(championship)
+                        self.upcoming_champ.append(championship)
                     }
                     
-                    if history_champ.count > 1 {
-                        history_champ.sort(by: {$1.startDate > $0.startDate})
+                    if self.history_champ.count > 1 {
+                        self.history_champ.sort(by: {$1.startDate > $0.startDate})
                     }
                     
-                    if upcoming_champ.count > 1 {
-                        upcoming_champ.sort(by: {$0.startDate < $1.startDate})
+                    if self.upcoming_champ.count > 1 {
+                       self.upcoming_champ.sort(by: {$0.startDate < $1.startDate})
                     }
                     
                     if (self.isUpcoming) {
-                        display_champ = upcoming_champ
+                        self.display_champ = self.upcoming_champ
                     } else {
-                        display_champ = history_champ
+                        self.display_champ = self.history_champ
                     }
                     
                     DispatchQueue.main.async { // Correct
@@ -128,7 +140,6 @@ class Championship_Master: UIViewController, UITableViewDelegate, UITableViewDat
                 }
             }).resume()
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -192,7 +203,7 @@ class Championship_Master: UIViewController, UITableViewDelegate, UITableViewDat
         if destination == "Up To Event" || destination == "Hist To Event" {
             let secondViewController = segue.destination as! Event_list
             let event = display_champ[eventIndex]
-            secondViewController.eventID = event.subordinates
+            secondViewController.eventID = event.events
 
             if destination == "Up To Event" {
                 secondViewController.UpOrHis = "Upcoming"
@@ -201,11 +212,25 @@ class Championship_Master: UIViewController, UITableViewDelegate, UITableViewDat
             }
         }
         
+        if destination == "To Add Champ" {
+            let secondViewController = segue.destination as! Add_Championship
+            
+            if isAdd {
+                secondViewController.toolBarName = "Add Championship"
+            } else {
+                secondViewController.toolBarName = "Edit Championship"
+            }
+        }
+        
         
     }
     
     @IBAction func unwindToChampList(segue:UIStoryboardSegue) { }
     
+    @IBAction func Add_Pressed(_ sender: Any) {
+        isAdd = true
+        performSegue(withIdentifier: "To Add Champ", sender: self)
+    }
     
     /*
     // MARK: - Navigation

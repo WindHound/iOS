@@ -7,19 +7,15 @@
 
 import UIKit
 
-struct Events : Decodable {
-    let id : Int
-    let name : String
-    let subordinates : [Int] // Race
-    let managers : [Int] // Championship
-    let admins : [Int]
-    let startDate : Int
-    let endDate : Int
+struct Events : Encodable, Decodable {
+    var id : Int?
+    var name : String
+    var startDate : Int // Race
+    var endDate : Int // Championship
+    var admins : [Int]
+    var championships : [Int]
+    var races : [Int]
 }
-
-private var upcoming_event = [Events]()
-private var history_event = [Events]()
-private var display_event = [Events]()
 
 class Event_Master: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -35,10 +31,24 @@ class Event_Master: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     var raceIndex : Int = 0
     
+    var upcoming_event = [Events]()
+    var history_event = [Events]()
+    var display_event = [Events]()
+    
+    var isAdd : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let jsonUrlString = URL(string: "\(baseURL)\(allURL)")
+        
+        let longTitleLabel = UILabel()
+        longTitleLabel.text = "WindHound"
+        longTitleLabel.textColor = UIColor.white
+        longTitleLabel.sizeToFit()
+        
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        self.navigationItem.leftBarButtonItem = leftItem
         
         let session = URLSession.shared
         //        activityIndicator.startAnimating()
@@ -48,6 +58,8 @@ class Event_Master: UIViewController, UITableViewDataSource, UITableViewDelegate
                 do {
                     
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    
+                    print(json)
                     
                     let ids = json as! [Int]
                     
@@ -59,7 +71,7 @@ class Event_Master: UIViewController, UITableViewDataSource, UITableViewDelegate
                     
                     //                    print("\(upcoming_champ.count) after update function")
                 } catch {
-                    print(error    )
+                    print(error)
                 }
             }
             if let error = error {
@@ -91,23 +103,23 @@ class Event_Master: UIViewController, UITableViewDataSource, UITableViewDelegate
                     let enddate = Date(timeIntervalSince1970: TimeInterval(serverenddate/1000))
                     
                     if enddate < currentDate {
-                        history_event.append(event)
+                        self.history_event.append(event)
                     } else {
-                        upcoming_event.append(event)
+                        self.upcoming_event.append(event)
                     }
                     
-                    if history_event.count > 1 {
-                        history_event.sort(by: {$1.startDate > $0.startDate})
+                    if self.history_event.count > 1 {
+                       self.history_event.sort(by: {$1.startDate > $0.startDate})
                     }
                     
-                    if upcoming_event.count > 1 {
-                        upcoming_event.sort(by: {$0.startDate < $1.startDate})
+                    if self.upcoming_event.count > 1 {
+                        self.upcoming_event.sort(by: {$0.startDate < $1.startDate})
                     }
                     
                     if (self.isUpcoming) {
-                        display_event = upcoming_event
+                        self.display_event = self.upcoming_event
                     } else {
-                        display_event = history_event
+                        self.display_event = self.history_event
                     }
                     
                     DispatchQueue.main.async {
@@ -189,7 +201,7 @@ class Event_Master: UIViewController, UITableViewDataSource, UITableViewDelegate
         if destination == "Up To Race" || destination == "Hist To Race" {
             let secondViewController = segue.destination as! Race_list
             let race = display_event[raceIndex]
-            secondViewController.raceID = race.subordinates
+            secondViewController.raceID = race.races
             
             if destination == "Up To Event" {
                 secondViewController.UpOrHis = "Upcoming"
@@ -197,6 +209,21 @@ class Event_Master: UIViewController, UITableViewDataSource, UITableViewDelegate
                 secondViewController.UpOrHis = "History"
             }
         }
+        
+        if destination == "To Add Event" {
+            let secondViewController = segue.destination as! Add_Event
+            
+            if isAdd {
+                secondViewController.toolBarName = "Add Event"
+            } else {
+                secondViewController.toolBarName = "Edit Event"
+            }
+        }
+    }
+    
+    @IBAction func Add_Pressed(_ sender: Any) {
+        isAdd = true
+        performSegue(withIdentifier: "To Add Event", sender: self)
     }
     
     @IBAction func unwindToEventList(segue:UIStoryboardSegue) { }

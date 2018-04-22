@@ -66,6 +66,7 @@
 		552865402022282E007D4707 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5528653F2022282E007D4707 /* LocationSearchTable.swift */; };
 		552CF840201FD5F700620C29 /* Add_Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552CF83F201FD5F700620C29 /* Add_Race.swift */; };
 		553FD97A204D6BBE00198BC5 /* Existing_Admins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553FD979204D6BBE00198BC5 /* Existing_Admins.swift */; };
+		554F31522087A175002CD970 /* Sign_Up.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554F31512087A175002CD970 /* Sign_Up.swift */; };
 		554F424B2029CCBD0088534B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 554F424A2029CCBD0088534B /* Podfile */; };
 		554FCA0C2045C942009B0EE2 /* Add_Championship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554FCA0B2045C942009B0EE2 /* Add_Championship.swift */; };
 		554FCA102045DE7D009B0EE2 /* Existing_events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554FCA0F2045DE7D009B0EE2 /* Existing_events.swift */; };
@@ -151,6 +152,7 @@
 		5528653F2022282E007D4707 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		552CF83F201FD5F700620C29 /* Add_Race.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_Race.swift; sourceTree = "<group>"; };
 		553FD979204D6BBE00198BC5 /* Existing_Admins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_Admins.swift; sourceTree = "<group>"; };
+		554F31512087A175002CD970 /* Sign_Up.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign_Up.swift; sourceTree = "<group>"; };
 		554F424A2029CCBD0088534B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		554FCA0B2045C942009B0EE2 /* Add_Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add_Championship.swift; sourceTree = "<group>"; };
 		554FCA0F2045DE7D009B0EE2 /* Existing_events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Existing_events.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				55686E26204C3A4E00D86201 /* Race */,
 				556BDED320547C8300822130 /* Racing */,
 				550B2E8F20174AAE0027127F /* log_in.swift */,
+				554F31512087A175002CD970 /* Sign_Up.swift */,
 				5512CCE1203B893500B17951 /* Profile_page.swift */,
 				553FD979204D6BBE00198BC5 /* Existing_Admins.swift */,
 			);
@@ -651,6 +654,7 @@
 				55686E20204AFA1E00D86201 /* Add_Event.swift in Sources */,
 				557F41632007E8DF0087239B /* AppDelegate.swift in Sources */,
 				5552C9532041AE1800598669 /* Race_list.swift in Sources */,
+				554F31522087A175002CD970 /* Sign_Up.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

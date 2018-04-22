@@ -8,16 +8,16 @@
 
 import UIKit
 
-struct Race_Post : Encodable {
+struct Race_To_Post : Encodable {
     var id : Int?
     var name : String
-    var subordinates : [Int]
-    var managers : [Int]
+    var boats : [Int] // Boat
+    var events : [Int] // Event
     var admins : [Int]
     var startDate : Int
     var endDate : Int
-//    var latitude : Double
-//    var longitude : Double
+    //    var latitude : Double
+    //    var longitude : Double
 }
 
 //For event
@@ -48,19 +48,30 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     
     var fromwhere : String = ""
     
-    var raceToAdd = Race_Post(id: 0 , name: "", subordinates: [], managers: [], admins: [], startDate: 0, endDate: 0)
-    
     var requestURL : String = "structure/race/add"
 
-    var Selected_Events : NSMutableArray = []
+    var Selected_Events : [Events] = []
     var Selected_Admins : NSMutableArray = []
-    var Selected_Boats : NSMutableArray = []
+    var Selected_Boats : [Boats_Post] = []
+    
+    var events : [Int] = []
+    var admins : [Int] = []
+    var boats : [Int] = []
     
     @IBOutlet weak var Selected_Admins_Table: UITableView!
     @IBOutlet weak var Selected_Events_Table: UITableView!
-    @IBOutlet weak var Selected_Boats_Table: UITableView!
     
+    var id : Int? = nil
     
+    var raceToAdd = Race_To_Post(id: nil, name:"" , boats: [], events: [], admins: [], startDate: 0, endDate: 0)
+    
+    var startdateMilli : Int = 0
+    var enddateMilli : Int = 0
+    
+    var addPressed : Bool = false
+    
+    var toolBarName : String = ""
+
     @IBOutlet weak var add_button: UIBarButtonItem!
     
     let picker = UIDatePicker()
@@ -68,7 +79,7 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestID()
+        addPressed = false
         
         textTitle.delegate = self
         textLocation.delegate = self
@@ -76,6 +87,8 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         textEnddate.delegate = self
         textRace.delegate = self
         add_button.isEnabled = false
+        
+        self.navigationItem.title = toolBarName
         
         if Selected_Boats.count != 0 {
             textRace.text = "\(Selected_Boats.count)"
@@ -93,40 +106,6 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         
         currenttime = currentdateformatter.string(from: date)
         
-    }
-    
-    func requestID() {
-        
-        let parameters = ["id": Int?.self, "name": raceToAdd.name, "startDate": raceToAdd.startDate, "endDate": raceToAdd.endDate, "admins": raceToAdd.admins, "managers": raceToAdd.managers, "subordinates": raceToAdd.subordinates] as [String : Any] // where raceToAdd.id is null at this point
-
-        guard let url = URL(string: "\(baseURL)\(requestURL)") else {return}
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-
-        guard let jsonBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-
-        request.httpBody = jsonBody
-
-        
-        let session = URLSession.shared
-        session.dataTask(with: request) {(data, response, error) in
-            if let response = response {
-                print(response)
-            }
-
-            if let data = data {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
-                } catch {
-                    print(error)
-                }
-            }
-            }.resume()
-        
-        
-
-
     }
 
     
@@ -156,11 +135,12 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
             let startdateString = startdateformatter.string(from: picker.date)
 
             starttime = startdateString
+            startdateMilli = Int(TimeInterval(picker.date.timeIntervalSince1970 * 1000))
             
             if starttime < currenttime {
                 createAlert(title: "Invalid date", message: "Start date can't be before today", name: "Start date")
             } else {
-                textStartdate.text = "\(startdateString)"
+                textStartdate.text = startdateString
             }
         }
 
@@ -173,11 +153,12 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
             let enddateString = enddateformatter.string(from: picker.date)
             
             endtime = enddateString
+            enddateMilli = Int(TimeInterval(picker.date.timeIntervalSince1970 * 1000))
             
             if endtime < starttime {
                 createAlert(title: "Invalid date", message: "End date can't be before start date" , name: "End date")
             } else {
-                textEnddate.text = "\(enddateString)"
+                textEnddate.text = enddateString
                 
             }
         }
@@ -252,18 +233,11 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
             
             return cell
         }
-        if tableView == Selected_Events_Table {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Events", for: indexPath)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Events", for: indexPath)
             
-            cell.textLabel?.text = Selected_Events.object(at: indexPath.row) as? String
+        cell.textLabel?.text = Selected_Events[indexPath.row].name
             
-            return cell
-        }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Boats", for: indexPath)
-        
-        cell.textLabel?.text = Selected_Boats.object(at: indexPath.row) as? String
-        
         return cell
     }
     
@@ -292,7 +266,21 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         if destination == "To Add Boat" {
             let secondViewController = segue.destination as! Add_Boat
             
-//            secondViewController.Added_Boats = self.Selected_Boats
+            secondViewController.Added_Boats = self.Selected_Boats
+        }
+        
+        if destination == "Back To Race" {
+            if addPressed {
+                let secondViewController = segue.destination as! Race_Master
+                
+                secondViewController.upcoming_race = []
+                secondViewController.history_race = []
+                if (id != nil) {
+                    secondViewController.All_Races.append(id!)
+                }
+                secondViewController.updatearray()
+            }
+            
         }
     }
     
@@ -303,18 +291,22 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
-        if textField == textTitle {
+        add_button.isEnabled = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if checkAddValid() {
+            add_button.isEnabled = true
+        } else {
             add_button.isEnabled = false
         }
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == textTitle {
-            if textTitle.text != "" {
-                add_button.isEnabled = true
-            } else {
-                add_button.isEnabled = false
-            }
+    func checkAddValid() -> Bool {
+        if textTitle.text != "" && textStartdate.text != "" && textEnddate.text != "" {
+            return true
+        } else {
+            return false
         }
     }
     
@@ -335,19 +327,17 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
             if tableView == Selected_Events_Table {
-                if (indexPath.row == 0) {
-                    createAlert(title: "Denied", message: "You can not delete this event", name: "Error")
+                if fromwhere == "Add Event" {
+                    if (indexPath.row == 0) {
+                        createAlert(title: "Denied", message: "You can not delete this event", name: "Error")
+                    }
                 } else {
-                    Selected_Events.removeObject(at: indexPath.row)
+                    Selected_Events.remove(at: indexPath.row)
                 }
             }
             
             if tableView == Selected_Admins_Table {
                 Selected_Admins.removeObject(at: indexPath.row)
-            }
-            
-            if tableView == Selected_Boats_Table {
-                Selected_Boats.removeObject(at: indexPath.row)
             }
             
             tableView.reloadData()
@@ -358,45 +348,79 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
 
     
     @IBAction func Add_Pressed(_ sender: Any) {
+        events = []
+        admins = []
+        boats = []
+        
+        if Selected_Events.count != 0 {
+            for i in 0...Selected_Events.count - 1 {
+                events.append(Selected_Events[i].id!)
+            }
+        }
+        
+        if Selected_Boats.count != 0 {
+            for i in 0...Selected_Boats.count - 1 {
+                boats.append(Selected_Boats[i].id!)
+            }
+        }
+        
+        print(events)
+        print(boats)
+        
+        add()
+        addPressed = true
+        while (id == nil) {
+            
+        }
+        if fromwhere == "Add Event" {
+            performSegue(withIdentifier: "Back To Add Event", sender: self)
+        } else {
+            performSegue(withIdentifier: "Back To Race", sender: self)
+        }
+    }
+    
+    func add() {
         raceToAdd.name = textTitle.text!
+        raceToAdd.startDate = startdateMilli
+        raceToAdd.endDate = enddateMilli
+        raceToAdd.events = self.events
+        raceToAdd.boats = self.boats
         
-//        if latitude != nil && longitude != nil {
-//            raceToAdd.latitude = self.latitude
-//            raceToAdd.longitude = self.longitude
-//        }
+        guard let jsonData = try? JSONEncoder().encode(raceToAdd) else {return}
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments]) else {return}
         
-        if endtime != "" {
-            let convertedDate = formatter.date(from: endtime)
-            let endServerTime =   TimeInterval((convertedDate?.timeIntervalSince1970)! * 1000)
-            raceToAdd.endDate = Int(endServerTime)
-        }
+        print(json)
         
-        if starttime != "" {
-            let convertedDate = formatter.date(from: starttime)
-            let startServerTime = TimeInterval((convertedDate?.timeIntervalSince1970)! * 1000)
-            raceToAdd.startDate = Int(startServerTime)
-        }
+        guard let url = URL(string: "\(baseURL)\(requestURL)") else {return}
+        var request = URLRequest(url: url)
         
-//        if Selected_Admins.count != 0 {
-//            raceToAdd.admins = Selected_Admins
-//        } This need extra work
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-type")
+        request.httpBody = jsonData
         
-//        if Selected_Boats.count != 0 {
-//            raceToAdd.subordinates = Selected_Boats
-//        }
+        let session = URLSession.shared
+        session.dataTask(with: request) {(data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments])
+                    self.raceToAdd.id = json as? Int
+                    self.id = json as? Int
+                } catch {
+                    print(error)
+                }
+            }
+            
+            if let error = error {
+                print(error)
+            }
+        }.resume()
         
-
-//        func convertToUTC(dateToConvert:String) -> String {
-//            let formatter = DateFormatter()
-//            formatter.dateFormat = "dd-MM-yyyy hh:mm a"
-//            let convertedDate = formatter.date(from: dateToConvert)
-//            formatter.timeZone = TimeZone(identifier: "UTC")
-//            return formatter.string(from: convertedDate!)
-//
-//        }
+        
     }
 
     

@@ -17,6 +17,8 @@ class Race_list: UITableViewController {
     var raceID : [Int] = []
         
     var specificURL : String = "structure/race/get/"
+    
+    var infoIndex : Int = -1
 
 
     override func viewDidLoad() {
@@ -35,39 +37,42 @@ class Race_list: UITableViewController {
     }
     
     func updatearray() {
-        for i in 0...(raceID.count - 1) {
-            let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(raceID[i])")
-            
-            let session = URLSession.shared
-            session.dataTask(with: (jsonUrlString!), completionHandler: { (data, response, error) -> Void in
-                guard let data = data else {return}
+        if (raceID.count != 0) {
+            for i in 0...(raceID.count - 1) {
+                let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(raceID[i])")
                 
-                do {
-                    let race = try JSONDecoder().decode(Races.self, from: data)
+                let session = URLSession.shared
+                session.dataTask(with: (jsonUrlString!), completionHandler: { (data, response, error) -> Void in
+                    guard let data = data else {return}
                     
-                    print(race)
-                    
-                    self.detailed_races.append(race)
-                    if self.UpOrHis == "History" {
-                        self.detailed_races.sort(by: {$1.startDate > $0.startDate})
+                    do {
+                        let race = try JSONDecoder().decode(Races.self, from: data)
+                        
+                        print(race)
+                        
+                        self.detailed_races.append(race)
+                        if self.UpOrHis == "History" {
+                            self.detailed_races.sort(by: {$1.startDate > $0.startDate})
+                        }
+                        
+                        if self.UpOrHis == "Upcoming" {
+                            self.detailed_races.sort(by: {$0.startDate < $1.startDate})
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    } catch {
+                        print(error)
                     }
                     
-                    if self.UpOrHis == "Upcoming" {
-                        self.detailed_races.sort(by: {$0.startDate < $1.startDate})
+                    if let error = error {
+                        print(error)
                     }
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                } catch {
-                    print("ERROR")
-                }
-                
-                if let error = error {
-                    print(error)
-                }
-            }).resume()
+                }).resume()
+            }
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,10 +94,16 @@ class Race_list: UITableViewController {
             secondViewController.fromwhere = "Detailed_Race"
         }
         
-        if destination == "Race_info" {
+        if destination == "To Info" {
             let secondViewController = segue.destination as! event_information
             secondViewController.fromwhere = "Race_List"
             secondViewController.UpOrHis = self.UpOrHis
+            let info = detailed_races[infoIndex]
+            secondViewController.raceID = info.id
+            secondViewController.boatID = info.boats
+            secondViewController.name = info.name
+            secondViewController.startDate = info.startDate
+            secondViewController.endDate = info.endDate
         }
     }
     
@@ -114,6 +125,12 @@ class Race_list: UITableViewController {
         cell.textLabel?.text = race.name
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        infoIndex = indexPath.row
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "To Info", sender: self)
     }
 
     /*
