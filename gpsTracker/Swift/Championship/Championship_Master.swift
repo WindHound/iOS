@@ -36,7 +36,8 @@ class Championship_Master: UIViewController, UITableViewDelegate, UITableViewDat
     var display_champ = [Championships]()
     
     var isAdd : Bool = true
-
+    
+    @IBOutlet weak var Add_Button: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -184,10 +185,14 @@ class Championship_Master: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         eventIndex = indexPath.row
-        if isUpcoming {
-            performSegue(withIdentifier: "Up To Event", sender: self)
+        if !isAdd {
+            performSegue(withIdentifier: "To Add Champ", sender: self)
         } else {
-            performSegue(withIdentifier: "Hist To Event", sender: self)
+            if isUpcoming {
+                performSegue(withIdentifier: "Up To Event", sender: self)
+            } else {
+                performSegue(withIdentifier: "Hist To Event", sender: self)
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -219,6 +224,12 @@ class Championship_Master: UIViewController, UITableViewDelegate, UITableViewDat
                 secondViewController.toolBarName = "Add Championship"
             } else {
                 secondViewController.toolBarName = "Edit Championship"
+                secondViewController.championshipToAdd.id = display_champ[eventIndex].id
+                secondViewController.championshipToAdd.name = display_champ[eventIndex].name
+                secondViewController.championshipToAdd.admins = display_champ[eventIndex].admins
+                secondViewController.championshipToAdd.startDate = display_champ[eventIndex].startDate
+                secondViewController.championshipToAdd.endDate = display_champ[eventIndex].endDate
+                secondViewController.championshipToAdd.events = display_champ[eventIndex].events
             }
         }
         
@@ -231,6 +242,17 @@ class Championship_Master: UIViewController, UITableViewDelegate, UITableViewDat
         isAdd = true
         performSegue(withIdentifier: "To Add Champ", sender: self)
     }
+    
+    @IBAction func Edit_Button_Pressed(_ sender: Any) {
+        if !isAdd {
+            isAdd = true
+            Add_Button.isEnabled = true
+        } else {
+            isAdd = false
+            Add_Button.isEnabled = false
+        }
+    }
+    
     
     /*
     // MARK: - Navigation

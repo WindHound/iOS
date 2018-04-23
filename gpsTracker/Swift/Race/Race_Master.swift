@@ -96,8 +96,8 @@ class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     
                     let serverEndDate = race.endDate
                     
-                    let endDate = Date(timeIntervalSince1970: TimeInterval(serverEndDate/1000))
-//                    let endDate = Date(timeIntervalSince1970: TimeInterval(1614718600000/1000)) // This need to be deleted
+//                    let endDate = Date(timeIntervalSince1970: TimeInterval(serverEndDate/1000))
+                    let endDate = Date(timeIntervalSince1970: TimeInterval(1414718600000/1000)) // This need to be deleted
                     
                     if endDate < currentDate {
                         self.history_race.append(race)

@@ -10,11 +10,19 @@ import UIKit
 
 class Existing_Races: UITableViewController {
     
-    private var Races : NSMutableArray = []
-    private var Selected_Races : NSMutableArray = []
+    @IBOutlet var Existing_Table: UITableView!
     
-    var Already_added : NSMutableArray = []
+    var Upcoming_Races : [Races] = []
+    var Selected_Races : [Races] = []
+    
+    var Already_added : [Races] = []
+    
+    var allURL : String = "structure/race/all"
+    var specificURL : String = "structure/race/get/"
+    
+    var All_Races : [Int] = []
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,21 +35,87 @@ class Existing_Races: UITableViewController {
         
         navigationItem.rightBarButtonItem?.isEnabled = false
         
-        for i in 1...10 {
-            Races.add("Races\(i)")
-        }
+        let jsonUrlString = URL(string: "\(baseURL)\(allURL)")
         
-        if Already_added.count != 0 {
-            for i in 0...(Already_added.count - 1) {
-                Races.remove(Already_added.object(at: i))
+        let session = URLSession.shared
+        
+        session.dataTask(with: jsonUrlString!) { (data, response, error) in
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    
+                    let ids = json as! [Int]
+                    
+                    if ids.count != 0 {
+                        self.All_Races = ids
+                        self.updatearray()
+                    }
+                } catch {
+                    print(error)
+                }
             }
-        }
+        }.resume()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func updatearray() {
+        
+        let currentDate = Date()
+        
+        for i in 0...(All_Races.count - 1) {
+            let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(All_Races[i])")
+            
+            let session = URLSession.shared
+            
+            session.dataTask(with: (jsonUrlString!), completionHandler: { (data, response, error) -> Void in
+                guard let data = data else {return}
+                
+                do {
+                    
+                    let race = try JSONDecoder().decode(Races.self, from: data)
+                    
+                    print(race)
+                    
+                    let serverenddate = race.endDate
+                    
+                    let enddate = Date(timeIntervalSince1970: TimeInterval(serverenddate/1000))
+                    
+                    if enddate >= currentDate {
+                        var iscontain = false
+                        if self.Already_added.count != 0 {
+                            for i in 0...self.Already_added.count - 1 {
+                                if self.Already_added[i].id == race.id {
+                                    iscontain = true
+                                    break
+                                }
+                            }
+                        }
+                        
+                        if !iscontain {
+                            self.Upcoming_Races.append(race)
+                            print(self.Upcoming_Races)
+                        }
+                        
+                    }
+                    
+                    DispatchQueue.main.async { // Correct
+                        self.Existing_Table.reloadData()
+                    }
+                    
+                } catch {
+                    print(error)
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+            }).resume()
+        }
     }
 
     @IBAction func add_button() {
@@ -53,7 +127,7 @@ class Existing_Races: UITableViewController {
         
         if destination == "Back To Add Event" {
             let secondViewController = segue.destination as! Add_Event
-            secondViewController.Selected_Races.addObjects(from: self.Selected_Races as! [Any])
+            secondViewController.Selected_Races = self.Selected_Races
             secondViewController.Selected_Races_Table.reloadData()
         }
     }
@@ -72,14 +146,14 @@ class Existing_Races: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return Races.count
+        return Upcoming_Races.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Races", for: indexPath)
 
-        cell.textLabel?.text = Races.object(at: indexPath.row) as? String
+        cell.textLabel?.text = Upcoming_Races[indexPath.row].name
         return cell
     }
     
@@ -90,7 +164,12 @@ class Existing_Races: UITableViewController {
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            Selected_Races.remove(Races[indexPath.row])
+            for i in 0...Selected_Races.count - 1 {
+                if Selected_Races[i].id == Upcoming_Races[indexPath.row].id {
+                    Selected_Races.remove(at: i)
+                    break
+                }
+            }
             
             print(Selected_Races)
             
@@ -103,7 +182,7 @@ class Existing_Races: UITableViewController {
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            Selected_Races.add(Races[indexPath.row])
+            Selected_Races.append(Upcoming_Races[indexPath.row])
             
             print(Selected_Races)
             

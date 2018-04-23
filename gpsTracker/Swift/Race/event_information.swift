@@ -8,6 +8,12 @@
 
 import UIKit
 
+struct movedata {
+    var timeStamp : Int
+    var longitude : Double
+    var latitude : Double
+}
+
 class event_information: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var toolbar: UIToolbar!
@@ -24,7 +30,9 @@ class event_information: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var StartTime: UITextField!
     @IBOutlet weak var EndTime: UITextField!
     
-    var Chosen_Boat : Int!
+    var course : [movedata] = []
+    
+    var Chosen_Boat : Int = 0
     
     var UpOrHis : String = ""
     var fromwhere : String = ""
@@ -68,7 +76,6 @@ class event_information: UIViewController, UITextFieldDelegate {
             Edit_button.tintColor = UIColor.clear
             Mutipurpose_button.title = "Replay"
             Boat_Label.text = "Recorded Boat"
-            Boat.isUserInteractionEnabled = false
         }
 
         // Do any additional setup after loading the view.
@@ -88,9 +95,51 @@ class event_information: UIViewController, UITextFieldDelegate {
             if Boat.text == "" {
                 createAlert(title: "Error", message: "Please choose a boat to replay", name: "error")
             } else {
-                performSegue(withIdentifier: "To Replay", sender: self)
+                //performSegue(withIdentifier: "To Replay", sender: self)
+                getMoveData()
             }
         }
+    }
+    
+    func getMoveData() {
+        let dataURL = "movedata/get/"
+        
+        let jsonUrlString = URL(string: "\(baseURL)\(dataURL)\(raceID)/\(Chosen_Boat)")
+        
+        let session = URLSession.shared
+        session.dataTask(with: jsonUrlString!, completionHandler: {(data, response, error) -> Void in
+            guard let data = data else {return}
+            
+            do {
+//                let moveData = try JSONSerialization.jsonObject(with: data, options: [])
+                let moveData = try JSONDecoder().decode([sailboat].self, from: data)
+//                print(moveData)
+                
+                if (moveData.count != 0) {
+                    for i in 0...moveData.count - 1 {
+                        let location = movedata(timeStamp: moveData[i].timeMilli, longitude: moveData[i].longitude, latitude: moveData[i].latitude)
+
+                        self.course.append(location)
+
+                    }
+
+                    print(self.course)
+                }
+                
+            } catch {
+                print(error)
+            }
+            
+            if let response = response {
+                print(response)
+            }
+            
+            if let error = error {
+                print(error)
+            }
+            
+            
+        }).resume()
     }
     
     override func didReceiveMemoryWarning() {

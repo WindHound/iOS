@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import CoreMotion
 
-struct sailboat : Encodable {
+struct sailboat : Encodable, Decodable {
     var competitorID: Int
     var boatID : Int
     var raceID : Int
@@ -23,7 +23,7 @@ struct sailboat : Encodable {
     var dX : [Double] // gyroscope
     var dY : [Double]
     var dZ : [Double]
-    var angle : [Int]
+    var angle : [Double]
 }
 
 
@@ -41,7 +41,7 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
     var dX : [Double] = []
     var dY : [Double] = []
     var dZ : [Double] = []
-    var angle : [Int] = []
+    var angle : [Double] = []
     var compass : Double = 0
     var gyrX : Double = 0
     var gyrY : Double = 0
@@ -108,7 +108,7 @@ class GpsAndSensor: UIViewController, CLLocationManagerDelegate {
                     self.x.append((myData.acceleration.x) * -10)
                     self.y.append((myData.acceleration.y) * -10)
                     self.z.append((myData.acceleration.z) * -10)
-                    self.angle.append(Int(self.compass))
+                    self.angle.append(Double(self.compass))
                     if self.dX.last == self.gyrX {
                         self.dX.append(0)
                         self.dY.append(0)

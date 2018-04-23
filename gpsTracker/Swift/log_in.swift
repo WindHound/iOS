@@ -10,8 +10,8 @@ import UIKit
 
 //var baseURL : String = "http://WindHoundServerApp-cloud2017n04.apaas.us2.oraclecloud.com:8080/"
 
-//var baseURL : String = "http://192.168.138.1:8080/"
-var baseURL : String = "http://192.168.137.1:8080/"
+var baseURL : String = "http://192.168.138.1:8080/"
+//var baseURL : String = "http://192.168.137.1:8080/"
 //var baseURL : String = "http://94.175.24.251:8080/"
 
 class log_in: UIViewController {

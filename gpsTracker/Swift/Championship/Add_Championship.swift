@@ -35,6 +35,8 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
     
     var postURL : String = "structure/championship/add"
     
+    var specificURL : String = "structure/event/get/"
+    
     var id : Int? = nil
     
     var championshipToAdd = Championship_Post(id: nil, name: "", startDate: 0, endDate: 0, admins: [], events: [])
@@ -68,6 +70,30 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
         Start_date.delegate = self
         End_date.delegate = self
         
+        Name.text = championshipToAdd.name
+        if championshipToAdd.startDate != 0 {
+            
+            let dateformatter = DateFormatter()
+            
+            dateformatter.dateFormat = "yyyy-MM-dd"
+            
+            let startdate = Date(timeIntervalSince1970: TimeInterval(championshipToAdd.startDate/1000))
+            
+            let enddate = Date(timeIntervalSince1970: TimeInterval(championshipToAdd.endDate/1000))
+            
+            let startdateString = dateformatter.string(from: startdate)
+            let enddateString = dateformatter.string(from: enddate)
+            
+            
+            Start_date.text = startdateString
+            End_date.text = enddateString
+        }
+        
+        
+        if championshipToAdd.events != [] {
+            updateEvent()
+        }
+        
         Save_button.isEnabled = false
         addPressed = false
         
@@ -87,6 +113,39 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
         currentdate = currentdateformatter.string(from: date)
 
         // Do any additional setup after loading the view.
+    }
+    
+    func updateEvent() {
+        for i in 0...(self.championshipToAdd.events.count - 1) {
+            let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(self.championshipToAdd.events[i])")
+            
+            let session = URLSession.shared
+            session.dataTask(with: (jsonUrlString!), completionHandler: {(data, response, error) -> Void in
+                guard let data = data else {return}
+                
+                do {
+                    let event = try JSONDecoder().decode(Events.self, from: data)
+                    
+                    print(event)
+                    
+                    self.Selected_Events.append(event)
+                    
+                    DispatchQueue.main.async {
+                        self.Selected_Events_Table.reloadData()
+                    }
+                } catch {
+                    print(error)
+                }
+                
+                if let response = response {
+                    print(response)
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+            }).resume()
+        }
     }
     
     func createDatePicer(forField field : UITextField) {

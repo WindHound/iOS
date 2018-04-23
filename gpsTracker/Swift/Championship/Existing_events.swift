@@ -10,13 +10,21 @@ import UIKit
 
 class Existing_events: UITableViewController {
     
-    private var Events : NSMutableArray = []
+    @IBOutlet var Existing_Table: UITableView!
     
-    private var Selected_Events : NSMutableArray = []
+    private var Upcoming_Events : [Events] = []
     
-    var Already_added : NSMutableArray = []
+    private var Selected_Events : [Events] = []
+    
+    var Already_added : [Events] = []
     
     var fromwhere : String = ""
+    
+    var allURL : String = "structure/event/all"
+    
+    var specificURL : String = "structure/event/get/"
+    
+    var All_Event : [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,23 +38,88 @@ class Existing_events: UITableViewController {
         
         navigationItem.rightBarButtonItem?.isEnabled = false
         
-        for i in 1...10 {
-            Events.add("Events\(i)")
-        }
         
-        if Already_added.count != 0 {
-            for i in 0...(Already_added.count - 1) {
-                Events.remove(Already_added.object(at: i))
+        
+        let jsonUrlString = URL(string: "\(baseURL)\(allURL)")
+        
+        let session = URLSession.shared
+        
+        session.dataTask(with: jsonUrlString!) { (data, response, error) in
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    
+                    let ids = json as! [Int]
+                    
+                    if ids.count != 0 {
+                        self.All_Event = ids
+                        self.updatearray()
+                    }
+                } catch {
+                    print(error)
+                }
             }
             
-        }
-    
+            if let error = error {
+                print(error)
+            }
+        }.resume()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func updatearray() {
+        let currentDate = Date()
+        
+        for i in 0...(All_Event.count - 1) {
+            let jsonUrlString = URL(string: "\(baseURL)\(specificURL)\(All_Event[i])")
+            
+            let session = URLSession.shared
+            session.dataTask(with: (jsonUrlString!), completionHandler: {(data, response, error) -> Void in
+                guard let data = data else {return}
+                do {
+                    
+                    let event = try JSONDecoder().decode(Events.self, from: data)
+                    
+//                    print(event)
+                    
+                    let serverenddate = event.endDate
+                    
+                    let enddate = Date(timeIntervalSince1970: TimeInterval(serverenddate/1000))
+                    
+                    if enddate >= currentDate {
+                        var iscontain = false
+                        if self.Already_added.count != 0 {
+                            for i in 0...self.Already_added.count - 1 {
+                                if self.Already_added[i].id == event.id {
+                                    iscontain = true
+                                    break
+                                }
+                            }
+                        }
+                        if !iscontain {
+                            self.Upcoming_Events.append(event)
+                            print(self.Upcoming_Events)
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.Existing_Table.reloadData()
+                    }
+                    
+                } catch {
+                    print(error)
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+            }).resume()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -63,14 +136,14 @@ class Existing_events: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return Events.count
+        return Upcoming_Events.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Events", for: indexPath)
-
-        cell.textLabel?.text = Events.object(at: indexPath.row) as? String
+    
+        cell.textLabel?.text = Upcoming_Events[indexPath.row].name
         return cell
     }
     
@@ -81,7 +154,12 @@ class Existing_events: UITableViewController {
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            Selected_Events.remove(Events[indexPath.row])
+            for i in 0...Selected_Events.count - 1 {
+                if Selected_Events[i].id == Upcoming_Events[indexPath.row].id {
+                    Selected_Events.remove(at: i)
+                    break
+                }
+            }
             
             print(Selected_Events)
            
@@ -94,7 +172,7 @@ class Existing_events: UITableViewController {
             
             tableView.deselectRow(at: indexPath, animated: true)
             
-            Selected_Events.add(Events[indexPath.row])
+            Selected_Events.append(Upcoming_Events[indexPath.row])
             
             print(Selected_Events)
 
@@ -120,13 +198,13 @@ class Existing_events: UITableViewController {
         
         if destination == "Back To Add Champ" {
             let secondViewController = segue.destination as! Add_Championship
-            secondViewController.Selected_Events.addObjects(from: self.Selected_Events as! [Any])
+            secondViewController.Selected_Events = self.Selected_Events
             secondViewController.Selected_Events_Table.reloadData()
         }
         
         if destination == "Back To Add Race" {
             let secondViewController = segue.destination as! Add_Race
-            secondViewController.Selected_Events.addObjects(from: self.Selected_Events as! [Any])
+            secondViewController.Selected_Events = self.Selected_Events
             secondViewController.Selected_Events_Table.reloadData()
         }
     }
