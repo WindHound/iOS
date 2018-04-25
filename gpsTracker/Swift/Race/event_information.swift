@@ -7,12 +7,7 @@
 //
 
 import UIKit
-
-struct movedata {
-    var timeStamp : Int
-    var longitude : Double
-    var latitude : Double
-}
+import MapKit
 
 class event_information: UIViewController, UITextFieldDelegate {
     
@@ -30,7 +25,6 @@ class event_information: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var StartTime: UITextField!
     @IBOutlet weak var EndTime: UITextField!
     
-    var course : [movedata] = []
     
     var Chosen_Boat : Int = 0
     
@@ -42,6 +36,10 @@ class event_information: UIViewController, UITextFieldDelegate {
     var boatID : [Int] = []
     var startDate : Int = 0
     var endDate : Int = 0
+    
+//    var perform : Bool = false
+    
+    private var race_struct : Race_Struct? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,8 +93,11 @@ class event_information: UIViewController, UITextFieldDelegate {
             if Boat.text == "" {
                 createAlert(title: "Error", message: "Please choose a boat to replay", name: "error")
             } else {
-                //performSegue(withIdentifier: "To Replay", sender: self)
                 getMoveData()
+                while (race_struct == nil) {
+                    
+                }
+                performSegue(withIdentifier: "To Replay", sender: self)
             }
         }
     }
@@ -105,6 +106,8 @@ class event_information: UIViewController, UITextFieldDelegate {
         let dataURL = "movedata/get/"
         
         let jsonUrlString = URL(string: "\(baseURL)\(dataURL)\(raceID)/\(Chosen_Boat)")
+        
+        print(jsonUrlString as Any)
         
         let session = URLSession.shared
         session.dataTask(with: jsonUrlString!, completionHandler: {(data, response, error) -> Void in
@@ -115,21 +118,41 @@ class event_information: UIViewController, UITextFieldDelegate {
                 let moveData = try JSONDecoder().decode([sailboat].self, from: data)
 //                print(moveData)
                 
-                if (moveData.count != 0) {
-                    for i in 0...moveData.count - 1 {
-                        let location = movedata(timeStamp: moveData[i].timeMilli, longitude: moveData[i].longitude, latitude: moveData[i].latitude)
-
-                        self.course.append(location)
-
-                    }
-
-                    print(self.course)
+//                for i in 0...moveData.count - 1 {
+//                    print(moveData[i])
+//                }
+                print("1")
+                let newRace = Race_Struct(context: CoreDataStack.context)
+                print("2")
+                newRace.distance = 0
+                print("3")
+                newRace.duration = Int64(moveData[moveData.count - 1].timeMilli - moveData[0].timeMilli)
+                print("4")
+                
+                newRace.timestamp = Date(timeIntervalSince1970: TimeInterval(self.startDate / 1000))
+                print("5")
+                for location in moveData {
+                    print("I'm here")
+                    let locationObject = Location_Struct(context: CoreDataStack.context)
+                    locationObject.timestamp = Date(timeIntervalSince1970: TimeInterval(location.timeMilli))
+                    locationObject.latitude = location.latitude
+                    locationObject.longitude = location.longitude
+                    newRace.addToLocations(locationObject)
+                    
                 }
                 
+                
+                CoreDataStack.saveContext()
+                
+                self.race_struct = newRace
+                
+//                self.perform = true
+                
+
             } catch {
                 print(error)
             }
-            
+
             if let response = response {
                 print(response)
             }
@@ -140,6 +163,8 @@ class event_information: UIViewController, UITextFieldDelegate {
             
             
         }).resume()
+        
+        
     }
     
     override func didReceiveMemoryWarning() {

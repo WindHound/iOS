@@ -2180,7 +2180,7 @@
         <!--RaceDetailsViewController-->
         <scene sceneID="MDj-sb-gCp">
             <objects>
-                <viewController id="aBf-Cs-5pf" userLabel="RaceDetailsViewController" sceneMemberID="viewController">
+                <viewController id="aBf-Cs-5pf" userLabel="RaceDetailsViewController" customClass="RaceDetailsViewController" customModule="WindHound" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e2z-o1-avt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="944"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2207,7 +2207,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LeaderboardCollectionViewCell" id="b1z-yg-9tn" customClass="LeaderboardCollectionViewCell" customModule="map" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LeaderboardCollectionViewCell" id="b1z-yg-9tn" customClass="LeaderboardCollectionViewCell" customModule="WindHound" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="-0.5" width="81" height="81"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">

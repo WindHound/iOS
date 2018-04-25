@@ -75,6 +75,10 @@
 		55505A50208E05FE0032BDAF /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55505A4B208E05FD0032BDAF /* UnitExtensions.swift */; };
 		55505A51208E05FE0032BDAF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55505A4C208E05FE0032BDAF /* LocationManager.swift */; };
 		55505A52208E05FE0032BDAF /* FormatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55505A4D208E05FE0032BDAF /* FormatDisplay.swift */; };
+		555152CC2090BAF100F7420A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555152CB2090BAF100F7420A /* CoreDataStack.swift */; };
+		555152CF2090BD2800F7420A /* myMainProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 555152CD2090BD2800F7420A /* myMainProject.xcdatamodeld */; };
+		555152D22090C08C00F7420A /* RaceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555152D12090C08C00F7420A /* RaceDetailsViewController.swift */; };
+		555152D42090C14900F7420A /* LeaderboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555152D32090C14800F7420A /* LeaderboardCollectionViewCell.swift */; };
 		5552C9512041AE0000598669 /* Event_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5552C9502041AE0000598669 /* Event_list.swift */; };
 		5552C9532041AE1800598669 /* Race_list.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5552C9522041AE1800598669 /* Race_list.swift */; };
 		55548A142019444B00FC7E23 /* Championship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55548A132019444B00FC7E23 /* Championship.swift */; };
@@ -166,6 +170,10 @@
 		55505A4B208E05FD0032BDAF /* UnitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
 		55505A4C208E05FE0032BDAF /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		55505A4D208E05FE0032BDAF /* FormatDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatDisplay.swift; sourceTree = "<group>"; };
+		555152CB2090BAF100F7420A /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		555152CE2090BD2800F7420A /* myMainProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = myMainProject.xcdatamodel; sourceTree = "<group>"; };
+		555152D12090C08C00F7420A /* RaceDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceDetailsViewController.swift; sourceTree = "<group>"; };
+		555152D32090C14800F7420A /* LeaderboardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardCollectionViewCell.swift; sourceTree = "<group>"; };
 		5552C9502041AE0000598669 /* Event_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event_list.swift; sourceTree = "<group>"; };
 		5552C9522041AE1800598669 /* Race_list.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Race_list.swift; sourceTree = "<group>"; };
 		55548A132019444B00FC7E23 /* Championship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Championship.swift; sourceTree = "<group>"; };
@@ -367,9 +375,29 @@
 			path = "Supported Files";
 			sourceTree = "<group>";
 		};
+		555152CA2090BAD800F7420A /* Save Data */ = {
+			isa = PBXGroup;
+			children = (
+				555152CB2090BAF100F7420A /* CoreDataStack.swift */,
+				555152CD2090BD2800F7420A /* myMainProject.xcdatamodeld */,
+			);
+			path = "Save Data";
+			sourceTree = "<group>";
+		};
+		555152D02090C04E00F7420A /* Fetch Data */ = {
+			isa = PBXGroup;
+			children = (
+				555152D32090C14800F7420A /* LeaderboardCollectionViewCell.swift */,
+				555152D12090C08C00F7420A /* RaceDetailsViewController.swift */,
+			);
+			path = "Fetch Data";
+			sourceTree = "<group>";
+		};
 		55686E23204C39A100D86201 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
+				555152D02090C04E00F7420A /* Fetch Data */,
+				555152CA2090BAD800F7420A /* Save Data */,
 				55505A48208E05E60032BDAF /* Supported Files */,
 				55686E25204C3A1F00D86201 /* Championship */,
 				55686E24204C3A0D00D86201 /* Event */,
@@ -662,8 +690,10 @@
 				5512CCE2203B893500B17951 /* Profile_page.swift in Sources */,
 				55505A51208E05FE0032BDAF /* LocationManager.swift in Sources */,
 				555A7D0E207FC5E600F0C639 /* Championship_Master.swift in Sources */,
+				555152CC2090BAF100F7420A /* CoreDataStack.swift in Sources */,
 				550B1D4A2020845900213E81 /* set_location.swift in Sources */,
 				553FD97A204D6BBE00198BC5 /* Existing_Admins.swift in Sources */,
+				555152D42090C14900F7420A /* LeaderboardCollectionViewCell.swift in Sources */,
 				555A7D1C207FEA6800F0C639 /* Event_Master.swift in Sources */,
 				55505A52208E05FE0032BDAF /* FormatDisplay.swift in Sources */,
 				555A7D22207FF83D00F0C639 /* Race_Master.swift in Sources */,
@@ -672,6 +702,8 @@
 				554FCA102045DE7D009B0EE2 /* Existing_events.swift in Sources */,
 				557F41652007E8DF0087239B /* GpsAndSensor.swift in Sources */,
 				550AEE1B202F3B9100FC1978 /* event_information.swift in Sources */,
+				555152CF2090BD2800F7420A /* myMainProject.xcdatamodeld in Sources */,
+				555152D22090C08C00F7420A /* RaceDetailsViewController.swift in Sources */,
 				550AEE19202F37C200FC1978 /* Event.swift in Sources */,
 				5552C9512041AE0000598669 /* Event_list.swift in Sources */,
 				552CF840201FD5F700620C29 /* Add_Race.swift in Sources */,
@@ -863,6 +895,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		555152CD2090BD2800F7420A /* myMainProject.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				555152CE2090BD2800F7420A /* myMainProject.xcdatamodel */,
+			);
+			currentVersion = 555152CE2090BD2800F7420A /* myMainProject.xcdatamodel */;
+			path = myMainProject.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 557F41572007E8DF0087239B /* Project object */;
 }
