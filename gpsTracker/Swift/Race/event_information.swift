@@ -36,10 +36,12 @@ class event_information: UIViewController, UITextFieldDelegate {
     var boatID : [Int] = []
     var startDate : Int = 0
     var endDate : Int = 0
+    var moveData : [sailboat] = []
+
     
-//    var perform : Bool = false
+    var perform : Bool = false
     
-    private var race_struct : Race_Struct? = nil
+    private var race_struct : Race_Struct?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +77,6 @@ class event_information: UIViewController, UITextFieldDelegate {
             Mutipurpose_button.title = "Replay"
             Boat_Label.text = "Recorded Boat"
         }
-
         // Do any additional setup after loading the view.
     }
 
@@ -94,10 +95,38 @@ class event_information: UIViewController, UITextFieldDelegate {
                 createAlert(title: "Error", message: "Please choose a boat to replay", name: "error")
             } else {
                 getMoveData()
-                while (race_struct == nil) {
+
+                while perform == false {
                     
                 }
-                performSegue(withIdentifier: "To Replay", sender: self)
+                
+                
+                if moveData.count != 0 {
+                    let newRace = Race_Struct(context: CoreDataStack.context)
+                    newRace.distance = 10
+                    newRace.duration = Int64((moveData[moveData.count - 1].timeMilli/1000) - (moveData[0].timeMilli/1000))
+                    
+                    newRace.timestamp = Date(timeIntervalSince1970: TimeInterval(self.startDate / 1000))
+                    for location in moveData {
+                        let locationObject = Location_Struct(context: CoreDataStack.context)
+                        locationObject.timestamp = Date(timeIntervalSince1970: TimeInterval(location.timeMilli/1000))
+                        locationObject.latitude = location.longitude
+                        locationObject.longitude = location.latitude
+                        newRace.addToLocations(locationObject)
+                        
+                    }
+                    
+                    print(newRace as Any)
+                    
+                    CoreDataStack.saveContext()
+                    
+                    race_struct = newRace
+                    
+                    performSegue(withIdentifier: "To Replay", sender: self)
+                } else {
+                    createAlert(title: "No record", message: "There is no record for this boat", name: "Error")
+                }
+                
             }
         }
     }
@@ -115,38 +144,14 @@ class event_information: UIViewController, UITextFieldDelegate {
             
             do {
 //                let moveData = try JSONSerialization.jsonObject(with: data, options: [])
-                let moveData = try JSONDecoder().decode([sailboat].self, from: data)
+                self.moveData = try JSONDecoder().decode([sailboat].self, from: data)
 //                print(moveData)
                 
 //                for i in 0...moveData.count - 1 {
 //                    print(moveData[i])
 //                }
-                print("1")
-                let newRace = Race_Struct(context: CoreDataStack.context)
-                print("2")
-                newRace.distance = 0
-                print("3")
-                newRace.duration = Int64(moveData[moveData.count - 1].timeMilli - moveData[0].timeMilli)
-                print("4")
                 
-                newRace.timestamp = Date(timeIntervalSince1970: TimeInterval(self.startDate / 1000))
-                print("5")
-                for location in moveData {
-                    print("I'm here")
-                    let locationObject = Location_Struct(context: CoreDataStack.context)
-                    locationObject.timestamp = Date(timeIntervalSince1970: TimeInterval(location.timeMilli))
-                    locationObject.latitude = location.latitude
-                    locationObject.longitude = location.longitude
-                    newRace.addToLocations(locationObject)
-                    
-                }
-                
-                
-                CoreDataStack.saveContext()
-                
-                self.race_struct = newRace
-                
-//                self.perform = true
+                self.perform = true
                 
 
             } catch {
@@ -163,6 +168,7 @@ class event_information: UIViewController, UITextFieldDelegate {
             
             
         }).resume()
+        
         
         
     }
@@ -203,6 +209,12 @@ class event_information: UIViewController, UITextFieldDelegate {
             let secondViewController = segue.destination as! GpsAndSensor
             secondViewController.raceID = raceID
             secondViewController.boatID = Chosen_Boat
+        }
+        
+        if destination == "To Replay" {
+            let secondViewController = segue.destination as! RaceDetailsViewController
+            secondViewController.race = self.race_struct
+            secondViewController.name = "\(Chosen_Boat)"
         }
     }
     

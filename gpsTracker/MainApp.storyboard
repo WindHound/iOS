@@ -242,7 +242,7 @@
                                 <color key="barTintColor" red="0.090196078430000007" green="0.65098039220000004" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLC-YE-jnQ">
-                                <rect key="frame" x="155" y="32" width="64" height="21"/>
+                                <rect key="frame" x="155.5" y="32" width="64" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2185,15 +2185,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="944"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85r-wk-Avl">
-                                <rect key="frame" x="0.0" y="20" width="375" height="321"/>
-                                <items>
-                                    <navigationItem title="Race #123 Replay" id="9HP-t3-8NE">
-                                        <barButtonItem key="backBarButtonItem" title="Back" id="y37-Nv-SAG"/>
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="4XZ-8t-WSz"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ywU-kj-rvz">
                                 <rect key="frame" x="0.0" y="64" width="375" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2241,17 +2232,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="54h-IY-3D3">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                         <subviews>
-                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sa9-sQ-Z23">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="400" id="1SL-vK-HRt"/>
-                                                </constraints>
-                                                <connections>
-                                                    <outlet property="delegate" destination="aBf-Cs-5pf" id="VMl-E7-pEE"/>
-                                                </connections>
-                                            </mapView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="PeF-hT-pHC">
-                                                <rect key="frame" x="8" y="408" width="99" height="156"/>
+                                                <rect key="frame" x="8" y="358" width="99" height="156"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7w6-6m-IVx">
                                                         <rect key="frame" x="0.0" y="0.0" width="99" height="78"/>
@@ -2296,6 +2278,15 @@
                                                     <constraint firstAttribute="bottom" secondItem="7w6-6m-IVx" secondAttribute="bottom" constant="78" id="tOq-K3-XQ0"/>
                                                 </constraints>
                                             </stackView>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sa9-sQ-Z23">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="350" id="HKp-hb-3ZJ"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="delegate" destination="aBf-Cs-5pf" id="VMl-E7-pEE"/>
+                                                </connections>
+                                            </mapView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -2315,19 +2306,42 @@
                                     <constraint firstAttribute="bottom" secondItem="54h-IY-3D3" secondAttribute="bottom" id="yx9-Up-uhN"/>
                                 </constraints>
                             </scrollView>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYu-0g-y9c">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="barTintColor" red="0.090196078430000007" green="0.65098039220000004" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem id="t3n-MR-UQ3">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="7bM-CC-tme">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <segue destination="O3E-5a-ihd" kind="unwind" unwindAction="unwindToRaceInformationWithSegue:" id="tQ0-Xs-jna"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="log_in_background" translatesAutoresizingMaskIntoConstraints="NO" id="Kwv-p2-A89">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Kwv-p2-A89" secondAttribute="trailing" id="1Yh-oi-PBN"/>
                             <constraint firstItem="54h-IY-3D3" firstAttribute="width" secondItem="e2z-o1-avt" secondAttribute="width" id="6EA-Af-NCb"/>
+                            <constraint firstItem="Kwv-p2-A89" firstAttribute="leading" secondItem="e2z-o1-avt" secondAttribute="leading" id="7oc-Nk-0MS"/>
+                            <constraint firstItem="Kwv-p2-A89" firstAttribute="top" secondItem="e2z-o1-avt" secondAttribute="top" id="Jou-4L-K3d"/>
                             <constraint firstItem="gQw-Ra-pCE" firstAttribute="leading" secondItem="9QA-uO-1Ad" secondAttribute="leading" id="KaZ-ve-8q9"/>
-                            <constraint firstItem="85r-wk-Avl" firstAttribute="leading" secondItem="9QA-uO-1Ad" secondAttribute="leading" id="KcY-cp-c2d"/>
+                            <constraint firstItem="cYu-0g-y9c" firstAttribute="top" secondItem="9QA-uO-1Ad" secondAttribute="top" id="QZb-uO-5Di"/>
+                            <constraint firstItem="cYu-0g-y9c" firstAttribute="top" secondItem="Kwv-p2-A89" secondAttribute="bottom" id="Qrf-8j-Mby"/>
+                            <constraint firstItem="cYu-0g-y9c" firstAttribute="leading" secondItem="9QA-uO-1Ad" secondAttribute="leading" id="V42-ad-UgS"/>
                             <constraint firstItem="gQw-Ra-pCE" firstAttribute="bottom" secondItem="9QA-uO-1Ad" secondAttribute="bottom" id="ZXa-aK-m6Y"/>
-                            <constraint firstItem="85r-wk-Avl" firstAttribute="trailing" secondItem="9QA-uO-1Ad" secondAttribute="trailing" id="ZbS-b2-S5z"/>
                             <constraint firstItem="ywU-kj-rvz" firstAttribute="top" secondItem="9QA-uO-1Ad" secondAttribute="top" constant="44" id="Zi1-0V-kUX"/>
-                            <constraint firstItem="85r-wk-Avl" firstAttribute="top" secondItem="9QA-uO-1Ad" secondAttribute="top" id="dL7-PO-IHw"/>
+                            <constraint firstItem="cYu-0g-y9c" firstAttribute="trailing" secondItem="9QA-uO-1Ad" secondAttribute="trailing" id="jXO-jl-rQS"/>
                             <constraint firstItem="gQw-Ra-pCE" firstAttribute="top" secondItem="ywU-kj-rvz" secondAttribute="bottom" id="pCn-eG-cTq"/>
                             <constraint firstItem="gQw-Ra-pCE" firstAttribute="trailing" secondItem="9QA-uO-1Ad" secondAttribute="trailing" id="sKG-sz-Tkm"/>
-                            <constraint firstItem="9QA-uO-1Ad" firstAttribute="bottom" secondItem="85r-wk-Avl" secondAttribute="bottom" constant="603" id="vph-u3-J5p"/>
                             <constraint firstItem="ywU-kj-rvz" firstAttribute="leading" secondItem="9QA-uO-1Ad" secondAttribute="leading" id="xLf-GE-5v1"/>
                             <constraint firstItem="ywU-kj-rvz" firstAttribute="trailing" secondItem="9QA-uO-1Ad" secondAttribute="trailing" id="ykE-fH-Icb"/>
                         </constraints>
@@ -2335,6 +2349,7 @@
                     </view>
                     <size key="freeformSize" width="375" height="944"/>
                     <connections>
+                        <outlet property="bar" destination="t3n-MR-UQ3" id="ANp-Fy-QBD"/>
                         <outlet property="dateLabel" destination="yEe-xo-01y" id="xDv-H0-KDf"/>
                         <outlet property="distanceLabel" destination="GlK-2E-IuB" id="KU6-GM-mYS"/>
                         <outlet property="mapView" destination="Sa9-sQ-Z23" id="pBE-DT-pT5"/>
@@ -2343,8 +2358,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1f8-bH-Zun" sceneMemberID="firstResponder"/>
+                <exit id="O3E-5a-ihd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4305" y="1208"/>
+            <point key="canvasLocation" x="4304.8000000000002" y="1207.1964017991006"/>
         </scene>
     </scenes>
     <resources>
@@ -2364,8 +2380,8 @@
         <segue reference="8uC-EP-KLL"/>
         <segue reference="OqR-y3-SyR"/>
         <segue reference="fLT-Pn-PYc"/>
-        <segue reference="Fjf-b2-hib"/>
-        <segue reference="ecH-PI-kZl"/>
-        <segue reference="VaC-e6-Kdz"/>
+        <segue reference="TL8-TX-tPb"/>
+        <segue reference="lJZ-W7-ejP"/>
+        <segue reference="d8d-wV-tJg"/>
     </inferredMetricsTieBreakers>
 </document>
