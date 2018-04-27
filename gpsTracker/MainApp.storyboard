@@ -442,6 +442,9 @@
                             </barButtonItem>
                             <barButtonItem systemItem="compose" id="clc-wP-J27">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="Edit_Pressed:" destination="kJN-Ca-qir" id="vOK-fq-7aV"/>
+                                </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="add" id="iJS-J2-v5c">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -455,6 +458,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="Add_Button" destination="iJS-J2-v5c" id="1Km-aa-Kdb"/>
                         <outlet property="Race_Table" destination="NRx-6U-BK8" id="6NU-gf-V1I"/>
                         <segue destination="7N5-1w-mx0" kind="showDetail" identifier="Up To Info" id="ecH-PI-kZl"/>
                         <segue destination="7N5-1w-mx0" kind="showDetail" identifier="Hist To Info" id="M6W-Jd-HWu"/>
@@ -1293,6 +1297,9 @@
                             </barButtonItem>
                             <barButtonItem systemItem="compose" id="75P-u3-h1Q">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="Edit_Pressed:" destination="6N5-mJ-1ep" id="hSl-9C-KZI"/>
+                                </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="add" id="efv-hr-Mnr">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1306,6 +1313,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="Add_Button" destination="efv-hr-Mnr" id="6fk-Rv-mKV"/>
                         <outlet property="Events_Table" destination="mDh-Hy-aN3" id="ztJ-rw-lWC"/>
                         <segue destination="pY0-7z-LEB" kind="show" identifier="Up To Race" id="Y2d-fd-qgR"/>
                         <segue destination="pY0-7z-LEB" kind="show" identifier="Hist To Race" id="AK1-qy-65h"/>
@@ -1402,7 +1410,7 @@
                                                 </connections>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XyB-RO-NQO">
-                                                <rect key="frame" x="10" y="782" width="175" height="35"/>
+                                                <rect key="frame" x="10" y="782" width="355" height="35"/>
                                                 <color key="backgroundColor" red="0.0" green="0.31473214290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="bl9-M1-yQV"/>
@@ -1413,21 +1421,6 @@
                                                 </state>
                                                 <connections>
                                                     <segue destination="Fyc-5B-Ihc" kind="show" identifier="To Existing Event" id="JcI-IS-yfY"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jG8-tC-ZOp">
-                                                <rect key="frame" x="190" y="782" width="175" height="35"/>
-                                                <color key="backgroundColor" red="0.0" green="0.31473214290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="35" id="5it-8t-8e1"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <state key="normal" title="New">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="New_Events_Button_Pressed:" destination="W4s-P2-PzK" eventType="touchUpInside" id="m5x-ZZ-oD5"/>
-                                                    <segue destination="qQt-rf-Wel" kind="show" identifier="To Add Event" id="OqR-y3-SyR"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Admins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uC-jP-jNa">
@@ -1506,11 +1499,9 @@
                                             <constraint firstAttribute="trailing" secondItem="LSh-yD-4hg" secondAttribute="trailing" constant="10" id="BF4-70-ijr"/>
                                             <constraint firstAttribute="trailing" secondItem="ZUq-1w-SJd" secondAttribute="trailing" constant="10" id="ELj-5m-hdQ"/>
                                             <constraint firstItem="XyB-RO-NQO" firstAttribute="top" secondItem="QG9-cZ-947" secondAttribute="bottom" constant="15" id="Fox-MW-MKz"/>
-                                            <constraint firstAttribute="trailing" secondItem="jG8-tC-ZOp" secondAttribute="trailing" constant="10" id="HUt-bB-ghn"/>
                                             <constraint firstItem="wPR-q4-AiZ" firstAttribute="top" secondItem="zFM-Jb-Sel" secondAttribute="bottom" constant="15" id="Mbu-Vx-NNr"/>
                                             <constraint firstItem="h0X-a6-6lC" firstAttribute="leading" secondItem="4tj-ir-2fg" secondAttribute="leading" constant="10" id="Oag-rX-N8U"/>
                                             <constraint firstAttribute="trailing" secondItem="A4Q-8i-oDe" secondAttribute="trailing" constant="10" id="Q5v-3p-i6U"/>
-                                            <constraint firstItem="jG8-tC-ZOp" firstAttribute="leading" secondItem="XyB-RO-NQO" secondAttribute="trailing" constant="5" id="RDj-am-vKs"/>
                                             <constraint firstItem="doJ-e2-J0X" firstAttribute="leading" secondItem="4tj-ir-2fg" secondAttribute="leading" constant="10" id="RKp-wh-cLq"/>
                                             <constraint firstItem="doJ-e2-J0X" firstAttribute="top" secondItem="8lX-jY-oGm" secondAttribute="bottom" constant="15" id="UVB-fF-ISq"/>
                                             <constraint firstItem="6uC-jP-jNa" firstAttribute="leading" secondItem="4tj-ir-2fg" secondAttribute="leading" constant="10" id="Uuc-Wm-9cb"/>
@@ -1525,14 +1516,12 @@
                                             <constraint firstAttribute="trailing" secondItem="doJ-e2-J0X" secondAttribute="trailing" constant="10" id="eXZ-Cs-ztA"/>
                                             <constraint firstItem="zFM-Jb-Sel" firstAttribute="top" secondItem="4tj-ir-2fg" secondAttribute="top" constant="20" id="ekd-aW-3gq"/>
                                             <constraint firstItem="XyB-RO-NQO" firstAttribute="leading" secondItem="4tj-ir-2fg" secondAttribute="leading" constant="10" id="gQo-Xd-dEP"/>
-                                            <constraint firstItem="XyB-RO-NQO" firstAttribute="width" secondItem="jG8-tC-ZOp" secondAttribute="width" id="gqm-qd-7fc"/>
-                                            <constraint firstItem="jG8-tC-ZOp" firstAttribute="leading" secondItem="XyB-RO-NQO" secondAttribute="trailing" constant="5" id="hps-6y-fgz"/>
                                             <constraint firstItem="wPR-q4-AiZ" firstAttribute="leading" secondItem="4tj-ir-2fg" secondAttribute="leading" constant="10" id="jr8-7S-gII"/>
-                                            <constraint firstItem="jG8-tC-ZOp" firstAttribute="top" secondItem="QG9-cZ-947" secondAttribute="bottom" constant="15" id="kLd-LY-ccT"/>
                                             <constraint firstAttribute="height" constant="850" id="kc6-B7-Kjz"/>
                                             <constraint firstItem="zFM-Jb-Sel" firstAttribute="leading" secondItem="4tj-ir-2fg" secondAttribute="leading" constant="10" id="km0-aZ-NsB"/>
                                             <constraint firstAttribute="trailing" secondItem="QG9-cZ-947" secondAttribute="trailing" constant="10" id="nb6-ZR-ZGr"/>
                                             <constraint firstAttribute="trailing" secondItem="zFM-Jb-Sel" secondAttribute="trailing" constant="10" id="nsR-g0-qrQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="XyB-RO-NQO" secondAttribute="trailing" constant="10" id="qRN-EN-LCp"/>
                                             <constraint firstAttribute="trailing" secondItem="h0X-a6-6lC" secondAttribute="trailing" constant="10" id="r6B-Hd-XFL"/>
                                             <constraint firstAttribute="trailing" secondItem="6uC-jP-jNa" secondAttribute="trailing" constant="10" id="rWd-u8-XrS"/>
                                             <constraint firstItem="8lX-jY-oGm" firstAttribute="leading" secondItem="4tj-ir-2fg" secondAttribute="leading" constant="10" id="tSz-xS-Cif"/>
@@ -1578,7 +1567,6 @@
                     <connections>
                         <outlet property="End_date" destination="DJB-BE-fHl" id="Ssj-c9-qq7"/>
                         <outlet property="Name" destination="wPR-q4-AiZ" id="zqd-J4-4r7"/>
-                        <outlet property="New_Event_button" destination="jG8-tC-ZOp" id="1Ba-Sa-1TK"/>
                         <outlet property="Save_button" destination="m34-vM-dyT" id="F02-GP-8EN"/>
                         <outlet property="Selected_Admins_Table" destination="ZUq-1w-SJd" id="mcH-WN-3mv"/>
                         <outlet property="Selected_Events_Table" destination="QG9-cZ-947" id="3tL-Yb-W47"/>
@@ -1684,7 +1672,7 @@
                                                 </connections>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeQ-I9-dKj">
-                                                <rect key="frame" x="10" y="1069" width="175" height="35"/>
+                                                <rect key="frame" x="10" y="1069" width="355" height="35"/>
                                                 <color key="backgroundColor" red="0.0" green="0.31473214290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="Z6D-sL-zcd"/>
@@ -1694,20 +1682,6 @@
                                                 </state>
                                                 <connections>
                                                     <segue destination="wNY-hV-HmR" kind="show" id="jYE-Nz-h9a"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFF-5b-zJK">
-                                                <rect key="frame" x="190" y="1069" width="175" height="35"/>
-                                                <color key="backgroundColor" red="0.0" green="0.31473214290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="35" id="XXS-cG-7ny"/>
-                                                </constraints>
-                                                <state key="normal" title="New">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="New_Race_Button_Pressed:" destination="qQt-rf-Wel" eventType="touchUpInside" id="SaJ-yV-kaY"/>
-                                                    <segue destination="OO6-VZ-vR1" kind="show" identifier="To Add Race" id="Fjf-b2-hib"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Admins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lww-4d-GEf">
@@ -1778,12 +1752,11 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="ZN7-z7-0VU" firstAttribute="top" secondItem="Oxi-s5-raN" secondAttribute="top" constant="20" id="02w-xp-n89"/>
-                                            <constraint firstItem="PFF-5b-zJK" firstAttribute="top" secondItem="Fup-19-4To" secondAttribute="bottom" constant="15" id="22C-iv-S4M"/>
                                             <constraint firstAttribute="trailing" secondItem="Ed5-MU-KVd" secondAttribute="trailing" constant="10" id="2PZ-j4-Xrz"/>
                                             <constraint firstItem="Ecx-E1-2eL" firstAttribute="top" secondItem="tQt-HD-34w" secondAttribute="bottom" constant="15" id="2VO-ho-hBR"/>
-                                            <constraint firstItem="PFF-5b-zJK" firstAttribute="leading" secondItem="ZeQ-I9-dKj" secondAttribute="trailing" constant="5" id="3e6-Ef-hMW"/>
                                             <constraint firstItem="XqC-P7-8Zz" firstAttribute="top" secondItem="fYO-Vz-fCf" secondAttribute="bottom" constant="15" id="3sZ-AW-bGB"/>
                                             <constraint firstItem="yfo-JT-sDe" firstAttribute="leading" secondItem="Oxi-s5-raN" secondAttribute="leading" constant="10" id="4h5-qm-kgz"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZeQ-I9-dKj" secondAttribute="trailing" constant="10" id="612-Q5-v0k"/>
                                             <constraint firstItem="Fup-19-4To" firstAttribute="leading" secondItem="Oxi-s5-raN" secondAttribute="leading" constant="10" id="6vO-HQ-QqS"/>
                                             <constraint firstAttribute="trailing" secondItem="tQt-HD-34w" secondAttribute="trailing" constant="10" id="7So-Db-qem"/>
                                             <constraint firstItem="B1X-p0-9pR" firstAttribute="leading" secondItem="Oxi-s5-raN" secondAttribute="leading" constant="10" id="8hn-tm-7n3"/>
@@ -1803,7 +1776,6 @@
                                             <constraint firstItem="Ed5-MU-KVd" firstAttribute="top" secondItem="lww-4d-GEf" secondAttribute="bottom" constant="15" id="UOf-7G-xTU"/>
                                             <constraint firstItem="ZeQ-I9-dKj" firstAttribute="leading" secondItem="Oxi-s5-raN" secondAttribute="leading" constant="10" id="VsR-yB-dZc"/>
                                             <constraint firstAttribute="trailing" secondItem="WMW-wp-6fG" secondAttribute="trailing" constant="10" id="VuG-yG-dr6"/>
-                                            <constraint firstItem="ZeQ-I9-dKj" firstAttribute="height" secondItem="PFF-5b-zJK" secondAttribute="height" id="Wdh-pl-H6w"/>
                                             <constraint firstAttribute="trailing" secondItem="B1X-p0-9pR" secondAttribute="trailing" constant="10" id="ahC-pr-aBS"/>
                                             <constraint firstItem="Ed5-MU-KVd" firstAttribute="leading" secondItem="Oxi-s5-raN" secondAttribute="leading" constant="10" id="bS8-7R-bhi"/>
                                             <constraint firstItem="Ecx-E1-2eL" firstAttribute="leading" secondItem="Oxi-s5-raN" secondAttribute="leading" constant="10" id="dk3-d5-I0Q"/>
@@ -1811,11 +1783,9 @@
                                             <constraint firstItem="lww-4d-GEf" firstAttribute="top" secondItem="XqC-P7-8Zz" secondAttribute="bottom" constant="15" id="fHt-ji-7Xz"/>
                                             <constraint firstAttribute="trailing" secondItem="Ecx-E1-2eL" secondAttribute="trailing" constant="10" id="idz-eK-mhU"/>
                                             <constraint firstItem="B1X-p0-9pR" firstAttribute="top" secondItem="5sW-Fv-IYG" secondAttribute="bottom" constant="15" id="j77-ot-Pez"/>
-                                            <constraint firstItem="PFF-5b-zJK" firstAttribute="leading" secondItem="ZeQ-I9-dKj" secondAttribute="trailing" constant="5" id="j7V-mQ-TwZ"/>
                                             <constraint firstItem="FZ3-fK-syN" firstAttribute="leading" secondItem="Oxi-s5-raN" secondAttribute="leading" constant="10" id="l1q-C5-Qpq"/>
                                             <constraint firstAttribute="trailing" secondItem="Fup-19-4To" secondAttribute="trailing" constant="10" id="lMF-w4-sa6"/>
                                             <constraint firstItem="tQt-HD-34w" firstAttribute="top" secondItem="FZ3-fK-syN" secondAttribute="bottom" constant="15" id="lRl-D4-TZe"/>
-                                            <constraint firstAttribute="trailing" secondItem="PFF-5b-zJK" secondAttribute="trailing" constant="10" id="n1H-04-AYN"/>
                                             <constraint firstItem="ZN7-z7-0VU" firstAttribute="leading" secondItem="Oxi-s5-raN" secondAttribute="leading" constant="10" id="nfN-rL-xhe"/>
                                             <constraint firstItem="FZ3-fK-syN" firstAttribute="top" secondItem="ZN7-z7-0VU" secondAttribute="bottom" constant="4" id="oMu-Eh-2vK"/>
                                             <constraint firstItem="ZeQ-I9-dKj" firstAttribute="top" secondItem="Fup-19-4To" secondAttribute="bottom" constant="15" id="p30-Mz-7b9"/>
@@ -1827,7 +1797,6 @@
                                             <constraint firstAttribute="trailing" secondItem="ZN7-z7-0VU" secondAttribute="trailing" constant="10" id="x8i-qX-pwT"/>
                                             <constraint firstAttribute="trailing" secondItem="XqC-P7-8Zz" secondAttribute="trailing" constant="10" id="yXU-TQ-S92"/>
                                             <constraint firstItem="fYO-Vz-fCf" firstAttribute="top" secondItem="Ecx-E1-2eL" secondAttribute="bottom" constant="15" id="z4x-iC-Aad"/>
-                                            <constraint firstItem="ZeQ-I9-dKj" firstAttribute="width" secondItem="PFF-5b-zJK" secondAttribute="width" id="zaZ-Bg-1lL"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -2376,12 +2345,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AK1-qy-65h"/>
-        <segue reference="plq-d2-ZHt"/>
-        <segue reference="8uC-EP-KLL"/>
-        <segue reference="OqR-y3-SyR"/>
+        <segue reference="4X4-eV-UDb"/>
+        <segue reference="JcI-IS-yfY"/>
         <segue reference="fLT-Pn-PYc"/>
-        <segue reference="TL8-TX-tPb"/>
-        <segue reference="lJZ-W7-ejP"/>
-        <segue reference="d8d-wV-tJg"/>
+        <segue reference="M6W-Jd-HWu"/>
+        <segue reference="lJd-EP-aFk"/>
     </inferredMetricsTieBreakers>
 </document>

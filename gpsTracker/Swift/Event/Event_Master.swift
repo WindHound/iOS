@@ -20,6 +20,7 @@ struct Events : Encodable, Decodable {
 class Event_Master: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var Events_Table: UITableView!
+    @IBOutlet weak var Add_Button: UIBarButtonItem!
     
     var isUpcoming : Bool = true
     
@@ -35,7 +36,7 @@ class Event_Master: UIViewController, UITableViewDataSource, UITableViewDelegate
     var history_event = [Events]()
     var display_event = [Events]()
     
-    var isAdd : Bool = false
+    var isAdd : Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,11 +182,16 @@ class Event_Master: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         raceIndex = indexPath.row
-        if isUpcoming {
-            performSegue(withIdentifier: "Up To Race", sender: self)
+        if !isAdd {
+            performSegue(withIdentifier: "To Add Event", sender: self)
         } else {
-            performSegue(withIdentifier: "Hist To Race", sender: self)
+            if isUpcoming {
+                performSegue(withIdentifier: "Up To Race", sender: self)
+            } else {
+                performSegue(withIdentifier: "Hist To Race", sender: self)
+            }
         }
+        
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -217,6 +223,13 @@ class Event_Master: UIViewController, UITableViewDataSource, UITableViewDelegate
                 secondViewController.toolBarName = "Add Event"
             } else {
                 secondViewController.toolBarName = "Edit Event"
+                secondViewController.eventToAdd.id = display_event[raceIndex].id
+                secondViewController.eventToAdd.name = display_event[raceIndex].name
+                secondViewController.eventToAdd.admins = display_event[raceIndex].admins
+                secondViewController.eventToAdd.startDate = display_event[raceIndex].startDate
+                secondViewController.eventToAdd.endDate = display_event[raceIndex].endDate
+                secondViewController.eventToAdd.races = display_event[raceIndex].races
+                secondViewController.eventToAdd.championships = display_event[raceIndex].championships
             }
         }
     }
@@ -225,6 +238,17 @@ class Event_Master: UIViewController, UITableViewDataSource, UITableViewDelegate
         isAdd = true
         performSegue(withIdentifier: "To Add Event", sender: self)
     }
+    
+    @IBAction func Edit_Pressed(_ sender: Any) {
+        if !isAdd {
+            isAdd = true
+            Add_Button.isEnabled = true
+        } else {
+            isAdd = false
+            Add_Button.isEnabled = false
+        }
+    }
+    
     
     @IBAction func unwindToEventList(segue:UIStoryboardSegue) { }
     

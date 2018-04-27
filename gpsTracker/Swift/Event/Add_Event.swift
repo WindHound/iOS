@@ -39,6 +39,10 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
     
     var postURL : String = "structure/event/add"
     
+    var championshipURL : String = "structure/championship/get/"
+    
+    var raceURL : String = "structure/race/get/"
+    
     var id : Int? = nil
     
     var eventToAdd = Events(id: nil, name: "", startDate: 0, endDate: 0, admins: [], championships: [], races: [])
@@ -62,6 +66,35 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
         Start_date.delegate = self
         End_Date.delegate = self
     
+        Name.text = eventToAdd.name
+        if eventToAdd.startDate != 0 {
+            let dateformatter = DateFormatter()
+            
+            dateformatter.dateFormat = "yyyy-MM-dd"
+            
+            let startdate = Date(timeIntervalSince1970: TimeInterval(eventToAdd.startDate/1000))
+            
+            let enddate = Date(timeIntervalSince1970: TimeInterval(eventToAdd.endDate / 1000))
+            
+            let startdateString = dateformatter.string(from: startdate)
+            let enddateString = dateformatter.string(from: enddate)
+            
+            startdateMilli = eventToAdd.startDate
+            enddateMilli = eventToAdd.endDate
+            
+            Start_date.text = startdateString
+            End_Date.text = enddateString
+            
+        }
+        
+        if eventToAdd.championships != [] {
+            updateChampionship()
+        }
+        
+        if eventToAdd.races != [] {
+            updateRaces()
+        }
+        
         Save_button.isEnabled = false
         addPressed = false
         
@@ -76,6 +109,72 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
         currentdate = currentdateformatter.string(from: date)
 
         // Do any additional setup after loading the view.
+    }
+    
+    func updateChampionship() {
+        for i in 0...(self.eventToAdd.championships.count - 1) {
+            let jsonUrlString = URL(string: "\(baseURL)\(championshipURL)\(self.eventToAdd.championships[i])")
+            
+            let session = URLSession.shared
+            session.dataTask(with: jsonUrlString!, completionHandler: {(data, response, error) -> Void in
+                guard let data = data else {return}
+                
+                do {
+                    let championship = try JSONDecoder().decode(Championships.self, from: data)
+                    
+                    print(championship)
+                    
+                    self.Selected_Championships.append(championship)
+                    
+                    DispatchQueue.main.async {
+                        self.Selected_Championships_Table.reloadData()
+                    }
+                } catch {
+                    print(error)
+                }
+                
+                if let response = response {
+                    print(response)
+                }
+                if let error = error {
+                    print(error)
+                }
+            })
+        }
+    }
+    
+    func updateRaces() {
+        for i in 0...(self.eventToAdd.races.count - 1) {
+            let jsonUrlString = URL(string: "\(baseURL)\(raceURL)\(self.eventToAdd.races[i])")
+            
+            let session = URLSession.shared
+            
+            session.dataTask(with: jsonUrlString!, completionHandler: {(data, response, error) -> Void in
+                
+                guard let data = data else {return}
+                
+                do {
+                    let race = try JSONDecoder().decode(Races.self, from: data)
+                    print(race)
+                    
+                    self.Selected_Races.append(race)
+                    
+                    DispatchQueue.main.async {
+                        self.Selected_Races_Table.reloadData()
+                    }
+                } catch {
+                    print(error)
+                }
+                
+                if let response = response {
+                    print(response)
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+            })
+        }
     }
     
     func createDatePicer(forField field : UITextField) {
@@ -235,20 +334,20 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
         }
     }
     
-    @IBAction func New_Race_Button_Pressed(_ sender: Any) {
-        if Name.text == "" {
-            createAlert(title: "Empty Event Name", message: "To create a new race, please enter event name", name: "Name")
-        } else {
-            if Start_date.text == "" {
-            createAlert(title: "Empty Start Date", message: "To create a new event, please enter the start date", name: "Start Date")
-
-            } else {
-                if End_Date.text == "" {
-                    createAlert(title: "Empty End Date", message: "To create a new event, please enter the end date", name: "End Date")
-                }
-            }
-        }
-    }
+//    @IBAction func New_Race_Button_Pressed(_ sender: Any) {
+//        if Name.text == "" {
+//            createAlert(title: "Empty Event Name", message: "To create a new race, please enter event name", name: "Name")
+//        } else {
+//            if Start_date.text == "" {
+//            createAlert(title: "Empty Start Date", message: "To create a new event, please enter the start date", name: "Start Date")
+//
+//            } else {
+//                if End_Date.text == "" {
+//                    createAlert(title: "Empty End Date", message: "To create a new event, please enter the end date", name: "End Date")
+//                }
+//            }
+//        }
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.identifier
@@ -281,7 +380,7 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
                 secondViewController.upcoming_event = []
                 secondViewController.history_event = []
                 
-                if (id != nil) {
+                if (id != nil && toolBarName != "Edit Event") {
                     secondViewController.All_Event.append(id!)
                 }
                 secondViewController.updatearray()

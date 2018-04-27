@@ -24,6 +24,8 @@ class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
     @IBOutlet weak var Race_Table: UITableView!
     
+    @IBOutlet weak var Add_Button: UIBarButtonItem!
+    
     var isUpcoming : Bool = true
     
     var allURL : String = "structure/race/all"
@@ -38,7 +40,7 @@ class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource 
     var history_race = [Races]()
     var display_race = [Races]()
     
-    var isAdd : Bool = false
+    var isAdd : Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,11 +179,17 @@ class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         raceIndex = indexPath.row
-        if isUpcoming {
-            performSegue(withIdentifier: "Up To Info", sender: self)
+        
+        if !isAdd {
+            performSegue(withIdentifier: "To Add Race", sender: self)
         } else {
-            performSegue(withIdentifier: "Hist To Info", sender: self)
+            if isUpcoming {
+                performSegue(withIdentifier: "Up To Info", sender: self)
+            } else {
+                performSegue(withIdentifier: "Hist To Info", sender: self)
+            }
         }
+        
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -219,6 +227,13 @@ class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 secondViewController.toolBarName = "Add Race"
             } else {
                 secondViewController.toolBarName = "Edit Race"
+                secondViewController.raceToAdd.id = display_race[raceIndex].id
+                secondViewController.raceToAdd.name = display_race[raceIndex].name
+                secondViewController.raceToAdd.admins = display_race[raceIndex].admins
+                secondViewController.raceToAdd.startDate = display_race[raceIndex].startDate
+                secondViewController.raceToAdd.endDate = display_race[raceIndex].endDate
+                secondViewController.raceToAdd.boats = display_race[raceIndex].boats
+                secondViewController.raceToAdd.events = display_race[raceIndex].events
             }
         }
     }
@@ -229,6 +244,17 @@ class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource 
         isAdd = true
         performSegue(withIdentifier: "To Add Race", sender: self)
     }
+    
+    @IBAction func Edit_Pressed(_ sender: Any) {
+        if !isAdd {
+            isAdd = true
+            Add_Button.isEnabled = true
+        } else {
+            isAdd = false
+            Add_Button.isEnabled = false
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

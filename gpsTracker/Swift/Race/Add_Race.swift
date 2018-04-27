@@ -49,6 +49,9 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     var fromwhere : String = ""
     
     var requestURL : String = "structure/race/add"
+    
+    var eventURL : String = "structure/event/get/"
+    var boatURL : String = "structure/boat/get/"
 
     var Selected_Events : [Events] = []
     var Selected_Admins : NSMutableArray = []
@@ -88,11 +91,37 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         textRace.delegate = self
         add_button.isEnabled = false
         
+        textTitle.text = raceToAdd.name
+        
+        if (raceToAdd.startDate != 0) {
+            let dateformatter = DateFormatter()
+            
+            dateformatter.dateFormat = "yyyy-MM-dd"
+            
+            let startdate = Date(timeIntervalSince1970: TimeInterval(raceToAdd.startDate/1000))
+            
+            let enddate = Date(timeIntervalSince1970: TimeInterval(raceToAdd.endDate/1000))
+            
+            let startdateString = dateformatter.string(from:startdate)
+            let enddateString = dateformatter.string(from: enddate)
+            
+            textStartdate.text = startdateString
+            textEnddate.text = enddateString
+            
+            startdateMilli = raceToAdd.startDate
+            enddateMilli = raceToAdd.endDate
+        }
+        
+        if raceToAdd.boats != [] {
+            updateBoat()
+        }
+        
+        if raceToAdd.events != [] {
+            updateEvent()
+        }
+        
         self.navigationItem.title = toolBarName
         
-        if Selected_Boats.count != 0 {
-            textRace.text = "\(Selected_Boats.count)"
-        }
         
         // To repond when user presses date text fields
         createDatePicker(forField: textStartdate)
@@ -106,6 +135,74 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         
         currenttime = currentdateformatter.string(from: date)
         
+    }
+    
+    func updateEvent() {
+        for i in 0...(self.raceToAdd.events.count - 1) {
+            let jsonUrlString = URL(string: "\(baseURL)\(eventURL)\(self.raceToAdd.events[i])")
+            
+            let session = URLSession.shared
+            session.dataTask(with: (jsonUrlString!), completionHandler: {(data, response, error) -> Void in
+                guard let data = data else {return}
+                
+                do {
+                    let event = try JSONDecoder().decode(Events.self, from: data)
+                    
+                    print(event)
+                    
+                    self.Selected_Events.append(event)
+                    
+                    DispatchQueue.main.async {
+                        self.Selected_Events_Table.reloadData()
+                    }
+                } catch {
+                    print(error)
+                }
+                
+                if let response = response {
+                    print(response)
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+            }).resume()
+        }
+    }
+    
+    func updateBoat() {
+        for i in 0...(self.raceToAdd.boats.count - 1){
+            let jsonUrlString = URL(string:"\(baseURL)\(boatURL)\(self.raceToAdd.boats[i])")
+            
+            let session = URLSession.shared
+            session.dataTask(with: jsonUrlString!, completionHandler: {(data, response, error) -> Void in
+                guard let data = data else {return}
+                
+                do {
+                    let boat = try JSONDecoder().decode(Boats_Post.self, from: data)
+                    
+                    print(boat)
+                    
+                    self.Selected_Boats.append(boat)
+                    
+                    DispatchQueue.main.async{
+                        self.textRace.text = String(self.Selected_Boats.count)
+                    }
+                    
+                    
+                } catch {
+                    print(error)
+                }
+                
+                if let response = response {
+                    print(response)
+                }
+                
+                if let error = error {
+                    print(error)
+                }
+            }).resume()
+        }
     }
 
     
@@ -275,7 +372,7 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
                 
                 secondViewController.upcoming_race = []
                 secondViewController.history_race = []
-                if (id != nil) {
+                if (id != nil && toolBarName != "Edit Race") {
                     secondViewController.All_Races.append(id!)
                 }
                 secondViewController.updatearray()

@@ -79,7 +79,11 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
             
             let startdate = Date(timeIntervalSince1970: TimeInterval(championshipToAdd.startDate/1000))
             
+            startdateMilli = championshipToAdd.startDate
+            
             let enddate = Date(timeIntervalSince1970: TimeInterval(championshipToAdd.endDate/1000))
+            
+            enddateMilli = championshipToAdd.endDate
             
             let startdateString = dateformatter.string(from: startdate)
             let enddateString = dateformatter.string(from: enddate)
@@ -326,7 +330,7 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
                 let secondViewController = segue.destination as! Championship_Master
                 secondViewController.upcoming_champ = []
                 secondViewController.history_champ = []
-                if (id != nil) {
+                if (id != nil && toolBarName != "Edit Championship") {
                     secondViewController.All_Championship.append(id!)
                 }
                 secondViewController.updatearray()
@@ -341,20 +345,20 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
         }
     }
     
-    @IBAction func New_Events_Button_Pressed(_ sender: Any) {
-        if Name.text == "" {
-            createAlert(title: "Empty Championship Name", message: "To create a new event, please enter championship name", name: "Name")
-        } else {
-            if Start_date.text == "" {
-                createAlert(title: "Empty Start Date", message: "To create a new event, please enter the start date", name: "Start Date")
-            } else {
-                if End_date.text == "" {
-                    createAlert(title: "Empty End Date", message: "To create a new event, please enter the end date", name: "End Date")
-                }
-            }
-        
-        }
-    }
+//    @IBAction func New_Events_Button_Pressed(_ sender: Any) {
+//        if Name.text == "" {
+//            createAlert(title: "Empty Championship Name", message: "To create a new event, please enter championship name", name: "Name")
+//        } else {
+//            if Start_date.text == "" {
+//                createAlert(title: "Empty Start Date", message: "To create a new event, please enter the start date", name: "Start Date")
+//            } else {
+//                if End_date.text == "" {
+//                    createAlert(title: "Empty End Date", message: "To create a new event, please enter the end date", name: "End Date")
+//                }
+//            }
+//        
+//        }
+//    }
     
     func createAlert(title:String, message:String, name: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
