@@ -139,7 +139,7 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
                 if let error = error {
                     print(error)
                 }
-            })
+            }).resume()
         }
     }
     
@@ -173,7 +173,7 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
                 if let error = error {
                     print(error)
                 }
-            })
+            }).resume()
         }
     }
     
@@ -302,11 +302,8 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
             if tableView == Selected_Championships_Table {
-                if (indexPath.row == 0) {
-                    createAlert(title: "Denied", message: "You can not delete this championship", name: "Error")
-                } else {
-                    Selected_Championships.remove(at: indexPath.row)
-                }
+                Selected_Championships.remove(at: indexPath.row)
+                Save_button.isEnabled = true
             }
             
             if tableView == Selected_Admins_Table {
@@ -315,6 +312,7 @@ class Add_Event: UIViewController, UITextFieldDelegate, UITableViewDataSource, U
             
             if tableView == Selected_Races_Table {
                 Selected_Races.remove(at: indexPath.row)
+                Save_button.isEnabled = true
             }
             tableView.reloadData()
         }

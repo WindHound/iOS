@@ -341,6 +341,7 @@ class Add_Championship: UIViewController, UITextFieldDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
             Selected_Events.remove(at: indexPath.row)
+            Save_button.isEnabled = true
             tableView.reloadData()
         }
     }

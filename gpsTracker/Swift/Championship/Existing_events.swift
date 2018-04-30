@@ -199,12 +199,14 @@ class Existing_events: UITableViewController {
         if destination == "Back To Add Champ" {
             let secondViewController = segue.destination as! Add_Championship
             secondViewController.Selected_Events = self.Selected_Events
+            secondViewController.Save_button.isEnabled = true
             secondViewController.Selected_Events_Table.reloadData()
         }
         
         if destination == "Back To Add Race" {
             let secondViewController = segue.destination as! Add_Race
             secondViewController.Selected_Events = self.Selected_Events
+            secondViewController.add_button.isEnabled = true
             secondViewController.Selected_Events_Table.reloadData()
         }
     }

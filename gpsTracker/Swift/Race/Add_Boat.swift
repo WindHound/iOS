@@ -55,12 +55,10 @@ class Add_Boat: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
                 print(json)
                 add(index: i, jsonData: jsonData)
             }
+            for i in 0...Added_Boats.count - 1{
+                while(ids[i] == nil) {}
+            }
         }
-        
-        for i in 0...Added_Boats.count - 1{
-            while(ids[i] == nil) {}
-        }
-        
         performSegue(withIdentifier: "Back To Add Race", sender: self)
     }
     
@@ -104,6 +102,7 @@ class Add_Boat: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         if destination == "Back To Add Race" {
             let secondViweController = segue.destination as! Add_Race
             secondViweController.Selected_Boats = self.Added_Boats
+            secondViweController.add_button.isEnabled = true
             secondViweController.textRace.text = String(self.Added_Boats.count)
         }
     }

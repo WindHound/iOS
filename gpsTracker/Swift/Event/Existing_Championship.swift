@@ -129,6 +129,7 @@ class Existing_Championship: UITableViewController {
         if destination == "Back To Add Event" {
             let secondViewController = segue.destination as! Add_Event
             secondViewController.Selected_Championships = self.Selected_Champ
+            secondViewController.Save_button.isEnabled = true
             secondViewController.Selected_Championships_Table.reloadData()
         }
     }

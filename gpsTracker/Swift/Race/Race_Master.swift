@@ -104,7 +104,11 @@ class Race_Master: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     if endDate < currentDate {
                         self.history_race.append(race)
                     } else {
-                        self.upcoming_race.append(race)
+                        if (race.name == "android_test_3") {
+                            self.history_race.append(race)
+                        } else {
+                            self.upcoming_race.append(race)
+                        }
                     }
                     
                     if self.history_race.count > 1 {

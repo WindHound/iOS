@@ -96,7 +96,7 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
         if (raceToAdd.startDate != 0) {
             let dateformatter = DateFormatter()
             
-            dateformatter.dateFormat = "yyyy-MM-dd"
+            dateformatter.dateFormat = "yyyy-MM-dd HH:mm"
             
             let startdate = Date(timeIntervalSince1970: TimeInterval(raceToAdd.startDate/1000))
             
@@ -424,13 +424,8 @@ class Add_Race: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
             if tableView == Selected_Events_Table {
-                if fromwhere == "Add Event" {
-                    if (indexPath.row == 0) {
-                        createAlert(title: "Denied", message: "You can not delete this event", name: "Error")
-                    }
-                } else {
-                    Selected_Events.remove(at: indexPath.row)
-                }
+                add_button.isEnabled = true
+                Selected_Events.remove(at: indexPath.row)
             }
             
             if tableView == Selected_Admins_Table {

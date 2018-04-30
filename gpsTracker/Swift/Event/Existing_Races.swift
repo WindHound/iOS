@@ -128,6 +128,7 @@ class Existing_Races: UITableViewController {
         if destination == "Back To Add Event" {
             let secondViewController = segue.destination as! Add_Event
             secondViewController.Selected_Races = self.Selected_Races
+            secondViewController.Save_button.isEnabled = true
             secondViewController.Selected_Races_Table.reloadData()
         }
     }
