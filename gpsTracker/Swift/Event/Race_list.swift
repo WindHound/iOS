@@ -26,12 +26,10 @@ class Race_list: UITableViewController {
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationItem.title = "Race"
-        
-        let search = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: nil)
-        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+
         let profile = UIBarButtonItem(image: #imageLiteral(resourceName: "Profile_icon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(profile_tapped))
         
-        self.navigationItem.rightBarButtonItems = [profile, add, search]
+        self.navigationItem.rightBarButtonItems = [profile]
         updatearray()
         
     }

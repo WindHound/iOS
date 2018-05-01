@@ -452,9 +452,6 @@
                                     <action selector="Add_Pressed:" destination="kJN-Ca-qir" id="NIk-Sq-hc7"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="search" id="tO3-Gu-RTh">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -1345,9 +1342,6 @@
                                     <action selector="Add_Pressed:" destination="6N5-mJ-1ep" id="BuL-kh-vH5"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="search" id="tpA-XJ-co7">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -2166,9 +2160,6 @@
                                 <connections>
                                     <action selector="Add_Pressed:" destination="fYL-NK-Jso" id="iyb-Lg-Fd7"/>
                                 </connections>
-                            </barButtonItem>
-                            <barButtonItem style="plain" systemItem="search" id="eES-xe-Dpu">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
